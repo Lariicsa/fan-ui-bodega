@@ -1,0 +1,15 @@
+{
+  "name": "ui-bodega-fantastico",
+  "version": "1.0.0",
+  "description": "API for fantastico warehouse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.vmo.mx:larissa/ui-bodega-fantastico.git"
+  },
+  "author": "Larissa Avila",
+  "license": "ISC"
+}
