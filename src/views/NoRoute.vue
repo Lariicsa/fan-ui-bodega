@@ -1,0 +1,8 @@
+<template>
+  <h1>Página no encontrada 404</h1>
+</template>
+<script>
+export default {
+  name: "NoRoute",
+};
+</script>

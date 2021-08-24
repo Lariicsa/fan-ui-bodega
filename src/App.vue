@@ -1,32 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="space">
+    <div class="wrapper">
+      <Header
+        :width="
+          isOpen ? 'width: calc(100% - 24rem)' : 'width: calc(100% - 6.4rem)'
+        "
+      />
+      <div class="container__main">
+        <div :class="isOpen ? 'container__in' : 'container__in-full'">
+          <Sidebar @btnClick="expandMenu" :modifier="{ opened: isOpen }">
+            <MenuItems></MenuItems>
+          </Sidebar>
+          <router-view />
+        </div>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+import MenuItems from "@/components/MenuItems";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+export default {
+  name: "app",
 
-#nav {
-  padding: 30px;
+  components: {
+    Header,
+    Sidebar,
+    MenuItems,
+  },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  methods: {
+    expandMenu() {
+      this.isOpen = !this.isOpen;
+      console.log("clic");
+    },
+  },
+};
+</script>

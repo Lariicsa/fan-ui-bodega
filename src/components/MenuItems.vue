@@ -1,29 +1,58 @@
 <template>
-  <div class="container__box">
-    <div class="col">
-      <div class="row">
-        <Finder phText="Encuentra un artículo" />
-      </div>
-    </div>
-  </div>
+  <ul class="sidebar-items">
+    <li
+      v-for="(item, index) in items"
+      @click="collapseItem(index, item)"
+      :class="
+        currentPath === item.path
+          ? 'item selected ' + item.name
+          : 'item ' + item.name
+      "
+      :key="index"
+    >
+      <router-link
+        :class="currentPath === item.path ? 'selected ' + item.name : item.name"
+        :to="item.path"
+      >
+        {{ item.text }}
+
+        <transition name="slide-fade">
+          <ul class="child-items" v-if="openedItems[index]">
+            <li class="child-item" v-for="(child, x) in item.children" :key="x">
+              <router-link
+                :class="
+                  currentPath === item.path
+                    ? 'selected ' + item.name
+                    : item.name
+                "
+                :to="child.path"
+                @click.stop
+              >
+                {{ child.text }}
+              </router-link>
+            </li>
+          </ul>
+        </transition>
+      </router-link>
+    </li>
+  </ul>
 </template>
-
 <script>
-import { mapActions, mapGetters } from "vuex";
-import FanButton from "@/components/Button";
-import Finder from "@/components/Finder";
-import Modal from "@/components/ModalContainer";
 export default {
-  name: "Home",
+  name: "FMenuItems",
 
-  components: {
-    FanButton,
-    Finder,
-    Modal,
-  },
   data() {
     return {
-      sections: [
+      openedItems: {},
+      selectedSub: "",
+      userMenu: false,
+      items: [
+        {
+          icon: "./src/assets/img/icons/dashboard.svg",
+          text: "Dashboard",
+          path: "/",
+          name: "dashboard",
+        },
         {
           icon: "./src/assets/img/icons/orders.svg",
           text: "Banner",
@@ -87,13 +116,20 @@ export default {
     };
   },
 
+  methods: {
+    collapseItem(index, item) {
+      if (item.children != null) {
+        this.openedItems[index] = !this.openedItems[index];
+        this.$forceUpdate();
+      }
+    },
+  },
+
   computed: {
-    ...mapGetters(["gtrFetchSlides"]),
+    currentPath() {
+      return this.$route.path;
+    },
+    isInSection() {},
   },
 };
 </script>
-<style lang="scss" scoped>
-.uploader__button {
-  margin: 3.2rem 0;
-}
-</style>
