@@ -1,8 +1,22 @@
 <template>
   <div class="container__box">
     <div class="col">
-      <div class="row md between">
-        <Finder phText="Encuentra un artículo" />
+      <div class="row center">
+        <div class="row md"><Finder phText="Encuentra un artículo" /></div>
+        <div class="row sm between">
+          <RadioOption
+            v-model="SelectedFilter"
+            textOption="Por clave"
+            id="clave1"
+            @click="selectPaymentType('clave1')"
+          />
+          <RadioOption
+            v-model="SelectedFilter"
+            textOption="Por nombre"
+            id="nombre2"
+            @click="selectPaymentType('nombre2')"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -13,6 +27,7 @@ import { mapActions, mapGetters } from "vuex";
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Modal from "@/components/ModalContainer";
+import RadioOption from "@/components/RadioOption";
 export default {
   name: "Home",
 
@@ -20,6 +35,7 @@ export default {
     FanButton,
     Finder,
     Modal,
+    RadioOption,
   },
   data() {
     return {
@@ -84,7 +100,15 @@ export default {
           name: "faqs",
         },
       ],
+
+      SelectedFilter: "clave1",
     };
+  },
+
+  methods: {
+    selectPaymentType(filter) {
+      console.log("filter", filter);
+    },
   },
 
   computed: {

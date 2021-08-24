@@ -8,13 +8,6 @@
   &:last-child {
     border-bottom: none;
   }
-  // &__image {
-  //   background-position: center;
-  //   background-repeat: no-repeat;
-  //   background-size: contain;
-  //   height: 3.2rem;
-  //   width: 13rem;
-  // }
 
   &__image {
     background-position: center;
@@ -23,20 +16,6 @@
     margin-left: 4rem;
     height: 3.2rem;
     width: 14rem;
-    &.Paypal {
-      background-image: url("https://fantasticocomic.com/img/paypal.png");
-    }
-    &.Tarjeta {
-      background-image: url("https://fantasticocomic.com/img/conekta.png");
-    }
-    &.Oxxo {
-      background-image: url("https://fantasticocomic.com/img/oxxo-logo.png");
-      width: 6rem;
-    }
-    &.Bitcoin {
-      background-image: url("https://www.weusecoins.com/images/we-use-coins-what-is-bitcoin.png");
-      width: 6rem;
-    }
   }
   &__item {
     color: $blackio;
