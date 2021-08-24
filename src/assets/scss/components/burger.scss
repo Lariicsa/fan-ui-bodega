@@ -1,0 +1,72 @@
+
+.fBurger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 2rem;
+  width: 2.2rem;
+  position: relative;
+  & > span {
+    display: inline-block;
+    background-color: $blue-grey;
+    height: 0.2rem;
+    width: 100%;
+    transform: rotate(0);
+    transition: 0.1s ease-in-out;
+  }
+  @include tablet {
+    display: flex;
+  }
+
+  &__bg {
+    background-color: rgba($blackio, 0.4);
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 8rem;
+    left: 0;
+    z-index: 12;
+    &.open {
+      display: flex;
+    }
+  }
+
+  &.cross {
+    & > span {
+      height: 0.1rem;
+      position: absolute;
+      top: 1rem;
+      transition: 0.2s ease-in-out;
+      &:nth-child(2) {
+        display: none;
+      }
+      &:nth-child(1),
+      &:nth-child(2) {
+        transform: rotate(135deg);
+      }
+      &:nth-child(3) {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__menu {
+    background-color: $white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    right: 0;
+    top: 6.4rem;
+    z-index: 10;
+
+    &.open {
+      display: flex;
+      z-index: 12;
+    }
+  }
+}

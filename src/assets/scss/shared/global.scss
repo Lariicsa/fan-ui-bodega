@@ -1,0 +1,237 @@
+html {
+  box-sizing: border-box;
+  font-family: $font-primary;
+  font-size: 62.5%;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+  font-size: $regular-size;
+  font-family: $font-primary;
+  color: $blackio;
+}
+
+a,
+.link {
+  color: $accent;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: $bold;
+}
+
+h2 {
+  font-size: $medium-title;
+  color: $blackio;
+  margin: 1.6rem 0;
+}
+
+h3 {
+  font-size: $small-title;
+  color: $blackio;
+  margin: 1.6rem 0;
+}
+
+h4 {
+  font-size: $big-size;
+  color: $blackio;
+  margin: 1rem 0;
+}
+
+p {
+  margin: 0.4rem 0;
+  line-height: initial;
+  font-size: $medium-size;
+  color: $blackio;
+}
+
+ul {
+  padding: 0;
+}
+
+input,
+button,
+select {
+  outline: 0;
+}
+
+.space {
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  z-index: 0;
+  @include from($desktop) {
+    padding-bottom: 2.4rem;
+  }
+}
+
+.container__ {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  @include tablet {
+    padding: 0 1.6rem;
+  }
+  @include mobile {
+    padding: 0 4%;
+  }
+
+  &main {
+    background-color: $pale-grey-two;
+    @extend .container__;
+    justify-content: flex-end;
+    margin: 0;
+    max-width: $maxwidth-containner;
+  }
+
+  &in {
+    @extend .container__;
+    background-color: $white;
+    margin-top: 4rem;
+    padding: 0;
+    width: calc(100% - 24rem);
+    height: calc(100% - 6.4rem);
+  }
+
+  &in-full {
+    @extend .container__;
+    background-color: $white;
+    margin-top: 4rem;
+    padding: 0;
+    width: calc(100% - 6.4rem);
+  }
+
+  &box {
+    @extend .container__;
+    padding: 2.4rem;
+    width: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  overflow-wrap: break-word;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+
+  &.md {
+    width: 48%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+  &.sm {
+    width: 32%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+  &.xcenter {
+    align-items: center;
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  min-height: auto;
+  width: 100%;
+  overflow-wrap: break-word;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.bottom {
+    justify-content: flex-end;
+  }
+
+  &.md {
+    width: 48%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+  &.sm {
+    width: 32.666%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+}
+
+hr {
+  height: 1px;
+  background-color: $pale-grey;
+  overflow: visible;
+  border: none;
+  width: 100%;
+}
+
+.wrapper {
+  background-color: $pale-grey-two;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  min-height: calc(50vh + 68rem);
+  @include tablet {
+    padding-top: 6.4rem;
+  }
+  &:after {
+    background-color: $white;
+    content: "";
+    display: block;
+    height: 72vw;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -3;
+    @include from($tablet) {
+      height: 48vw;
+    }
+  }
+}

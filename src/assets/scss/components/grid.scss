@@ -1,0 +1,107 @@
+.fgrid {
+  &-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    position: relative;
+    justify-items: stretch;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @include mobile {
+      grid-column-gap: 0;
+    }
+  }
+  &-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    position: relative;
+    justify-items: stretch;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+    @include until(1100px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @include mobile {
+      grid-template-columns: repeat(1, 1fr);
+      grid-column-gap: 0;
+    }
+  }
+  &-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    position: relative;
+    justify-items: stretch;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+    @include until(1100px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @include mobile {
+      grid-column-gap: 0;
+    }
+  }
+  &-5 {
+    display: grid;
+    margin: 5.6rem 0;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    position: relative;
+    justify-items: center;
+    grid-column-gap: 2%;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+    @include until(1100px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @include mobile {
+      grid-column-gap: 0;
+    }
+  }
+  &-8 {
+    display: none;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0;
+    align-items: center;
+    position: relative;
+    justify-items: center;
+    grid-column-gap: 1%;
+    grid-row-gap: 1%;
+    height: auto;
+    width: 100%;
+    @include from($tablet) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @include from($tablet-landscape) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+  }
+}
+
+.bgfGrid {
+  background-color: $grey-base;
+  display: block;
+  height: 100%;
+  width: 100%;
+}

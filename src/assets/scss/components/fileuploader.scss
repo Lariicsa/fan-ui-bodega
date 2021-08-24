@@ -1,0 +1,183 @@
+.uploader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  outline: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  &__box {
+    background-color: $white;
+    border: 0.1rem solid $grey-base;
+    border-radius: $radius;
+    margin: 4rem 0;
+    padding: 3.2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 83.2rem;
+  }
+
+  &__icon {
+    background: $pale-grey-four;
+    background-size: 56%;
+    background-position: center;
+    @include icon("plus-circle", $blackio);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 5.4rem;
+    &:hover {
+      @include icon("plus-circle", $green-vue);
+    }
+    @include lowmobile {
+      background-size: 48%;
+      width: 4.8rem;
+    }
+    &:hover {
+      background: $pale-grey-two;
+      background-size: 56%;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 5.4rem;
+      cursor: pointer;
+    }
+  }
+
+  &__wrapper {
+    border: 0.1rem solid $blue-grey;
+    border-radius: 0.2rem;
+    box-shadow: inset 0 0.1rem 0.1rem $border-grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2.4rem 0;
+    height: 5.4rem;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+  }
+
+  &__text {
+    font-size: $regular-size;
+    color: $blackio;
+    font-weight: $regular;
+    pointer-events: none;
+    position: absolute;
+    top: 2rem;
+    left: 2.4rem;
+    transform-origin: left;
+    transition: transform 0.2s ease-in-out;
+    will-change: transform;
+    width: auto;
+    z-index: 2;
+    @include lowmobile {
+      font-size: $medium-size;
+      left: 1.2rem;
+    }
+    &-filled {
+      @extend .uploader__text;
+      background-color: $white;
+      padding: 0.8rem 1.6rem;
+      font-size: $small-size;
+      color: $blue-grey;
+      transform: scale(1) translateX(-7px) translateY(-36px);
+      @include lowmobile {
+        transform: scale(1) translateX(-1rem) translateY(-3.9rem);
+      }
+
+      z-index: 5;
+    }
+  }
+
+  &__picked {
+    font-size: $regular-size;
+    color: $blackio;
+    font-weight: $regular;
+    pointer-events: none;
+    width: calc(100% - 5.6rem);
+    text-indent: 1.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+
+    &.large {
+      &:before {
+        content: "";
+        background-color: $white;
+        position: absolute;
+        right: -0.9rem;
+        top: 0;
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+      &:after {
+        content: "...";
+        position: absolute;
+        right: 0.8rem;
+        top: auto;
+      }
+    }
+  }
+
+  &__progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    &-num {
+      display: flex;
+      width: auto;
+      min-width: 4rem;
+      font-size: $regular-size;
+      font-weight: $semibold;
+    }
+
+    &-fill {
+      background-color: $aqua-blue;
+      border: none;
+      border-radius: $radius * 3;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    &-bar {
+      background-color: $white;
+      border: 0.1rem solid $very-light-pink;
+      border-radius: $radius * 3;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 0.8rem;
+      position: relative;
+      width: 100%;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

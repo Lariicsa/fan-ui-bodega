@@ -1,0 +1,37 @@
+.subs {
+  &__wrapper {
+    background-color: $white;
+    display: flex;
+    margin: 4rem 0;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: $maxwidth-containner;
+
+    h2 {
+      margin: 5.6rem 0;
+      font-size: $small-title;
+      color: $aqua-blue;
+    }
+    h3 {
+      margin: 2rem 0;
+      font-size: $big-size;
+      color: $dusk;
+    }
+    p {
+      margin: 1.6rem 0;
+      font-size: $regular-size;
+    }
+  }
+  &__in {
+    width: 100%;
+    max-width: 104.8rem;
+  }
+  &__row {
+    display: flex;
+    margin: 1.6rem 0;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}

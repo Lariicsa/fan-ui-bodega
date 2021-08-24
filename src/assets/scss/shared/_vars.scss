@@ -1,0 +1,112 @@
+//Font
+$bold: 600;
+$semibold: 500;
+$regular: 400;
+$font-primary: "Montserrat", sans-serif;
+$font-secondary: "Montserrat", sans-serif;
+
+//Font-size
+$tiny-size: 1.1rem;
+$small-size: 1.2rem;
+$medium-size: 1.4rem;
+$regular-size: 1.6rem;
+$big-size: 2.1rem;
+$big-size-m: 1.8rem;
+$tiny-title: 2.4rem;
+$small-title: 2.8rem;
+$medium-title: 3.6rem;
+$big-title: 4rem;
+$big-special: 4.8rem;
+$green-vue: #4fc08d;
+
+//Colors
+
+$accent: #52a9e1;
+
+$greyo: #50565d;
+$greyo-end: #3d454c;
+$grey-base: #d8d8d8;
+$bluerple: #6a86da;
+$blue-lite: #e1e7f8;
+$border-grey: #f1f1f1;
+
+$dryer: #ebeff0;
+$girly: #ff5077;
+$gloss: #ffccd7;
+$grad-bg: linear-gradient(0deg, rgba(255, 107, 107, 0.5) 0%, rgba(224, 41, 98, 0.4) 100%);
+$grad-bg-solid: rgb(255, 107, 107);
+$gradiente-aqua: linear-gradient(
+  0deg,
+  rgba(8, 237, 182, 0) 0%,
+  rgba(23, 209, 192, 0.8) 49%,
+  rgba(39, 188, 217, 1) 100%
+);
+$gradient-indigo: linear-gradient(45deg, #99abc6 23%, #8512e1 100%, #8512e1 100%);
+$gradient-indigo-ms: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99abc6', endColorstr='#8512e1',GradientType=1 );
+$gradient-white: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 90%);
+$white: #ffffff;
+$snow: $white;
+$footer-bg: #b1c5dd;
+$primary: #1b5ba9;
+$secondary: #4b96e8;
+
+//new Pallette
+$blackio: #000001;
+$aqua-blue: #27bcd9;
+$aqua-blue-g1: #2ed1f1;
+$aqua-blue-g2: #27bcd9;
+$blue-grey: #8e98a5;
+$coral: #fc4d4d;
+$dark-indigo: #320f5e;
+$dark-pink: #d92758;
+$dusk: #485b76;
+$tomato: #dd2e14;
+$light-sky-blue: #e0e2e4;
+$duck-egg-blue: #dce1e2;
+$orange-yellow: #ffb000;
+$pale-grey: #f2f4f6;
+$pale-grey-two: #edf1f7;
+$pale-grey-three: #f6f8fb;
+$pale-grey-four: #f5f7fa;
+$pale-pink: #f8d7da;
+$purple-brown: #662c2f;
+$greyish-blue: #659099;
+$marigold: #ffcb01;
+$marigold-two: #fec705;
+$faded-orange: #f08a50;
+$rouge: #af1451;
+$ig-pink: $girly;
+$french-blue: #4267b2;
+$very-light-pink: #e9e9e9;
+$light-blue-grey: #c0cfd2;
+$light-periwinkle: #dcdee3;
+$light-mint: #c0f9ce;
+$pine: #2c663a;
+$pale-peach: #f5e8c0;
+$sepia: #8c692c;
+$light-sky-blue-two: #d1ecf1;
+$dark-grey-blue: #2c3766;
+
+
+//Larges
+$large: 100%;
+$medium: 48%;
+$small: 31%;
+$maxwidth-containner: 1440px;
+$maxwidth-inner-containner: 1280px;
+
+//Breakpoints
+$mobile-low: 320px !default;
+$mobile: 475px !default;
+$tablet: 769px !default;
+$tablet-landscape: 1024px !default;
+$desktop: 1280px !default;
+
+//RYTHMS
+$global-padding: 0 1.6rem;
+$global-padding-mobile: 0 1.6rem;
+
+//Box
+$radius: 0.4rem;
+
+

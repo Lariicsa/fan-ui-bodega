@@ -1,0 +1,69 @@
+.message {
+  &__error {
+    @include msg-color("error");
+    & > p {
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+  &__info {
+    @include msg-color("info");
+    & > p {
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+  &__success {
+    @include msg-color("success");
+    & > p {
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+  &__warning {
+    @include msg-color("warning");
+    & > p {
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+  &__text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-size: $regular-size;
+    text-indent: 0.4rem;
+    width: 100%;
+    &-error {
+      @extend .message__text;
+      color: $tomato;
+    }
+  }
+  &__notfound {
+    border: 0.1rem solid $aqua-blue;
+    border-radius: $radius;
+    box-shadow: none;
+    padding: 2.4rem 3.2rem;
+    font-size: $big-size;
+    font-weight: $semibold;
+    color: $blackio;
+    text-align: center;
+    width: 100%;
+    @include mobile {
+      flex-direction: column;
+    }
+    & > p {
+      font-size: $big-size;
+      font-weight: $semibold;
+      color: $blackio;
+      text-indent: 1rem;
+      letter-spacing: -0.1rem;
+    }
+  }
+
+  &__emoji {
+    font-size: $tiny-title;
+  }
+}

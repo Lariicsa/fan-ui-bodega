@@ -1,0 +1,124 @@
+.finder {
+  background-color: $snow;
+  border-radius: $radius;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  height: 3.8rem;
+  width: 100%;
+  position: relative;
+
+  &__bg {
+    background-color: $white;
+    display: none;
+    position: fixed;
+    top: 11.2rem;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    &.opened {
+      display: block;
+    }
+  }
+
+  &-icon {
+    @include icon("finder", $blackio);
+    background-size: 100%;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    @include tablet {
+      display: none;
+    }
+
+    &-mobile {
+      @extend .finder-icon;
+      display: none;
+      @include tablet {
+        @include icon("finder", $white);
+        display: block;
+      }
+    }
+  }
+  input {
+    display: block;
+    border: none;
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+    padding: 0;
+    font-size: $regular-size;
+    color: $blackio;
+    width: calc(100% - 40px);
+    height: 100%;
+    &::placeholder {
+      color: $grey-base;
+    }
+    &:focus {
+      outline: 0;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
+  @include tablet {
+    background-color: transparent;
+    margin-left: 2rem;
+    margin-right: 4rem;
+    width: 4rem;
+
+    &.opened {
+      background-color: $white;
+      border-radius: 0;
+      padding: 0;
+      width: 100%;
+      height: 4.8rem;
+      position: fixed;
+      margin-left: 0;
+      left: 0;
+      top: 6.4rem;
+      z-index: 8;
+      .finder-icon {
+        @include icon("finder", $greyish-blue);
+        background-size: 96%;
+        &.show {
+          @include icon("finder", $greyish-blue);
+          height: 100%;
+          width: 4rem;
+          background-size: 56%;
+          display: flex;
+        }
+
+        &-mobile {
+          &.hide {
+            display: none;
+          }
+        }
+      }
+      .finder-cross {
+        @include icon("cross", $blackio);
+        background-size: 100%;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
+        width: 2rem;
+        @include tablet {
+          @include icon("arrow", $blue-grey);
+          height: 100%;
+          width: 4rem;
+          background-size: 44%;
+        }
+      }
+      input {
+        display: block;
+        text-indent: 1.6rem;
+      }
+    }
+  }
+}

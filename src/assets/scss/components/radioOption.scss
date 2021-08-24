@@ -1,0 +1,113 @@
+.radioption {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+  // &__image {
+  //   background-position: center;
+  //   background-repeat: no-repeat;
+  //   background-size: contain;
+  //   height: 3.2rem;
+  //   width: 13rem;
+  // }
+
+  &__image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 4rem;
+    height: 3.2rem;
+    width: 14rem;
+    &.Paypal {
+      background-image: url("https://fantasticocomic.com/img/paypal.png");
+    }
+    &.Tarjeta {
+      background-image: url("https://fantasticocomic.com/img/conekta.png");
+    }
+    &.Oxxo {
+      background-image: url("https://fantasticocomic.com/img/oxxo-logo.png");
+      width: 6rem;
+    }
+    &.Bitcoin {
+      background-image: url("https://www.weusecoins.com/images/we-use-coins-what-is-bitcoin.png");
+      width: 6rem;
+    }
+  }
+  &__item {
+    color: $blackio;
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    &:hover label {
+      cursor: pointer;
+    }
+    & > label {
+      display: inline-block;
+      position: relative;
+      color: $blackio;
+      font-size: $regular-size;
+      line-height: 3.2rem;
+      padding: 0rem 0rem 0rem 4.8rem;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9;
+      cursor: pointer;
+    }
+    & .check {
+      display: flex;
+      position: absolute;
+      background-color: $white;
+      border: 0.2rem solid $duck-egg-blue;
+      border-radius: 50%;
+      height: 3.2rem;
+      width: 3.2rem;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      &:after {
+        content: "";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.2rem;
+        height: 1rem;
+        border-radius: 0.2rem;
+        opacity: 0;
+      }
+      &.ticked {
+        background-color: transparent;
+        border: 0.2rem solid $aqua-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        &:after {
+          background: $aqua-blue;
+          border: 0.2rem solid $white;
+          border-radius: 50%;
+          opacity: 1;
+          width: 2.2rem;
+          height: 2.2rem;
+        }
+      }
+      &:hover {
+        border: 0.2rem solid $blue-grey;
+      }
+      &Bold {
+        font-weight: $bold;
+      }
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

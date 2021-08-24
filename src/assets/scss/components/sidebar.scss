@@ -1,0 +1,62 @@
+.fSidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 1.6rem 0;
+  height: 100%;
+  width: 100%;
+
+  &__logo {
+    width: 3.6rem;
+    height: 3.6rem;
+    display: flex;
+    margin: 1.6rem 1.6rem 2.4rem 0;
+    &.opened {
+      margin: 2.4rem auto 2.4rem auto;
+    }
+  }
+
+  &__button {
+    @include icon("arrow", $french-blue);
+    background-size: 32%;
+    background-position: center;
+    transform: rotate(180deg);
+    transition: 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 6.4rem;
+
+    &:hover {
+      @include from($desktop) {
+        cursor: pointer;
+      }
+    }
+
+    .opened & {
+      @include icon("arrow", $blackio);
+      transform: rotate(0deg);
+    }
+  }
+
+  &__container {
+    background-color: $white;
+    border-right: 0.1rem solid $pale-grey;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 24rem;
+    transform: translateX(-17.6rem);
+    transition: 0.4s ease-out;
+
+    &.opened {
+      transform: translateX(0);
+      transition: 0.4s ease-in;
+    }
+  }
+}

@@ -1,0 +1,224 @@
+.box {
+  background-color: $white;
+  border: 0.1rem solid $grey-base;
+  border-radius: $radius;
+  margin: 4rem 0;
+  padding: 3.2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 48rem;
+
+  @include mobile {
+    width: 100%;
+    margin: auto 0;
+    padding: 3.2rem 2.4rem;
+  }
+
+  h2 {
+    font-size: $big-size;
+  }
+
+  &__button {
+    display: flex;
+    margin: 2.4rem 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__button-disabled {
+    @extend .box__button;
+    filter: grayscale(90%);
+    pointer-events: none !important;
+    &:hover {
+      pointer-events: none !important;
+    }
+  }
+
+  &__mail {
+    color: $french-blue;
+    font-weight: $semibold;
+    &.link {
+      text-decoration: underline;
+    }
+  }
+  &__subtitle {
+    display: flex;
+    margin: 1.6rem 0;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: $regular-size;
+    font-weight: $regular;
+    color: $dusk;
+    width: 100%;
+    &.info {
+      &:before {
+        background-color: rgba($dusk, 0.8);
+        border-radius: 90%;
+        content: "i";
+        margin-right: 0.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $small-size;
+        color: $white;
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    margin: 1.6rem auto;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+
+    & > p {
+      font-size: $medium-size;
+      margin: 0.4rem 0;
+    }
+    & > a {
+      font-size: $medium-size;
+      color: $dark-pink;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    margin: 1.6rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    & > p {
+      font-size: $medium-size;
+      margin: 0.4rem 0;
+      & > a {
+        font-size: $medium-size;
+        color: $dark-pink;
+      }
+    }
+    &.terms {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      & > label {
+        font-size: $medium-size;
+        color: $blackio;
+        & > a {
+          font-size: inherit;
+          color: $dusk;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &Select {
+    border: none;
+    background-color: $white;
+    display: flex;
+    padding: 0;
+    text-indent: 3.2rem;
+    border-radius: 0.2rem;
+    -webkit-appearance: none;
+    font-size: $regular-size;
+    text-align: center;
+    color: $blackio;
+    font-weight: $semibold;
+    width: 100%;
+    min-width: 8.2rem;
+    height: 5.4rem;
+    position: relative;
+    &:hover {
+      border: 0.1rem solid $aqua-blue;
+      cursor: pointer;
+    }
+    &:focus {
+      border: 0.1rem solid $grey-base;
+      border-right: none;
+      border-left: none;
+    }
+    &__wrapper {
+      position: relative;
+      width: 100%;
+
+      & > label {
+        font-size: $regular-size;
+        color: $blackio;
+        transform-origin: left;
+        transition: transform 0.2s ease-in-out;
+        will-change: transform;
+        position: absolute;
+        top: 1.4rem;
+        left: 1rem;
+        cursor: text;
+        pointer-events: none;
+        z-index: 2;
+        &.picked {
+          transform: scale(0.7) translateY(-1.6rem);
+          text-transform: uppercase;
+          top: -0.4rem;
+          left: 0;
+        }
+      }
+      &.error {
+        border: 0.1rem solid $tomato;
+        color: $tomato;
+      }
+    }
+
+    &__wrapper {
+      position: relative;
+      width: 100%;
+      &:after {
+        @include icon("triangle", $greyish-blue);
+        background-size: contain;
+        content: "";
+        position: absolute;
+        top: 1.8rem;
+        right: 1.6rem;
+        height: 1rem;
+        width: 1.2rem;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    & > button {
+      width: 48%;
+      max-width: 18.8rem;
+      @include mobile {
+        max-width: 16rem;
+      }
+    }
+  }
+}
+
+.signup {
+  width: 58rem;
+}

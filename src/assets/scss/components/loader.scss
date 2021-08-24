@@ -1,0 +1,182 @@
+.dots {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 5rem;
+  width: 5rem;
+  margin: -2.5rem 0 0 -2.5rem;
+  & span {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    animation: dotsAnimate 1s infinite ease-in-out;
+    &:nth-child(1) {
+      left: 0;
+      animation-delay: 0.2s;
+    }
+    &:nth-child(2) {
+      left: 1.5rem;
+      animation-delay: 0.3s;
+    }
+    &:nth-child(3) {
+      left: 3rem;
+      animation-delay: 0.4s;
+    }
+    &:nth-child(4) {
+      left: 4.5rem;
+      animation-delay: 0.5s;
+    }
+  }
+}
+
+.hero {
+  display: inline-block;
+  @include figure("hero");
+  background-size: cover;
+  margin: -5rem 0 0 -5rem;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  height: 10rem;
+  width: 10rem;
+  animation: spinner 2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 22rem 11rem;
+  @include mobile {
+    transform-origin: 10rem 4rem;
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
+.loader {
+  border-radius: 100%;
+  border: 0.6rem solid transparent;
+  border-top-color: $marigold;
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 10rem;
+  height: 10rem;
+  margin: -5rem 0 0 -5rem;
+  animation: spin 2s linear infinite;
+
+  &:before {
+    border-radius: 50%;
+    border: 0.6rem solid transparent;
+    border-top-color: $marigold-two;
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    animation: spin 3s linear infinite;
+  }
+  &:after {
+    border-radius: 50%;
+    border: 0.6rem solid transparent;
+    border-top-color: $orange-yellow;
+    content: "";
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    animation: spin 1.5s linear infinite;
+  }
+  &__out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__wrapper {
+    background-color: rgba($pale-grey-four, 0.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    &.nobg {
+      display: flex;
+      width: auto;
+    }
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+.rocket {
+  @include icon("rocket", $pale-pink);
+  background-size: contain;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 4.8rem;
+  width: 4.8rem;
+  margin: -2.4rem 0 0 -2.4rem;
+  animation: rocketFloating 1s infinite linear;
+  z-index: 2;
+}
+
+@keyframes rocketFloating {
+  0%,
+  100% {
+    transform: translateZ(0) rotate(315deg);
+    @include icon("rocket", $french-blue);
+  }
+  50% {
+    transform: translateZ(-2.4rem) rotate(315deg);
+    @include icon("rocket", $dark-pink);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotsAnimate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    background: $tomato;
+  }
+  25% {
+    transform: translateY(1rem) rotate(0deg);
+    background: $marigold-two;
+  }
+  50% {
+    transform: translateY(1rem) rotate(0deg);
+    background: $aqua-blue;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    background: $french-blue;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
