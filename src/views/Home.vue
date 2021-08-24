@@ -1,7 +1,7 @@
 <template>
   <div class="container__box">
     <div class="col">
-      <div class="row">
+      <div class="row md between">
         <Finder phText="Encuentra un artículo" />
       </div>
     </div>

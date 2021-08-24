@@ -1,6 +1,7 @@
 const filters = {
   state: {
     textTyped: "",
+    loader: false,
   },
 };
 
