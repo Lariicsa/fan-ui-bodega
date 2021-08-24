@@ -17,9 +17,9 @@
     overflow-y: auto;
   }
   &__cell {
-    padding: 1.2rem 0;
+    padding: 0;
     font-size: $medium-size;
-    text-align: center;
+    text-align: left;
     display: flex;
     width: auto;
     align-items: center;
@@ -33,6 +33,10 @@
       @extend .simpleTable__cell;
       font-weight: $regular;
       color: $blue-grey;
+    }
+
+    &.left {
+      text-align: left;
     }
 
     &-in {
@@ -70,6 +74,19 @@
     &.cols5 {
       width: 20%;
       @include tablet {
+        width: auto;
+      }
+    }
+    &.cols6 {
+      width: 18%;
+      @include tablet {
+        width: auto;
+      }
+    }
+
+    &.cols7 {
+      width: 14.28%;
+      @include until($tablet-landscape) {
         width: auto;
       }
     }

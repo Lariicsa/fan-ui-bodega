@@ -21,7 +21,7 @@
       <div class="col">
         <h3>Resultados</h3>
         <div class="row">
-          
+          <TableSimple :item="tabledata" :cols="7" />
         </div>
       </div>
     </div>
@@ -34,6 +34,8 @@ import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
+import TableSimple from "@/components/TableSimple"
+import dataTable from "@/Mucks/products"
 export default {
   name: "Home",
 
@@ -42,6 +44,7 @@ export default {
     Finder,
     Modal,
     RadioOption,
+    TableSimple
   },
   data() {
     return {
@@ -108,6 +111,7 @@ export default {
       ],
 
       SelectedFilter: "clave1",
+      dataTable: dataTable.prodsin
     };
   },
 
@@ -119,6 +123,14 @@ export default {
 
   computed: {
     ...mapGetters(["gtrFetchSlides"]),
+
+    tabledata() {
+      const table = {
+        head: ["clave", "Título", "Editorial", "ingreso", "línea", "lugar", "precio"],
+        rows: this.dataTable,
+      };
+      return table;
+    },
   },
 };
 </script>
