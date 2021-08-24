@@ -1,0 +1,120 @@
+.fanTable {
+  background-color: $white;
+  font-size: $small-size;
+  color: $blackio;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &__scrollable {
+    display: block;
+    height: 100%;
+    max-height: 52rem;
+    width: 100%;
+    overflow-y: auto;
+  }
+  &__cell {
+    padding: 1.2rem 0;
+    font-size: $medium-size;
+    text-align: center;
+    display: flex;
+    width: 16%;
+    align-items: center;
+    justify-content: center;
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(5) {
+      width: 10%;
+      @include tablet {
+        width: auto;
+      }
+    }
+    &:nth-child(3) {
+      width: 22%;
+      @include tablet {
+        width: auto;
+      }
+    }
+    @include tablet {
+      width: auto;
+    }
+    &.view {
+      @include tablet {
+        width: 13.2rem;
+        margin: 0 auto;
+      }
+    }
+    &.check {
+      @include tablet {
+        margin: 0 auto;
+      }
+    }
+
+    &-head {
+      @extend .fanTable__cell;
+      font-weight: $regular;
+      color: $blue-grey;
+    }
+
+    &-in {
+      @include from($tablet) {
+        display: none;
+      }
+      display: flex;
+      margin-right: 0.8rem;
+      font-weight: $semibold;
+    }
+  }
+  &__header {
+    background-color: $pale-grey-two;
+    border: 0.1rem solid $white;
+    font-size: $small-size;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 5.6rem;
+    width: 100%;
+
+    @include until($tablet) {
+      display: none;
+    }
+  }
+  &__row {
+    border-bottom: 0.1rem solid $pale-grey-two;
+    display: flex;
+    font-size: $small-size;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5.6rem;
+    width: 100%;
+    @include tablet {
+      border-bottom: none;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: auto;
+      min-height: 30rem;
+    }
+    &:hover {
+      @include from($tablet) {
+        background-color: rgba($blue-lite, 0.16);
+      }
+    }
+
+    &.selected {
+      background-color: rgba($blue-lite, 0.16);
+    }
+  }
+
+  hr {
+    display: none;
+    @include tablet {
+      display: block;
+    }
+  }
+}

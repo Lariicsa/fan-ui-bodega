@@ -1,7 +1,7 @@
 <template>
   <div class="container__box">
     <div class="col">
-      <div class="row center">
+      <div class="row between">
         <div class="row md"><Finder phText="Encuentra un artículo" /></div>
         <div class="row sm between">
           <RadioOption
@@ -16,6 +16,12 @@
             id="nombre2"
             @click="selectPaymentType('nombre2')"
           />
+        </div>
+      </div>
+      <div class="col">
+        <h3>Resultados</h3>
+        <div class="row">
+          
         </div>
       </div>
     </div>

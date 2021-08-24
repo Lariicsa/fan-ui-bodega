@@ -1,0 +1,155 @@
+.gridtable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include tablet {
+    padding: 0.8rem 0;
+    overflow-x: scroll;
+  }
+  @include tablet {
+    grid-template-columns: auto;
+  }
+
+  &__scrollable {
+    display: flex;
+    height: 100%;
+    max-height: 52rem;
+    width: 100%;
+    overflow: auto;
+  }
+
+  &__flexwrap {
+    display: grid;
+    grid-gap: 0;
+    width: 100%;
+    hr {
+      display: none;
+      @include tablet {
+        display: block;
+      }
+    }
+    &.colsDefault {
+      grid-template-columns: 10% 10% repeat(3, 22%) 14%;
+      @include tablet {
+        grid-template-columns: auto;
+      }
+    }
+
+    &.cols8 {
+      grid-template-columns: repeat(8, auto);
+      @include tablet {
+        grid-template-columns: auto;
+      }
+    }
+    &.cols7 {
+      grid-template-columns: repeat(7, auto);
+      @include mobile {
+        grid-template-columns: auto;
+      }
+    }
+
+    &.cols6 {
+      grid-template-columns: repeat(6, auto);
+      @include tablet {
+        grid-template-columns: auto;
+      }
+    }
+
+    &.cols5 {
+      grid-template-columns: 12% repeat(4, 22%);
+      @include tablet {
+        grid-template-columns: auto;
+      }
+    }
+
+    &.cols4 {
+      grid-template-columns: repeat(4, 25%);
+      @include tablet {
+        grid-template-columns: auto;
+      }
+    }
+  }
+
+  &.cols4 {
+    grid-template-columns: repeat(4, 25%);
+  }
+
+  &__icon {
+    &.remove {
+      @include icon("trash", $blackio);
+      display: flex;
+      height: 2rem;
+      width: 2.4rem;
+      transition: transform 0.16s ease-in-out;
+      will-change: transform;
+      &:hover {
+        @include icon("trash", $tomato);
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__item {
+    border-bottom: 0.1rem solid $border-grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: $medium-size;
+    color: $blackio;
+    height: 5.6rem;
+    width: auto;
+    @include tablet {
+      border-bottom: none;
+      justify-content: flex-start;
+      height: 3.2rem;
+    }
+
+    &.selected {
+      background-color: $pale-grey-three;
+    }
+
+    &-in {
+      display: none;
+      @include tablet {
+        display: flex;
+        margin-right: 0.8rem;
+      }
+    }
+
+    &-head {
+      @extend .gridtable__item;
+      background-color: $pale-grey-two;
+      border-bottom: 0.2rem solid $border-grey;
+      font-weight: $regular;
+      color: $blue-grey;
+      @include tablet {
+        display: none;
+      }
+    }
+
+    @include tablet {
+      min-width: 12.8rem;
+    }
+  }
+
+  &__row {
+    background-color: $accent;
+    display: flex;
+    width: 100%;
+    &:hover {
+      background-color: $blue-lite;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    @include tablet {
+      overflow-x: hidden;
+    }
+  }
+}

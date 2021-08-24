@@ -3,7 +3,7 @@ $bold: 600;
 $semibold: 500;
 $regular: 400;
 $font-primary: "Montserrat", sans-serif;
-$font-secondary: "Montserrat", sans-serif;
+$font-comic: "Luckiest Guy", cursive;
 
 //Font-size
 $tiny-size: 1.1rem;
@@ -33,7 +33,11 @@ $border-grey: #f1f1f1;
 $dryer: #ebeff0;
 $girly: #ff5077;
 $gloss: #ffccd7;
-$grad-bg: linear-gradient(0deg, rgba(255, 107, 107, 0.5) 0%, rgba(224, 41, 98, 0.4) 100%);
+$grad-bg: linear-gradient(
+  0deg,
+  rgba(255, 107, 107, 0.5) 0%,
+  rgba(224, 41, 98, 0.4) 100%
+);
 $grad-bg-solid: rgb(255, 107, 107);
 $gradiente-aqua: linear-gradient(
   0deg,
@@ -41,9 +45,39 @@ $gradiente-aqua: linear-gradient(
   rgba(23, 209, 192, 0.8) 49%,
   rgba(39, 188, 217, 1) 100%
 );
-$gradient-indigo: linear-gradient(45deg, #99abc6 23%, #8512e1 100%, #8512e1 100%);
+
+$gradient-blue: linear-gradient(
+  0deg,
+  rgba(30, 112, 205, 1) 0%,
+  rgba(32, 151, 214, 1) 50%,
+  rgba(59, 191, 241, 1) 100%
+);
+$gradient-blue-top: linear-gradient(
+  0deg,
+  rgba(22, 180, 222, 0) 0%,
+  rgba(22, 180, 222, 1) 45%,
+  rgba(0, 100, 174, 1) 100%
+);
+//$gradient-indigo: linear-gradient(45deg, #8512e1 23%, #99abc6 100%);
+$gradient-indigo: linear-gradient(
+  100deg,
+  rgba(153, 171, 198, 1) 0%,
+  rgba(167, 103, 232, 1) 68%,
+  rgba(133, 18, 225, 0.8) 100%
+);
+$gradient-indigo-mobile: linear-gradient(
+  170deg,
+  rgba(153, 171, 198, 1) 0%,
+  rgba(133, 18, 225, 0.8) 68%,
+  rgba(133, 18, 225, 0.427608543417367) 100%
+);
 $gradient-indigo-ms: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99abc6', endColorstr='#8512e1',GradientType=1 );
-$gradient-white: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 90%);
+$gradient-white: linear-gradient(
+  0deg,
+  rgba(2, 0, 36, 1) 0%,
+  rgba(255, 255, 255, 1) 0%,
+  rgba(255, 255, 255, 0) 90%
+);
 $white: #ffffff;
 $snow: $white;
 $footer-bg: #b1c5dd;
@@ -52,6 +86,7 @@ $secondary: #4b96e8;
 
 //new Pallette
 $blackio: #000001;
+$black-green: #062535;
 $aqua-blue: #27bcd9;
 $aqua-blue-g1: #2ed1f1;
 $aqua-blue-g2: #27bcd9;
@@ -68,6 +103,7 @@ $pale-grey: #f2f4f6;
 $pale-grey-two: #edf1f7;
 $pale-grey-three: #f6f8fb;
 $pale-grey-four: #f5f7fa;
+$pale-grey-five: #f0f4fb;
 $pale-pink: #f8d7da;
 $purple-brown: #662c2f;
 $greyish-blue: #659099;
@@ -79,6 +115,7 @@ $ig-pink: $girly;
 $french-blue: #4267b2;
 $very-light-pink: #e9e9e9;
 $light-blue-grey: #c0cfd2;
+$very-light-blue-two: #e5eaf1;
 $light-periwinkle: #dcdee3;
 $light-mint: #c0f9ce;
 $pine: #2c663a;
@@ -86,7 +123,34 @@ $pale-peach: #f5e8c0;
 $sepia: #8c692c;
 $light-sky-blue-two: #d1ecf1;
 $dark-grey-blue: #2c3766;
+$dark-sky-blue: #4cc6db;
+$ocean-blue: #0064ae;
 
+//Degrees
+$amex-degree: linear-gradient(
+  215deg,
+  rgba(85, 208, 123, 1) 45%,
+  rgba(88, 141, 127, 1) 100%
+);
+$amex-solid: rgb(85, 208, 123);
+$mastercard-degree: linear-gradient(
+  215deg,
+  rgba(216, 173, 59, 1) 45%,
+  rgba(222, 133, 56, 1) 100%
+);
+$mastercard-solid: rgb(216, 173, 59);
+$visa-degree: linear-gradient(
+  215deg,
+  rgba(57, 154, 206, 1) 58%,
+  rgba(41, 54, 136, 1) 100%
+);
+$visa-solid: rgb(57, 154, 206);
+$grey-degree: linear-gradient(
+  215deg,
+  rgba(192, 207, 210, 1) 58%,
+  rgba(142, 152, 165, 1) 100%
+);
+$grey-solid: rgb(192, 207, 210);
 
 //Larges
 $large: 100%;
@@ -109,4 +173,5 @@ $global-padding-mobile: 0 1.6rem;
 //Box
 $radius: 0.4rem;
 
-
+//pathBase
+$path-base: "https://im.fantasticocomic.com/img";
