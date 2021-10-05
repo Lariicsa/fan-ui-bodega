@@ -1,0 +1,144 @@
+.textfield {
+  position: relative;
+  margin: 2.4rem 0;
+  width: 100%;
+  & > input {
+    background-color: $white;
+    border: 0.1rem solid $blue-grey;
+    border-radius: 0.2rem;
+    box-shadow: inset 0 0.1rem 0.1rem $border-grey;
+    padding: 0;
+    font-size: $regular-size;
+    color: $blackio;
+    font-weight: $regular;
+    text-indent: 2.4rem;
+    width: 100%;
+    height: 5.6rem;
+    position: relative;
+    &.disabled {
+      background-color: $light-blue-grey;
+      border: 0.1rem solid $light-sky-blue;
+      cursor: not-allowed;
+    }
+    &.error {
+      background-color: #fff8f4;
+      border: 0.1rem solid $tomato;
+      color: $tomato;
+      font-weight: 400;
+    }
+    &::placeholder,
+    .pholder {
+      font-size: $regular-size;
+      color: $blue-grey;
+      font-weight: 400;
+    }
+    &:focus {
+      border: 0.1rem solid $aqua-blue;
+      font-weight: 400;
+      &.error {
+        background-color: $white;
+        border: 0.1rem solid $tomato;
+        color: $tomato;
+      }
+    }
+  }
+
+  &__title {
+    position: absolute;
+    left: 0;
+    top: -2.2rem;
+    z-index: 2;
+    font-size: $medium-size;
+    font-weight: $semibold;
+  }
+
+  & > label {
+    font-size: $regular-size;
+    color: $blackio;
+    font-weight: $regular;
+    position: absolute;
+    position: absolute;
+    top: 2rem;
+    left: 3.2rem;
+    transform-origin: left;
+    transition: transform 0.2s ease-in-out;
+    will-change: transform;
+    pointer-events: none;
+    z-index: 2;
+    &:active {
+      color: $light-blue-grey;
+      cursor: text;
+    }
+    &.filled {
+      background-color: $white;
+      padding: 0.9rem 1.6rem;
+      font-size: $small-size;
+      color: $blue-grey;
+      transform: scale(1) translateX(-2rem) translateY(-3.4rem);
+    }
+  }
+  &__comment {
+    display: block;
+    margin: 0.4rem 0;
+    font-size: $small-size;
+    font-weight: 100;
+    color: $light-blue-grey;
+    font-style: italic;
+    position: absolute;
+    top: 104%;
+    left: 0;
+    z-index: 1;
+  }
+  &__error {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.2rem 0;
+    height: auto;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+    width: 100%;
+    & > span {
+      font-size: $small-size;
+      text-align: left;
+      color: $tomato;
+    }
+  }
+  &__warning {
+    background-color: $marigold;
+    border-radius: 0 0 0.2rem 0.2rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: $small-size;
+    color: $duck-egg-blue;
+    padding: 1rem;
+    width: 100%;
+    height: 4rem;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+  }
+  &.hide {
+    display: none;
+  }
+
+  &.error {
+    & > label.filled {
+      color: $tomato;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

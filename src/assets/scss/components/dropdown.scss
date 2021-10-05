@@ -1,0 +1,228 @@
+.dropdown {
+  border: none;
+  background-color: $white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0 0 0 1.2rem;
+  border-radius: 0.2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 1.6rem;
+  text-align: left;
+  color: $blackio;
+  font-weight: 500;
+  width: 100%;
+  min-width: 8.2rem;
+  height: 4.4rem;
+  position: relative;
+
+  @include from($tablet) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &__wrapper {
+    border: 0.2rem solid $pale-grey-two;
+    position: relative;
+    width: 100%;
+
+    &:after {
+      @include icon("triangle", $greyish-blue);
+      background-size: contain;
+      content: "";
+      position: absolute;
+      top: 1.8rem;
+      right: 1.6rem;
+      height: 1rem;
+      width: 1.2rem;
+      pointer-events: none;
+    }
+    &.error {
+      border: 0.1rem solid $tomato;
+      color: $tomato;
+    }
+
+    &.small {
+      &:after {
+        top: 1.2rem;
+        @include mobile {
+          top: 1.6rem;
+        }
+      }
+    }
+
+    &.form {
+      border: 0.1rem solid $blue-grey;
+      box-shadow: inset 0 0.1rem 0.1rem $border-grey;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 1rem 0;
+      padding: 0;
+      color: $blackio;
+      height: 5.6rem;
+      width: 100%;
+      position: relative;
+      &:hover {
+        border-color: $aqua-blue;
+      }
+      & input {
+        background-color: $white;
+        border: none;
+        font-size: $regular-size;
+        font-weight: $semibold;
+        color: $blackio;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-indent: 2rem;
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+
+      & label {
+        font-size: $regular-size;
+        color: $blackio;
+        display: flex;
+        padding: 0 1.2rem;
+        width: auto;
+        position: absolute;
+        top: 1.8rem;
+        left: 2rem;
+        z-index: 2;
+        &.filled {
+          background-color: $white;
+          font-size: $small-size;
+          color: $blue-grey;
+          position: absolute;
+          top: -0.9rem;
+          left: 0.7rem;
+        }
+      }
+      &-message {
+        display: block;
+        margin: 0.4rem 0 0.8rem 0;
+        width: 100%;
+        text-align: left;
+        font-size: $small-size;
+        color: $tomato;
+      }
+      &.error {
+        border-color: $tomato;
+        & > label {
+          color: $tomato;
+        }
+        & > .message {
+          font-size: $small-size;
+          color: $tomato;
+        }
+      }
+    }
+    &:hover {
+      @include from($tablet) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  option {
+    pointer-events: none;
+  }
+
+  &.small {
+    height: 3.2rem;
+    @include mobile {
+      height: 4rem;
+    }
+  }
+
+  &.disabled {
+    color: rgba($pale-grey-two, 0.2);
+  }
+}
+
+.select {
+  border: 0.2rem solid $pale-grey-two;
+  background-color: $white;
+  display: flex;
+  padding: 0;
+  text-indent: 3.2rem;
+  border-radius: 0.2rem;
+  -webkit-appearance: none;
+  font-size: $regular-size;
+  text-align: center;
+  color: $blackio;
+  font-weight: $semibold;
+  width: 100%;
+  min-width: 8.2rem;
+  height: 4.4rem;
+  position: relative;
+  &:hover {
+    border: 0.1rem solid $aqua-blue;
+    cursor: pointer;
+  }
+  &:focus {
+    border: 0.1rem solid $grey-base;
+    border-right: none;
+    border-left: none;
+  }
+  &__wrapper {
+    border: 0.2rem solid $pale-grey-two;
+    position: relative;
+    width: 100%;
+
+    @include from($tablet) {
+      cursor: pointer;
+    }
+
+    & > label {
+      font-size: $regular-size;
+      color: $blackio;
+      transform-origin: left;
+      transition: transform 0.2s ease-in-out;
+      will-change: transform;
+      position: absolute;
+      top: 1.4rem;
+      left: 1rem;
+      cursor: text;
+      pointer-events: none;
+      z-index: 2;
+      &.picked {
+        transform: scale(0.7) translateY(-1.6rem);
+        text-transform: uppercase;
+        top: -0.4rem;
+        left: 0;
+      }
+    }
+    &.error {
+      border: 0.1rem solid $tomato;
+      color: $tomato;
+    }
+  }
+
+  &__wrapper {
+    border: 0.2rem solid $pale-grey-two;
+    position: relative;
+    width: 100%;
+    @include from($tablet) {
+      cursor: pointer;
+    }
+
+    &:after {
+      @include icon("triangle", $greyish-blue);
+      background-size: contain;
+      content: "";
+      position: absolute;
+      top: 1.8rem;
+      right: 1.6rem;
+      height: 1rem;
+      width: 1.2rem;
+      pointer-events: none;
+    }
+  }
+}

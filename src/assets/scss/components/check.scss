@@ -1,0 +1,93 @@
+.chBox {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.4rem 0;
+  width: auto;
+  min-width: 1.6rem;
+  height: auto;
+  min-height: 1.6rem;
+  position: relative;
+  & > .txt {
+    display: flex;
+    text-align: left;
+    margin-left: 3.2rem;
+    color: $blackio;
+    & > a {
+      margin-left: 0.5rem;
+      text-decoration: underline;
+      font-weight: $semibold;
+      color: $blue-grey;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &:hover {
+      color: $aqua-blue;
+      cursor: pointer;
+    }
+
+    &.ticked {
+      color: $aqua-blue;
+    }
+  }
+  &__item {
+    display: flex;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin: 0;
+    background: $white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    label,
+    .square {
+      background-color: $white;
+      border: 0.1rem solid $light-blue-grey;
+      border-radius: 0.2rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      cursor: pointer;
+      position: absolute;
+      left: 0.5rem;
+      top: -0.1rem;
+      &:after {
+        content: "";
+        width: 1rem;
+        height: 0.3rem;
+        position: absolute;
+        top: 0.5rem;
+        left: 0.2rem;
+        border: 0.2rem solid $aqua-blue;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        transform: rotate(-50deg);
+      }
+      &:hover:after {
+        opacity: 0.3;
+      }
+
+      &.ticked {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+    input[type="checkbox"] {
+      visibility: hidden;
+      position: absolute;
+      top: 1px;
+      left: 7px;
+      &:checked + label:after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.chBox:hover .square {
+  border: 0.1rem solid $aqua-blue;
+}

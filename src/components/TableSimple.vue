@@ -1,33 +1,39 @@
 <template>
   <div class="simpleTable">
-    <div class="simpleTable__header">
+    <div class="simpleTable__scrollable-in">
       <div
-        v-for="(col, index) in item.head"
-        :class="'simpleTable__cell-head ' + 'cols' + cols"
-        :key="index"
+        :class="'simpleTable__header ' + 'cols' + cols"
+        :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
       >
-        {{ col }}
-      </div>
-    </div>
-
-    <div class="simpleTable__scrollable">
-      <div class="simpleTable__row" v-for="(row, i) in item.rows" :key="i">
         <div
-          v-for="(col, n) in columns"
-          :class="'simpleTable__cell ' + 'cols' + cols"
-          :key="n * 3.2 + 1"
-          v-html="
-            `<div class='simpleTable__cell-in'>` +
-              col +
-              '</div>' +
-              row[col]
-          "
-        ></div>
-
-        <hr :key="i + 'grd'" />
+          v-for="(col, index) in item.head"
+          :class="'simpleTable__cell-head ' + 'cols' + cols"
+          :key="index"
+        >
+          {{ col }}
+        </div>
       </div>
-      <div class="simpleTable__row">
-        <slot></slot>
+
+      <div class="simpleTable__scrollable">
+        <div
+          :class="'simpleTable__row ' + 'cols' + cols + ' '+ modifier"
+          :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
+          v-for="(row, i) in item.rows"
+          :key="i"
+          @click="rowClick(row)"
+        >
+          <div
+            v-for="(col, n) in columns"
+            :class="'simpleTable__cell ' + 'cols' + cols+ ' '+colmodifier+n+' '+row[col]"
+            :key="n * 3.2 + 1"
+            v-html="
+              `<div class='simpleTable__cell-in'>` + col + '</div>' + row[col]
+            "
+          ></div>
+        </div>
+        <div class="simpleTable__row">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -43,6 +49,18 @@ export default {
     cols: {
       type: Number,
     },
+    modifier: {
+      type: String
+    },
+    colmodifier: {
+      type: String
+    }
+  },
+
+  methods: {
+    rowClick(index) {
+     this.$emit("rowClick", index)
+    }
   },
 
   computed: {
