@@ -21,7 +21,7 @@
       <div class="col">
         <h3>Conteo: #63370</h3>
         <div class="row">
-          <TableDetail :item="tabledata" :cols="7" />
+          <TableDetail :item="tabledata" :topCols="6" :cols="7" />
         </div>
       </div>
     </div>
@@ -126,6 +126,7 @@ export default {
 
     tabledata() {
       const table = {
+        topHead: ["Id de Conteo", "Total", "Descripción","Fecha","Autor", ""],
         head: [
           "clave",
           "Título",

@@ -1,5 +1,18 @@
 <template>
   <div class="tableDetail">
+    <div
+      :class="'tableDetail__top ' + 'cols' + topCols"
+      :style="'grid-template-columns: repeat(' + topCols + ', 1fr)'"
+    >
+      <div
+        v-for="(col, index) in item.topHead"
+        :class="'tableDetail__cell-head ' + 'cols' + topCols"
+        :key="index"
+      >
+        {{ col }}
+      </div>
+    </div>
+
     <div class="tableDetail__bottom">
       <div class="tableDetail__scrollable-in">
         <div
@@ -60,6 +73,9 @@ export default {
     cols: {
       type: Number,
     },
+    topCols: {
+      type: Number,
+    },
     modifier: {
       type: String,
     },
@@ -84,6 +100,10 @@ export default {
 
     cellWidth() {
       let width = (100 / this.cols) * 100;
+      return width;
+    },
+    topCellWidth() {
+      let width = (100 / this.topCols) * 100;
       return width;
     },
   },
