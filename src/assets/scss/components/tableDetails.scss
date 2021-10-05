@@ -5,10 +5,16 @@
   align-items: flex-start;
   width: 100%;
   &__top {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    min-height: 10rem;
+    width: 100%;
+    line-height: 2.15;
     &-head {
       background-color: $white;
-      font-size: $small-size;
-      color: $blackio;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -76,7 +82,8 @@
       @extend .simpleTable__cell;
       text-align: center;
       font-weight: $semibold;
-      color: $dusk;
+      font-size: $regular-size;
+      color: $black-green;
     }
 
     &-in {
@@ -92,6 +99,10 @@
     & > a {
       font-size: $medium-size;
       color: $ocean-blue;
+    }
+
+    &-top {
+      @extend .tableDetail__cell;
     }
   }
   &__header {
@@ -115,7 +126,7 @@
     height: auto;
     width: 100%;
 
-    &:nth-child(even) {
+    &:nth-child(odd) {
       background-color: $pale-grey-three;
     }
 
@@ -124,6 +135,11 @@
         background-color: rgba($light-mint, 0.2);
         cursor: pointer;
       }
+    }
+
+    &.top {
+      height: auto;
+      min-height: 5rem;
     }
   }
 

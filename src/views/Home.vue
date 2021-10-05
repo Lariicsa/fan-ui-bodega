@@ -21,7 +21,7 @@
       <div class="col">
         <h3>Conteo: #63370</h3>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="7" />
+          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
       </div>
     </div>
@@ -112,8 +112,8 @@ export default {
       ],
 
       SelectedFilter: "clave1",
-      dataTable: dataTable.prodsin,
-      topDataTable: topDataTable.ins[0].brands
+      dataTable: topDataTable.ins[0].brands,
+      topDataTable: topDataTable.ins,
     };
   },
 
@@ -129,19 +129,16 @@ export default {
     tabledata() {
       const table = {
         topHead: ["Id de Conteo", "Total", "Descripción", "Fecha", "Autor", ""],
-        topRows: this.topDataTable,
-        head: [
-          "clave",
-          "Título",
-          "Editorial",
-          "ingreso",
-          "línea",
-          "lugar",
-          "precio",
-        ],
-        rows: this.topDataTable,
+        topRows: this.dataFormatedTable,
+        head: ["clave", "Descripción", "Cantidad"],
+        rows: this.dataTable,
       };
       return table;
+    },
+
+    dataFormatedTable() {
+      let arr = Object.values(this.topDataTable[0]).slice(0, 5);
+      return arr;
     },
   },
 };
