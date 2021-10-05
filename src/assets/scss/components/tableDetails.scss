@@ -5,18 +5,20 @@
   align-items: flex-start;
   width: 100%;
   &__top {
-    background-color: $white;
-    font-size: $small-size;
-    color: $blackio;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    overflow-x: auto;
+    &-head {
+      background-color: $white;
+      font-size: $small-size;
+      color: $blackio;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      overflow-x: auto;
 
-    @include until(1024px) {
-      flex-direction: row;
-      justify-content: flex-start;
+      @include until(1024px) {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
     }
   }
   &__bottom {
@@ -104,6 +106,28 @@
     position: relative;
   }
   &__row {
+    display: grid;
+    align-items: center;
+    position: relative;
+    justify-items: center;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+
+    &:nth-child(even) {
+      background-color: $pale-grey-three;
+    }
+
+    &:hover {
+      &.hasHover {
+        background-color: rgba($light-mint, 0.2);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__top-row {
     display: grid;
     align-items: center;
     position: relative;

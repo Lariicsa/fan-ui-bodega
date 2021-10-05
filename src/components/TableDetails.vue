@@ -1,15 +1,35 @@
 <template>
   <div class="tableDetail">
-    <div
-      :class="'tableDetail__top ' + 'cols' + topCols"
-      :style="'grid-template-columns: repeat(' + topCols + ', 1fr)'"
-    >
+    <div class="tableDetail__top">
       <div
-        v-for="(col, index) in item.topHead"
-        :class="'tableDetail__cell-head ' + 'cols' + topCols"
-        :key="index"
+        :class="'tableDetail__top-head ' + 'cols' + topCols"
+        :style="'grid-template-columns: repeat(' + topCols + ', 1fr)'"
       >
-        {{ col }}
+        <div
+          v-for="(col, index) in item.topHead"
+          :class="'tableDetail__cell-head ' + 'cols' + topCols"
+          :key="index"
+        >
+          {{ col }}
+        </div>
+      </div>
+      <div class="row">
+        <div
+          :class="'tableDetail__top-row ' + 'cols' + topCols + ' ' + modifier"
+          :style="'grid-template-columns: repeat(' + topCols + ', 1fr)'"
+          v-for="(row, i) in item.topRows"
+          :key="i"
+          @click="rowClick(row)"
+        >
+          <div
+            v-for="(col, n) in columns"
+            :class="'tableDetail__cell ' + 'cols' + topCols + row[col]"
+            :key="n * 5.7 + 1"
+            v-html="
+              `<div class='tableDetail__cell-in'>` + col + '</div>' + row[col]
+            "
+          ></div>
+        </div>
       </div>
     </div>
 

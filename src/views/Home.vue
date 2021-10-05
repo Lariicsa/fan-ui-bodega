@@ -36,6 +36,7 @@ import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
 import dataTable from "@/Mucks/products";
+import topDataTable from "@/Mucks/countingEntries";
 export default {
   name: "Home",
 
@@ -112,6 +113,7 @@ export default {
 
       SelectedFilter: "clave1",
       dataTable: dataTable.prodsin,
+      topDataTable: topDataTable.ins[0].brands
     };
   },
 
@@ -126,7 +128,8 @@ export default {
 
     tabledata() {
       const table = {
-        topHead: ["Id de Conteo", "Total", "Descripción","Fecha","Autor", ""],
+        topHead: ["Id de Conteo", "Total", "Descripción", "Fecha", "Autor", ""],
+        topRows: this.topDataTable,
         head: [
           "clave",
           "Título",
@@ -136,7 +139,7 @@ export default {
           "lugar",
           "precio",
         ],
-        rows: this.dataTable,
+        rows: this.topDataTable,
       };
       return table;
     },
