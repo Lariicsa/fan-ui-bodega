@@ -1,0 +1,107 @@
+.tableDetail {
+  &__bottom {
+    background-color: $white;
+    font-size: $small-size;
+    color: $blackio;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+
+    @include until(1024px) {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
+
+  &__scrollable {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 52rem;
+    width: 100%;
+    overflow-y: auto;
+
+    &-in {
+      overflow: auto;
+      width: 100%;
+      flex-wrap: nowrap;
+
+      @include until(1024px) {
+        min-width: 96rem;
+      }
+    }
+  }
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 0;
+    font-size: $medium-size;
+    color: $dusk;
+    letter-spacing: normal;
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+
+    @include tablet {
+      width: 100%;
+    }
+
+    &-head {
+      @extend .simpleTable__cell;
+      text-align: center;
+      font-weight: $semibold;
+      color: $dusk;
+    }
+
+    &-in {
+      @include from($tablet) {
+        display: none;
+      }
+      display: flex;
+      margin-right: 0.8rem;
+      font-weight: $semibold;
+      display: none;
+    }
+
+    & > a {
+      font-size: $medium-size;
+      color: $ocean-blue;
+    }
+  }
+  &__header {
+    background-color: $pale-grey-two;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+    position: relative;
+  }
+  &__row {
+    display: grid;
+    align-items: center;
+    position: relative;
+    justify-items: center;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.8rem;
+    height: auto;
+    width: 100%;
+
+    &:nth-child(even) {
+      background-color: $pale-grey-three;
+    }
+
+    &:hover {
+      &.hasHover {
+        background-color: rgba($light-mint, 0.2);
+        cursor: pointer;
+      }
+    }
+  }
+}

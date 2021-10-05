@@ -19,9 +19,9 @@
         </div>
       </div>
       <div class="col">
-        <h3>Resultados</h3>
+        <h3>Conteo: #63370</h3>
         <div class="row">
-          <TableSimple :item="tabledata" :cols="7" />
+          <TableDetail :item="tabledata" :cols="7" />
         </div>
       </div>
     </div>
@@ -34,8 +34,8 @@ import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
-import TableSimple from "@/components/TableSimple"
-import dataTable from "@/Mucks/products"
+import TableDetail from "@/components/TableDetails";
+import dataTable from "@/Mucks/products";
 export default {
   name: "Home",
 
@@ -44,7 +44,7 @@ export default {
     Finder,
     Modal,
     RadioOption,
-    TableSimple
+    TableDetail,
   },
   data() {
     return {
@@ -111,7 +111,7 @@ export default {
       ],
 
       SelectedFilter: "clave1",
-      dataTable: dataTable.prodsin
+      dataTable: dataTable.prodsin,
     };
   },
 
@@ -126,7 +126,15 @@ export default {
 
     tabledata() {
       const table = {
-        head: ["clave", "Título", "Editorial", "ingreso", "línea", "lugar", "precio"],
+        head: [
+          "clave",
+          "Título",
+          "Editorial",
+          "ingreso",
+          "línea",
+          "lugar",
+          "precio",
+        ],
         rows: this.dataTable,
       };
       return table;
