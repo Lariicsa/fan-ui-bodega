@@ -9,7 +9,7 @@
           v-model="idTyped"
         />
       </div>
-      <div class="col">
+      <div v-show="mainTableData !== null" class="col">
         <h4>Conteo: #{{ countId }}</h4>
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
