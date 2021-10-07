@@ -1,8 +1,15 @@
 <template>
   <div class="container__box">
+    <Loader v-show="loader" />
     <div class="col">
       <div class="row between">
-        <div class="row md"><Finder phText="Encuentra un artículo" /></div>
+        <div class="row md">
+          <Finder
+            phText="Encuentra un artículo"
+            @search="getEntriesData(idTyped)"
+            v-model="idTyped"
+          />
+        </div>
         <div class="row sm between">
           <RadioOption
             v-model="SelectedFilter"
@@ -19,7 +26,7 @@
         </div>
       </div>
       <div class="col">
-        <h3>Conteo: #63370</h3>
+        <h4>Conteo: #63370</h4>
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
@@ -29,20 +36,21 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
-import dataTable from "@/Mucks/products";
-import topDataTable from "@/Mucks/countingEntries";
+import Loader from "@/components/Loader.vue";
 export default {
   name: "Home",
 
   components: {
+    Dropdown,
     FanButton,
     Finder,
+    Loader,
     Modal,
     RadioOption,
     TableDetail,
@@ -110,35 +118,52 @@ export default {
           name: "faqs",
         },
       ],
-
-      SelectedFilter: "clave1",
-      dataTable: topDataTable.ins[0].brands,
-      topDataTable: topDataTable.ins,
+      idTyped: "",
+      SelectedFilter: "",
     };
+  },
+
+  created() {
+    let ls = localStorage.getItem("jwt");
+    if (ls === null) {
+      localStorage.setItem(
+        "jwt",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1YmMwNjg1OC01YzQ0LTQyZWMtOWExZC0xZGQ5NzYwYjBlZGIiLCJlbWFpbCI6Imxhcmlzc2FAZmFudGFzdGljb2NvbWljLmNvbSIsInJvbGUiOiJlbXBsb3llZSIsImlzcyI6ImZhbnRhc3RpY28gYXBpIiwiaWF0IjoxNjMyOTQ4MzI0fQ.JEZuHIGQqN9a_3ilEX4sYqOD1cfL1hatyhCOl4UswjQ"
+      );
+    }
   },
 
   methods: {
     selectPaymentType(filter) {
       console.log("filter", filter);
     },
+
+    getEntriesData(typed) {
+      this.$store.dispatch("getEntriesCountData", typed);
+    },
   },
 
   computed: {
-    ...mapGetters(["gtrFetchSlides"]),
+    mainTableData() {
+      return this.$store.state.entries.countingData;
+    },
+
+    detailsData() {
+      return this.$store.state.entries.countingDataDetail;
+    },
 
     tabledata() {
       const table = {
-        topHead: ["Id de Conteo", "Total", "Descripción", "Fecha", "Autor", ""],
-        topRows: this.dataFormatedTable,
+        topHead: ["Id de Conteo", "Fecha", "Descripción", "Total", "Autor", ""],
+        topRows: this.mainTableData,
         head: ["clave", "Descripción", "Cantidad"],
-        rows: this.dataTable,
+        rows: this.detailsData,
       };
       return table;
     },
 
-    dataFormatedTable() {
-      let arr = Object.values(this.topDataTable[0]).slice(0, 5);
-      return arr;
+    loader() {
+      return this.$store.state.entries.loader;
     },
   },
 };

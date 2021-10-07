@@ -1,9 +1,5 @@
 <template>
-  <form
-    @submit.prevent="search(textTyped)"
-    class="finder"
-    :class="{ opened: isOpen }"
-  >
+  <form @submit.prevent="search()" class="finder" :class="{ opened: isOpen }">
     <div
       @click="openFinder()"
       class="finder__bg"
@@ -12,14 +8,16 @@
     <span @click="openFinder()" class="finder-cross"></span>
     <input
       type="text"
-      :autofocus="true"
       :placeholder="phText"
-      v-model="textTyped"
-      v-on:keyenter="search(textTyped)"
-      @change="toFirstElem()"
+      ref="input"
+      :value="value"
+      @input="updateValue()"
+      @keyup="onKeyUp()"
+      @keyup.enter="onKeyUpEnter()"
+      @blur="onBlur()"
     />
     <span
-      @click="search(textTyped)"
+      @click="search()"
       class="finder-icon"
       :class="{ show: isOpen }"
     ></span>
@@ -28,82 +26,43 @@
       class="finder-icon-mobile"
       :class="{ hide: isOpen }"
     ></span>
-    <Loader v-show="loader"></Loader>
   </form>
 </template>
 <script>
-import { mapActions } from "vuex";
-import Loader from "@/components/Loader";
 export default {
   name: "finder",
-  components: {
-    Loader,
-  },
+
   props: {
     textUrl: {
       type: String,
     },
     phText: String,
+    textIn: String,
+    value: String,
   },
 
   data() {
     return {
-      textTyped: "",
+      textTyped: this.textIn,
       isOpen: false,
     };
   },
 
-  mounted() {
-    this.textInPath;
-  },
-
-  watch: {
-    $route: "closeFinder",
-  },
-
   methods: {
-    getTextToSearch() {
-      console.log("getTextToSearch");
+    search() {
+      this.$emit("search");
     },
-    search(text) {
-      this.isOpen = false;
-      if (text !== "") {
-        if (this.textInPath !== text) {
-          let textUrl = text.toLowerCase().replace(/[\/, ' ']/g, "+");
-        }
-      }
+    updateValue() {
+      this.$emit("input", this.$refs.input.value);
     },
-    openFinder() {
-      this.isOpen = !this.isOpen;
+    onKeyUp() {
+      this.$emit("keyup");
     },
-
-    closeFinder() {
-      this.isOpen = false;
+    onKeyUpEnter() {
+      this.$emit("keyupEnter");
     },
-
-    toFirstElem() {
-      console.log("toFirstElem");
-    },
-  },
-  computed: {
-    text() {
-      return this.$store.state.filters.textTyped;
-    },
-    loader() {
-      return this.$store.state.filters.loader;
-    },
-    currentPath() {
-      return this.$route.name;
-    },
-
-    textInPath() {
-      let fullPath = this.$route.fullPath.slice(8, 1000).toString();
-      let textUrl = fullPath
-        .toLowerCase()
-        .replace(/%[a-fA-F0-9-2f][a-fA-F0-9-2F]/g, "#")
-        .split("+")
-        .join(" ");
-      return textUrl;
+    onBlur() {
+      this.$emit("onBlur");
     },
   },
 };

@@ -69,9 +69,6 @@
               "
             ></div>
           </div>
-          <div class="tableDetail__row">
-            <slot></slot>
-          </div>
         </div>
       </div>
     </div>
