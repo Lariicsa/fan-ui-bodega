@@ -2,39 +2,17 @@
   <div class="container__box">
     <Loader v-show="loader" />
     <div class="col">
-      <div class="row between">
-        <div class="row md">
-          <Finder
-            phText="Encuentra un artículo"
-            @search="getEntriesData(idTyped)"
-            v-model="idTyped"
-          />
-        </div>
-        <div class="row sm between">
-          <RadioOption
-            v-model="SelectedFilter"
-            textOption="Por clave"
-            id="clave1"
-            @click="selectPaymentType('clave1')"
-          />
-          <RadioOption
-            v-model="SelectedFilter"
-            textOption="Por nombre"
-            id="nombre2"
-            @click="selectPaymentType('nombre2')"
-          />
-        </div>
-      </div>
+     
       <div class="col">
         <h4>Conteo: #63370</h4>
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
-        <div class="row between">
+        <div class="row between entries__setting">
           <Dropdown
             v-model="selectedStore"
             phName="Origen"
-            variant="normal"
+            variant="form"
             :options="stores"
             name="idStore"
             @onChange="setEntrieOrigin(selectedStore)"
@@ -42,12 +20,12 @@
           <Dropdown
             v-model="selectedEmployee"
             phName="Asignado a"
-            variant="normal"
+            variant="form"
             :options="employeesList"
             name="idEmployee"
             @onChange="setAssignedTo(selectedEmployee)"
           />
-           <FanButton text="Registrar entrada" ui="disabled" :isSubmit="true" />
+          <FanButton text="Registrar entrada" ui="primary " :isSubmit="true" />
         </div>
       </div>
     </div>
