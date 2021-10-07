@@ -2,15 +2,22 @@
   <div class="container__box">
     <Loader v-show="loader" />
     <div class="col">
-      <div class="row">
+      <div class="row between center">
         <Finder
-          phText="Encuentra un artículo"
+          phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
           v-model="idTyped"
         />
       </div>
       <div v-show="mainTableData !== null" class="col">
-        <h4>Conteo: #{{ countId }}</h4>
+        <div class="row between entries__top">
+          <h4>Conteo: #{{ countId }}</h4>
+          <FanButton
+            text="Detalles"
+            ui="secondary"
+            @btnClick="showCountingDetails()"
+          />
+        </div>
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
@@ -38,6 +45,13 @@
           />
         </div>
       </div>
+      <Modal :showBox="showDetails" @closeModal="closeModal()">
+        <div class="box__full">
+          <div class="hCarousel__text">
+            <TableSimple :item="tableDataDetails" :cols="6" />
+          </div>
+        </div>
+      </Modal>
     </div>
   </div>
 </template>
@@ -49,10 +63,11 @@ import Finder from "@/components/Finder";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
+import TableSimple from "@/components/TableSimple";
 import Loader from "@/components/Loader.vue";
 import storesData from "@/Mucks/stores";
 import employees from "@/Mucks/employees";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Home",
 
@@ -64,6 +79,7 @@ export default {
     Modal,
     RadioOption,
     TableDetail,
+    TableSimple,
   },
   data() {
     return {
@@ -72,6 +88,7 @@ export default {
       selectedStore: "",
       employeesList: employees.names,
       selectedEmployee: "",
+      showDetails: false,
     };
   },
 
@@ -91,6 +108,15 @@ export default {
       "setAssignedTo",
       "loadEntrieFromCounting",
     ]),
+
+    showCountingDetails() {
+      this.showDetails = true;
+    },
+
+    closeModal() {
+      this.showDetails = false;
+    },
+
     selectPaymentType(filter) {
       console.log("filter", filter);
     },
@@ -111,6 +137,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters(["countingDetails"]),
     mainTableData() {
       return this.$store.state.entries.countingData;
     },
@@ -125,6 +152,21 @@ export default {
         topRows: this.mainTableData,
         head: ["clave", "Descripción", "Cantidad"],
         rows: this.detailsData,
+      };
+      return table;
+    },
+
+    tableDataDetails() {
+      const table = {
+        head: [
+          "clave",
+          "Cantidad",
+          "Descripción",
+          "Editorial",
+          "Línea",
+          "Control",
+        ],
+        rows: this.countingDetails,
       };
       return table;
     },

@@ -9,6 +9,18 @@
   height: auto;
   width: 48rem;
 
+  &__full {
+    position: relative;
+    @extend .box;
+    width: 62vw;
+    min-width: 72rem;
+    max-width: 80rem;
+    @include tablet {
+      width: 80vw;
+      min-width: 32rem;
+    }
+  }
+
   @include mobile {
     width: 100%;
     margin: auto 0;

@@ -82,6 +82,12 @@ const entries = {
       console.log("name", name);
     },
   },
+
+  getters:{
+    countingDetails(state) {
+      return state.countingDataDetail
+    }
+  }
 };
 
 export default entries;
