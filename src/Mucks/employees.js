@@ -1,19 +1,19 @@
 export default {
   names: [
     {
-      value: "Christian",
-      text: "christian",
+      value: "christianchristian@fantasticocomic.com",
+      text: "Christian",
     },
     {
-      value: "Ismael",
+      value: "ismael@fantasticocomic.com",
       text: "Ismael",
     },
     {
-      value: "Jesús",
+      value: "jesus@fantasticocomic.com",
       text: "Jesús",
     },
     {
-      value: "Sergio",
+      value: "sergio@fantasticocomic.com",
       text: "Sergio",
     },
   ],

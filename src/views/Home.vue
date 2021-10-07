@@ -2,9 +2,15 @@
   <div class="container__box">
     <Loader v-show="loader" />
     <div class="col">
-     
+      <div class="row">
+        <Finder
+          phText="Encuentra un artículo"
+          @search="getEntriesData(idTyped)"
+          v-model="idTyped"
+        />
+      </div>
       <div class="col">
-        <h4>Conteo: #63370</h4>
+        <h4>Conteo: #{{ countId }}</h4>
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
@@ -25,7 +31,11 @@
             name="idEmployee"
             @onChange="setAssignedTo(selectedEmployee)"
           />
-          <FanButton text="Registrar entrada" ui="primary " :isSubmit="true" />
+          <FanButton
+            text="Registrar entrada"
+            :ui="isAllFilled ? 'primary' : 'disabled'"
+            @btnClick="loadEntries()"
+          />
         </div>
       </div>
     </div>
@@ -57,70 +67,7 @@ export default {
   },
   data() {
     return {
-      sections: [
-        {
-          icon: "./src/assets/img/icons/orders.svg",
-          text: "Banner",
-          path: "/banner",
-          name: "banner",
-        },
-        {
-          icon: "./src/assets/img/icons/products.svg",
-          text: "Bolsa de trabajo",
-          path: "#3",
-          name: "jobs",
-          children: [
-            {
-              icon: "now-ui-icons files_paper",
-              text: "Nested 1 ",
-              path: "/products",
-            },
-            {
-              icon: "now-ui-icons files_paper",
-              text: "Nested 2",
-              path: "/categories",
-            },
-            {
-              icon: "now-ui-icons location_bookmark",
-              text: "Nested 3",
-              path: "/attribute-sets",
-            },
-          ],
-        },
-        {
-          icon: "./src/assets/img/icons/clients.svg",
-          text: "Sucursales",
-          path: "#3",
-          name: "branches",
-        },
-        {
-          icon: "./src/assets/img/icons/marketing.svg",
-          text: "Contacto",
-          path: "#4",
-          name: "contact",
-        },
-        {
-          icon: "./src/assets/img/icons/reports.svg",
-          text: "Pedidos anticipados",
-          path: "#5",
-          name: "early",
-        },
-        {
-          icon: "./src/assets/img/icons/settings.svg",
-          text: "Pedidos entre sucursales",
-          path: "#6",
-          name: "between",
-        },
-        {
-          icon: "./src/assets/img/icons/integrations.svg",
-          text: "Preguntas frecuentes",
-          path: "#7",
-          name: "faqs",
-        },
-      ],
       idTyped: "",
-      SelectedFilter: "",
-
       storesData: storesData.tiendas,
       selectedStore: "",
       employeesList: employees.names,
@@ -139,13 +86,27 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setEntrieOrigin", "setAssignedTo"]),
+    ...mapActions([
+      "setEntrieOrigin",
+      "setAssignedTo",
+      "loadEntrieFromCounting",
+    ]),
     selectPaymentType(filter) {
       console.log("filter", filter);
     },
 
     getEntriesData(typed) {
       this.$store.dispatch("getEntriesCountData", typed);
+    },
+
+    loadEntries() {
+      console.log("clic");
+      this.$store.dispatch("loadEntrieFromCounting", {
+        countId: this.countId,
+        type: "ENTRADA",
+        fromTo: this.fromTo,
+        assignedTo: this.assignedTo,
+      });
     },
   },
 
@@ -177,6 +138,29 @@ export default {
         return { value: item.nombre, text: item.nombre };
       });
       return tiendas;
+    },
+
+    countId() {
+      if (this.$store.state.entries.countingData != undefined) {
+        return this.$store.state.entries.countingData.count_id;
+      }
+    },
+    fromTo() {
+      return this.$store.state.entries.entriesOrigin;
+    },
+    assignedTo() {
+      return this.$store.state.entries.assignedEmployee;
+    },
+
+    isAllFilled() {
+      if (
+        (this.selectedStore && this.selectedEmployee) !== "" &&
+        this.mainTableData !== null
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

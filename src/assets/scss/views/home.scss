@@ -3,7 +3,7 @@
     margin: 2.4rem 0;
     align-items: center;
     & > .dropdown__wrapper,
-    & > button[class^="btn__"] {
+    & > div[class^="btn__"] {
       width: 24%;
     }
 
@@ -11,7 +11,7 @@
       margin: 0 0.8rem;
     }
 
-    & > button[class^="btn__"] {
+    & > div[class^="btn__"] {
       margin-left: auto;
     }
   }

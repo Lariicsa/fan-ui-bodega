@@ -1,21 +1,16 @@
-import { getCountingOrder } from "@/api/entries.api";
+import { addPreload, getCountingOrder } from "@/api/entries.api";
 
 const entries = {
   state: {
-    countId: "",
-
     countingData: null,
     countingDataDetail: null,
     entriesResults: [],
     entriesOrigin: "",
-    assignedEmployee: '',
+    assignedEmployee: "",
     loader: false,
   },
 
   mutations: {
-    SET_COUNTING_ID: (state, payload) => {
-      state.countId = payload;
-    },
     GET_COUNTING_DATA: (state, payload) => {
       state.countingData = payload;
     },
@@ -29,9 +24,9 @@ const entries = {
     SET_ENTRIES_ORIGIN: (state, payload) => {
       state.entriesOrigin = payload;
     },
-    SET_ASSIGNED_EMPLOYEE: (state, payload)=> {
-      state.assignedEmployee
-    }
+    SET_ASSIGNED_EMPLOYEE: (state, payload) => {
+      state.assignedEmployee = payload;
+    },
   },
 
   actions: {
@@ -56,19 +51,36 @@ const entries = {
         }
         console.log(res);
       } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
+    },
+
+    async loadEntrieFromCounting({ commit }, data) {
+      commit("FETCH_LOADER_STATUS", true);
+      console.log("data", data);
+      try {
+        const res = await addPreload(data);
+        let success = res.status;
+        if (success) {
+          commit("FETCH_LOADER_STATUS", false);
+        }
+        console.log(res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
       }
     },
 
     setEntrieOrigin({ commit }, origin) {
       commit("SET_ENTRIES_ORIGIN", origin);
-      console.log('origin', origin );
+      console.log("origin", origin);
     },
 
-    setAssignedTo({commit}, name) {
-      commit("SET_ASSIGNED_EMPLOYEE", name)
-      console.log('name', name);
-    }
+    setAssignedTo({ commit }, name) {
+      commit("SET_ASSIGNED_EMPLOYEE", name);
+      console.log("name", name);
+    },
   },
 };
 
