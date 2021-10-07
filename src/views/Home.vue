@@ -30,6 +30,25 @@
         <div class="row">
           <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
+        <div class="row between">
+          <Dropdown
+            v-model="selectedStore"
+            phName="Origen"
+            variant="normal"
+            :options="stores"
+            name="idStore"
+            @onChange="setEntrieOrigin(selectedStore)"
+          />
+          <Dropdown
+            v-model="selectedEmployee"
+            phName="Asignado a"
+            variant="normal"
+            :options="employeesList"
+            name="idEmployee"
+            @onChange="setAssignedTo(selectedEmployee)"
+          />
+           <FanButton text="Registrar entrada" ui="disabled" :isSubmit="true" />
+        </div>
       </div>
     </div>
   </div>
@@ -43,6 +62,9 @@ import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
 import Loader from "@/components/Loader.vue";
+import storesData from "@/Mucks/stores";
+import employees from "@/Mucks/employees";
+import { mapActions } from "vuex";
 export default {
   name: "Home",
 
@@ -120,6 +142,11 @@ export default {
       ],
       idTyped: "",
       SelectedFilter: "",
+
+      storesData: storesData.tiendas,
+      selectedStore: "",
+      employeesList: employees.names,
+      selectedEmployee: "",
     };
   },
 
@@ -134,6 +161,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["setEntrieOrigin", "setAssignedTo"]),
     selectPaymentType(filter) {
       console.log("filter", filter);
     },
@@ -164,6 +192,13 @@ export default {
 
     loader() {
       return this.$store.state.entries.loader;
+    },
+
+    stores() {
+      let tiendas = this.storesData.map((item) => {
+        return { value: item.nombre, text: item.nombre };
+      });
+      return tiendas;
     },
   },
 };

@@ -15,11 +15,20 @@
   &__delete {
     @extend .btn;
     @include button(auto, "delete");
+
+    &.min {
+      @include tablet {
+        width: 3rem;
+        min-width: 3rem;
+        height: 3rem;
+      }
+    }
   }
 
   &__disabled {
     @extend .btn;
     @include button(auto, "disabled");
+    color: $blue-grey;
   }
 
   &__link {
@@ -45,5 +54,35 @@
     @include mobile {
       margin: 1.6rem 0;
     }
+
+    &.min {
+      font-size: $medium-size;
+      height: 4rem;
+      width: 4rem;
+      padding: 0;
+      &:before {
+        background-size: contain;
+        background-position: center;
+        width: 1.7rem;
+        height: 1.7rem;
+
+        top: auto;
+        left: auto;
+      }
+      @include tablet {
+        margin: 0;
+        width: 3rem;
+        min-width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  &.auto {
+    width: auto;
+  }
+
+  &.medium {
+    max-width: 20rem;
   }
 }

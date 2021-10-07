@@ -3,9 +3,12 @@ import { getCountingOrder } from "@/api/entries.api";
 const entries = {
   state: {
     countId: "",
-    entriesResults: [],
+
     countingData: null,
     countingDataDetail: null,
+    entriesResults: [],
+    entriesOrigin: "",
+    assignedEmployee: '',
     loader: false,
   },
 
@@ -23,6 +26,12 @@ const entries = {
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
     },
+    SET_ENTRIES_ORIGIN: (state, payload) => {
+      state.entriesOrigin = payload;
+    },
+    SET_ASSIGNED_EMPLOYEE: (state, payload)=> {
+      state.assignedEmployee
+    }
   },
 
   actions: {
@@ -50,6 +59,16 @@ const entries = {
         console.log(error.response);
       }
     },
+
+    setEntrieOrigin({ commit }, origin) {
+      commit("SET_ENTRIES_ORIGIN", origin);
+      console.log('origin', origin );
+    },
+
+    setAssignedTo({commit}, name) {
+      commit("SET_ASSIGNED_EMPLOYEE", name)
+      console.log('name', name);
+    }
   },
 };
 

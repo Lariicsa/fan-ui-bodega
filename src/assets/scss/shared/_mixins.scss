@@ -139,6 +139,7 @@
   @include tablet {
     width: 100%;
   }
+
   @if ($type == "primary") {
     background: $aqua-blue;
     background: linear-gradient(
@@ -146,20 +147,20 @@
       rgba($aqua-blue-g1, 0.88) 10%,
       rgba($aqua-blue-g2, 0.88) 71%
     );
-    border: 0.2rem solid $pale-grey-two;
+    border: 0.1rem solid $pale-grey-two;
     color: $white;
     &:hover {
       background-color: $aqua-blue;
     }
     &:active {
-      border: 0.2rem solid $aqua-blue;
+      border: 0.1rem solid $aqua-blue;
     }
   } @else if ($type == "secondary") {
     background-color: $white;
     border: 0.2rem solid $pale-grey-two;
     color: $blackio;
     &:hover {
-      border-color: $aqua-blue;
+      border: 0.1rem solid $aqua-blue;
       color: $aqua-blue;
     }
     &:active {
@@ -215,15 +216,22 @@
     color: $blackio;
     height: 4rem;
     width: 4rem;
+    @include tablet {
+      width: 100%;
+      min-width: 4rem;
+    }
     &:hover {
-      @include icon("trash", $tomato);
-      border-color: $tomato;
-      color: $tomato;
+      @include icon("trash", $coral);
+      border-color: $coral;
+      color: $coral;
       text-decoration: none;
+    }
+    @include tablet {
+      width: 4rem;
     }
   } @else if ($type == "filter") {
     @include icon("filter", $blue-grey);
-    background-color: $white;
+    background-color: transparent;
     background-position: center;
     background-size: contain;
     border-radius: 0;
@@ -255,16 +263,16 @@
     background-color: $white;
     border: 0.2rem solid $pale-grey-two;
     color: $blackio;
-    padding-left: 3.2rem;
+    padding: 0 2rem 0 3.2rem;
     position: relative;
     &:hover {
       &:before {
-        @include icon("heart-filled", $tomato);
+        @include icon("heart-border", $tomato);
       }
     }
     &:before {
       content: "";
-      @include icon("heart-border", $tomato);
+      @include icon("heart-border", $blackio);
       position: absolute;
       left: 1rem;
       top: 1rem;
@@ -283,6 +291,15 @@
     height: 4rem;
     &:hover {
       cursor: not-allowed !important;
+    }
+  } @else if ($type == "disabled") {
+    background-color: $pale-grey-two;
+    border: 0.2rem solid $pale-grey-two;
+    &:hover {
+      cursor: not-allowed;
+    }
+    &:active {
+      pointer-events: none;
     }
   }
   &:hover {
