@@ -1,9 +1,14 @@
-import { addPreload, getCountingOrder } from "@/api/entries.api";
+import {
+  addPreload,
+  getCountingOrder,
+  getOrderDetail,
+} from "@/api/entries.api";
 
 const entries = {
   state: {
     countingData: null,
     countingDataDetail: null,
+    countingDetail: null,
     entriesResults: [],
     entriesOrigin: "",
     assignedEmployee: "",
@@ -15,8 +20,12 @@ const entries = {
       state.countingData = payload;
     },
 
-    GET_COUNTING_DETAIL_DATA: (state, payload) => {
+    GET_COUNTING_DATA_DETAIL: (state, payload) => {
       state.countingDataDetail = payload;
+    },
+
+    GET_COUNTING_DETAILS: (state, payload) => {
+      state.countingDetail = payload;
     },
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
@@ -47,13 +56,20 @@ const entries = {
           };
           let dataDetail = payload.brands;
           commit("GET_COUNTING_DATA", mainData);
-          commit("GET_COUNTING_DETAIL_DATA", dataDetail);
+          commit("GET_COUNTING_DATA_DETAIL", dataDetail);
         }
         console.log(res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
       }
+    },
+
+    async getEntriesCountDetail({ commit }, idC) {
+      const res = await getOrderDetail(idC);
+      let items = res.data.payload;
+      commit("GET_COUNTING_DETAILS", items);
+      console.log("details", res);
     },
 
     async loadEntrieFromCounting({ commit }, data) {
@@ -83,11 +99,25 @@ const entries = {
     },
   },
 
-  getters:{
+  getters: {
     countingDetails(state) {
-      return state.countingDataDetail
-    }
-  }
+      const items = state.countingDetail;
+      if (items !== null) {
+        let detail = items.map((ele) => {
+          return {
+            total_items: ele.total_items,
+            product_id: ele.product_id,
+            description: ele.description,
+            brand: ele.brand,
+            line_id: ele.line_id,
+            control: ele.control,
+            price: ele.price,
+          };
+        });
+        return detail;
+      }
+    },
+  },
 };
 
 export default entries;

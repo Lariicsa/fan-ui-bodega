@@ -45,11 +45,11 @@
           />
         </div>
       </div>
+    </div>
+    <div class="row">
       <Modal :showBox="showDetails" @closeModal="closeModal()">
         <div class="box__full">
-          <div class="hCarousel__text">
-            <TableSimple :item="tableDataDetails" :cols="6" />
-          </div>
+          <TableSimple :item="tableDataDetails" :cols="7" />
         </div>
       </Modal>
     </div>
@@ -122,7 +122,9 @@ export default {
     },
 
     getEntriesData(typed) {
-      this.$store.dispatch("getEntriesCountData", typed);
+      this.$store.dispatch("getEntriesCountData", typed).then(() => {
+        this.$store.dispatch("getEntriesCountDetail", typed);
+      });
     },
 
     loadEntries() {
@@ -159,12 +161,13 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
-          "clave",
           "Cantidad",
+          "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
+          "Precio",
         ],
         rows: this.countingDetails,
       };
