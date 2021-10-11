@@ -2,6 +2,7 @@ import {
   addPreload,
   getCountingOrder,
   getOrderDetail,
+  getPreload,
 } from "@/api/entries.api";
 
 const entries = {
@@ -13,6 +14,7 @@ const entries = {
     entriesOrigin: "",
     assignedEmployee: "",
     loader: false,
+    status: false,
   },
 
   mutations: {
@@ -35,6 +37,9 @@ const entries = {
     },
     SET_ASSIGNED_EMPLOYEE: (state, payload) => {
       state.assignedEmployee = payload;
+    },
+    FETCH_STATUS: (state, payload) => {
+      state.status = payload;
     },
   },
 
@@ -78,10 +83,21 @@ const entries = {
       try {
         const res = await addPreload(data);
         let success = res.status;
-        if (success) {
+        if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
+          commit("FETCH_STATUS", true);
         }
         console.log(res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
+    },
+
+    async getPreloaded({ commit }, preloadId) {
+      try {
+        const res = await getPreload(preloadId);
+        console.log("getPreloaded", res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);

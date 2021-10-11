@@ -102,11 +102,18 @@ export default {
     }
   },
 
+  mounted() {
+    if(this.status) {
+      
+    }
+  },
+
   methods: {
     ...mapActions([
       "setEntrieOrigin",
       "setAssignedTo",
       "loadEntrieFromCounting",
+      "getPreloaded"
     ]),
 
     showCountingDetails() {
@@ -207,6 +214,10 @@ export default {
         return false;
       }
     },
+
+    status() {
+      return this.$store.state.entries.status
+    }
   },
 };
 </script>
