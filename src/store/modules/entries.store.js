@@ -41,6 +41,10 @@ const entries = {
     FETCH_STATUS: (state, payload) => {
       state.status = payload;
     },
+
+    GET_ENTRIE_BY_ID: (state, payload) => {
+      state.entriesResults = payload;
+    },
   },
 
   actions: {
@@ -95,12 +99,20 @@ const entries = {
     },
 
     async getPreloaded({ commit }, preloadId) {
+      commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getPreload(preloadId);
-        console.log("getPreloaded", res);
+        let entrieRes = res.data.payload;
+        let succes = res.status;
+        if (succes == 200) {
+          commit("FETCH_LOADER_STATUS", false);
+          commit("GET_ENTRIE_BY_ID", entrieRes);
+        }
+
+        console.log("getPreloaded", );
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error.response);
+        console.log(error);
       }
     },
 
@@ -133,6 +145,11 @@ const entries = {
         return detail;
       }
     },
+
+    entryDataResult(state) {
+      console.log(state.entriesResults);
+      return [state.entriesResults]
+    }
   },
 };
 
