@@ -63,6 +63,11 @@
           @include icon("dashboard", $blackio);
         }
       }
+      &.list-min {
+        &:after {
+          @include icon("list-min", $blackio);
+        }
+      }
     }
   }
 
@@ -77,6 +82,11 @@
   &.dashboard > a {
     &:after {
       @include icon("dashboard", $dusk);
+    }
+  }
+  &.list-min > a {
+    &:after {
+      @include icon("list-min", $dusk);
     }
   }
 }
