@@ -1,7 +1,7 @@
 <template>
   <div class="container__box">
     <Loader v-show="loader" />
-    <h4>Entrada 6df2e541-8592-480a-8c35-f1f14ebbcd44</h4>
+    <h4>Información de entrada</h4>
     <div class="row between center">
       <Finder
         phText="Ingresa el Id de precarga"
@@ -9,7 +9,7 @@
         v-model="idTyped"
       />
       <div class="row center">
-        <TableSimple :item="tableDataDetails" :cols="9" />
+        <TableDetail :item="tableData" :topCols="9" :cols="3" />
       </div>
     </div>
   </div>
@@ -17,6 +17,7 @@
 <script>
 import Finder from "@/components/Finder";
 import Loader from "@/components/Loader.vue";
+import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapGetters } from "vuex";
 export default {
@@ -25,6 +26,7 @@ export default {
   components: {
     Finder,
     Loader,
+    TableDetail,
     TableSimple,
   },
 
@@ -46,9 +48,9 @@ export default {
       return this.$store.state.entries.loader;
     },
 
-    tableDataDetails() {
+    tableData() {
       const table = {
-        head: [
+        topHead: [
           "id",
           "Asignado a",
           "Descripción",
@@ -59,7 +61,7 @@ export default {
           "Status",
           "Cantidad",
         ],
-        rows: this.entryDataResult,
+        topRows: this.entryDataResult,
       };
       return table;
     },

@@ -148,7 +148,7 @@ const entries = {
 
     entryDataResult(state) {
       console.log(state.entriesResults);
-      return [state.entriesResults]
+      return state.entriesResults
     }
   },
 };
