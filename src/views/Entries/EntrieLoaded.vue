@@ -9,7 +9,7 @@
         v-model="idTyped"
       />
       <div class="row center">
-        <TableDetail :item="tableData" :topCols="9" :cols="3" />
+        <TableDetail :item="tableData" :topCols="8" :cols="12" />
       </div>
     </div>
   </div>
@@ -36,18 +36,16 @@ export default {
     };
   },
 
-  created() {
-    this.$store.dispatch("getPreloadDetail", '6df2e541-8592-480a-8c35-f1f14ebbcd44')
-  },
-
   methods: {
     getEntrieInfo(entrieId) {
-      this.$store.dispatch("getPreloaded", entrieId);
+      this.$store.dispatch("getPreloaded", entrieId).then(() => {
+        this.$store.dispatch("getPreloadDetail", entrieId);
+      });
     },
   },
 
   computed: {
-    ...mapGetters(["entryDataResult"]),
+    ...mapGetters(["entryDataResult", "entryDataDetails"]),
     loader() {
       return this.$store.state.entries.loader;
     },
@@ -55,17 +53,31 @@ export default {
     tableData() {
       const table = {
         topHead: [
-          "id",
-          "Asignado a",
-          "Descripción",
-          "Desde",
-          "#Orden",
-          "Fecha",
-          "Editó",
-          "Status",
           "Cantidad",
+          "Transacción",
+          "Desde",
+          "Creado por",
+          "Fecha",
+          "Asignado a",
+          "#Orden",
+          "Status",
         ],
         topRows: this.entryDataResult,
+        head: [
+          "idProducto",
+          "Cantidad",
+          "Clave",
+          "Descripción",
+          "Editorial",
+          "Línea",
+          "Control",
+          "preUbicación",
+          "Ubicación",
+          "Actualización",
+          "Fecha",
+          "Status",
+        ],
+        rows: this.entryDataDetails,
       };
       return table;
     },

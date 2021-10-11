@@ -166,6 +166,7 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
+          "id",
           "Cantidad",
           "Clave",
           "Descripción",
@@ -173,6 +174,10 @@ export default {
           "Línea",
           "Control",
           "Precio",
+          "preUbicación",
+          "Ubicaicón",
+          
+          "status"
         ],
         rows: this.countingDetails,
       };
