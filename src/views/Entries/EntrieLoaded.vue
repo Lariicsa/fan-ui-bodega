@@ -36,6 +36,10 @@ export default {
     };
   },
 
+  created() {
+    this.$store.dispatch("getPreloadDetail", '6df2e541-8592-480a-8c35-f1f14ebbcd44')
+  },
+
   methods: {
     getEntrieInfo(entrieId) {
       this.$store.dispatch("getPreloaded", entrieId);

@@ -3,6 +3,7 @@ import {
   getCountingOrder,
   getOrderDetail,
   getPreload,
+  preloadDetail
 } from "@/api/entries.api";
 
 const entries = {
@@ -113,6 +114,15 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error);
+      }
+    },
+
+    async getPreloadDetail({commit}, preloadId) {
+      try {
+        const res = await preloadDetail(preloadId)
+        console.log('PreloadDetail', res);
+      } catch (error) {
+        
       }
     },
 
