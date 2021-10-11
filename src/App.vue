@@ -9,7 +9,7 @@
       <div class="container__main">
         <div :class="isOpen ? 'container__in' : 'container__in-full'">
           <Sidebar @btnClick="expandMenu" :modifier="{ opened: isOpen }">
-            <MenuItems></MenuItems>
+            <MenuItems :items="sidebarMenu" />
           </Sidebar>
           <router-view />
         </div>
@@ -21,6 +21,7 @@
 import MenuItems from "@/components/MenuItems";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import sidebarItems from "./Mucks/sidebar";
 
 export default {
   name: "app",
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      sidebarMenu: sidebarItems.items,
     };
   },
 
