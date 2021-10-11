@@ -103,8 +103,7 @@ export default {
   },
 
   mounted() {
-    if(this.status) {
-      
+    if (this.status) {
     }
   },
 
@@ -113,7 +112,6 @@ export default {
       "setEntrieOrigin",
       "setAssignedTo",
       "loadEntrieFromCounting",
-      "getPreloaded"
     ]),
 
     showCountingDetails() {
@@ -216,8 +214,8 @@ export default {
     },
 
     status() {
-      return this.$store.state.entries.status
-    }
+      return this.$store.state.entries.status;
+    },
   },
 };
 </script>
