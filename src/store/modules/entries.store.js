@@ -205,6 +205,9 @@ const entries = {
         return formated;
       }
     },
+    currentStatus(state) {
+      return state.status
+    }
   },
 };
 

@@ -45,7 +45,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["entryDataResult", "entryDataDetails"]),
+    ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
     loader() {
       return this.$store.state.entries.loader;
     },
