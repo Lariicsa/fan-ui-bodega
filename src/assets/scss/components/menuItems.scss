@@ -68,6 +68,16 @@
           @include icon("list-min", $blackio);
         }
       }
+      &.logs {
+        &:after {
+          @include icon("logs", $blackio);
+        }
+      }
+      &.logout {
+        &:after {
+          @include icon("logout", $blackio);
+        }
+      }
     }
   }
 
@@ -87,6 +97,16 @@
   &.list-min > a {
     &:after {
       @include icon("list-min", $dusk);
+    }
+  }
+  &.logs > a {
+    &:after {
+      @include icon("logs", $dusk);
+    }
+  }
+  &.logout > a {
+    &:after {
+      @include icon("logout", $dusk);
     }
   }
 }

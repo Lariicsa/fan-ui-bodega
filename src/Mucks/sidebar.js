@@ -14,6 +14,12 @@ export default {
     },
     {
       icon: "",
+      text: "Precarga",
+      path: "/preload",
+      name: "precarga",
+    },
+    {
+      icon: "",
       text: "Entradas",
       path: "/entradas",
       name: "list-min",
@@ -24,6 +30,18 @@ export default {
           path: "/entradas",
         },
       ],
+    },
+    {
+      icon: "",
+      text: "Logs",
+      path: "/logs",
+      name: "logs", 
+    },
+    {
+      icon: "",
+      text: "Cerrar Sesión",
+      path: "/logout",
+      name: "logout ", 
     },
   ],
 };
