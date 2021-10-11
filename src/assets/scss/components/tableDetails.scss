@@ -53,13 +53,10 @@
     overflow-y: auto;
 
     &-in {
-      overflow: auto;
+      overflow: hidden;
       width: 100%;
+      min-width: 142rem;
       flex-wrap: nowrap;
-
-      @include until(1024px) {
-        min-width: 96rem;
-      }
     }
   }
   &__cell {
