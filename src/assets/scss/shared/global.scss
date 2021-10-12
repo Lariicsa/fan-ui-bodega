@@ -104,7 +104,7 @@ select {
     @extend .container__;
     justify-content: flex-end;
     margin: 0;
-    max-width: $maxwidth-containner;
+    max-width: $maxwidth-inner-containner;
   }
 
   &in {
