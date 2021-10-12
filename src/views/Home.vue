@@ -150,6 +150,7 @@ export default {
             });
             setTimeout(() => {
               this.$store.commit("FETCH_LOADER_STATUS", false)
+              this.$store.commit("GET_COUNTING_DATA", null)
             }, 300);
           }
         });
