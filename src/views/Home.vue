@@ -1,6 +1,5 @@
 <template>
   <div class="container__box">
-    {{ status }}
     <Loader v-show="loader" />
     <div class="col">
       <div class="row between center">
@@ -82,6 +81,7 @@ export default {
     TableDetail,
     TableSimple,
   },
+
   data() {
     return {
       idTyped: "",

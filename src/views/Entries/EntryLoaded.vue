@@ -30,13 +30,30 @@ export default {
     TableSimple,
   },
 
+  props: {
+    entryId: {
+      type: String,
+    },
+  },
+
   data() {
     return {
       idTyped: "",
+      loadEntryId: this.entryId,
     };
   },
 
+  created() {
+    this.selectFunction();
+  },
+
   methods: {
+    selectFunction() {
+      if (this.entryId != undefined) {
+        this.getEntrieInfo(this.entryId);
+      }
+    },
+
     getEntrieInfo(entrieId) {
       this.$store.dispatch("getPreloaded", entrieId).then(() => {
         this.$store.dispatch("getPreloadDetail", entrieId);

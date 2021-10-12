@@ -6,7 +6,15 @@
         El conteo <strong>{{ countingId }}</strong> se ha registrado con éxito
       </p>
       <p>
-        El ID de entrada es <strong>{{ currentEntryId }}</strong
+        El ID de entrada es
+        <strong
+          ><router-link
+            :to="{
+              name: 'EntryLoaded',
+              params: { entryId: currentEntryId },
+            }"
+            >{{ currentEntryId }}</router-link
+          ></strong
         >.
       </p>
     </div>
