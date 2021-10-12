@@ -3,6 +3,7 @@ import {
   getCountingOrder,
   getOrderDetail,
   getPreload,
+  preloadDetail,
 } from "@/api/entries.api";
 
 const entries = {
@@ -11,6 +12,7 @@ const entries = {
     countingDataDetail: null,
     countingDetail: null,
     entriesResults: [],
+    entriesDetail: [],
     entriesOrigin: "",
     assignedEmployee: "",
     loader: false,
@@ -40,6 +42,14 @@ const entries = {
     },
     FETCH_STATUS: (state, payload) => {
       state.status = payload;
+    },
+
+    GET_ENTRIE_BY_ID: (state, payload) => {
+      state.entriesResults = payload;
+    },
+
+    GET_ENTRIE_DETAILS: (state, payload) => {
+      state.entriesDetail = payload;
     },
   },
 
@@ -95,23 +105,46 @@ const entries = {
     },
 
     async getPreloaded({ commit }, preloadId) {
+      commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getPreload(preloadId);
-        console.log("getPreloaded", res);
+        let entrieRes = res.data.payload;
+        let succes = res.status;
+        if (succes == 200) {
+          commit("FETCH_LOADER_STATUS", false);
+          commit("GET_ENTRIE_BY_ID", entrieRes);
+        }
+
+        console.log("getPreloaded", entrieRes);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error.response);
+        console.log(error);
+      }
+    },
+
+    async getPreloadDetail({ commit }, preloadId) {
+      try {
+        commit("FETCH_LOADER_STATUS", true);
+        const res = await preloadDetail(preloadId);
+        let success = res.status;
+        const items = res.data.payload;
+        if (success == 200) {
+          commit("FETCH_LOADER_STATUS", false);
+          commit("GET_ENTRIE_DETAILS", items);
+        }
+        console.log("PreloadDetail", items);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error);
       }
     },
 
     setEntrieOrigin({ commit }, origin) {
       commit("SET_ENTRIES_ORIGIN", origin);
-      console.log("origin", origin);
     },
 
     setAssignedTo({ commit }, name) {
       commit("SET_ASSIGNED_EMPLOYEE", name);
-      console.log("name", name);
     },
   },
 
@@ -133,6 +166,48 @@ const entries = {
         return detail;
       }
     },
+
+    entryDataResult(state) {
+      let item = state.entriesResults;
+      const formated = {
+        total_items: item.total_items,
+        action_type: item.action_type,
+        from_to: item.from_to,
+        created_by: item.created_by,
+        created_at: item.created_at,
+        assigned_to: item.assigned_to,
+        num_order: item.num_order,
+        status: item.status,
+      };
+
+      return formated;
+    },
+    entryDataDetails(state) {
+      let items = state.entriesDetail.items;
+      if (items != undefined) {
+        let formated = items.map((ele) => {
+          let elems = {
+            detail_id: ele.detail_id,
+            quantity: ele.quantity,
+            product_id: ele.product_id,
+            description: ele.description,
+            brand: ele.brand,
+            line: ele.line,
+            control: ele.control,
+            pre_location: ele.pre_location,
+            final_location: ele.final_location,
+            updated_by: ele.updated_by,
+            updated_at: ele.updated_at,
+            status: ele.status,
+          };
+          return elems;
+        });
+        return formated;
+      }
+    },
+    currentStatus(state) {
+      return state.status
+    }
   },
 };
 
