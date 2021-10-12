@@ -1,10 +1,10 @@
 import { MAIN_SERVICE } from "../services/index";
 
 const GET_COUNTING = "/v1/warehouse/counts/";
-const POST_PRELOAD = "/v1/warehouse/preload";
+const POST_PRELOAD = "/v1/warehouse/preloads";
 const GET_COUNTING_DETAIL = "/v1/warehouse/counts/";
-const GET_PRELOAD = "/v1/warehouse/preload/";
-const GET_PRELOAD_DETAIL = "/v1/warehouse/preload/";
+const GET_PRELOAD = "/v1/warehouse/preloads/";
+const GET_PRELOAD_DETAIL = "/v1/warehouse/preloads/";
 
 const getCountingOrder = (idCount) => MAIN_SERVICE.get(GET_COUNTING + idCount);
 const addPreload = ({ countId, type, fromTo, assignedTo }) =>
