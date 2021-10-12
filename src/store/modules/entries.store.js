@@ -58,7 +58,7 @@ const entries = {
   },
 
   actions: {
-    async getEntriesCountData({ commit }, idC) {
+    async getItemsCountData({ commit }, idC) {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getCountingOrder(idC);
@@ -98,7 +98,7 @@ const entries = {
         const res = await addPreload(data);
         let success = res.status;
         let preloadId = res.data.payload.preloadId;
-        console.log('preloadId:', preloadId);
+        console.log("preloadId:", preloadId);
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("FETCH_STATUS", true);
@@ -216,8 +216,8 @@ const entries = {
       return state.status;
     },
     currentEntryId(state) {
-      return state.preloadEntryId
-    }
+      return state.preloadEntryId;
+    },
   },
 };
 
