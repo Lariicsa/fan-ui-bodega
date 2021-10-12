@@ -1,5 +1,6 @@
 <template>
   <div class="container__box">
+    {{ status }}
     <Loader v-show="loader" />
     <div class="col">
       <div class="row between center">
@@ -134,12 +135,23 @@ export default {
 
     loadEntries() {
       console.log("clic");
-      this.$store.dispatch("loadEntrieFromCounting", {
-        countId: this.countId,
-        type: "ENTRADA",
-        fromTo: this.fromTo,
-        assignedTo: this.assignedTo,
-      });
+      this.$store
+        .dispatch("loadEntrieFromCounting", {
+          countId: this.countId,
+          type: "ENTRADA",
+          fromTo: this.fromTo,
+          assignedTo: this.assignedTo,
+        })
+        .then(() => {
+          if (this.status) {
+            this.$router.push({
+              name: "EntrieLoaded"
+            });
+            setTimeout(() => {
+              this.$store.commit("FETCH_LOADER_STATUS", false)
+            }, 300);
+          }
+        });
     },
   },
 
@@ -176,8 +188,8 @@ export default {
           "Precio",
           "preUbicación",
           "Ubicaicón",
-          
-          "status"
+
+          "status",
         ],
         rows: this.countingDetails,
       };
