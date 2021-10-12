@@ -8,25 +8,18 @@ export default {
     },
     {
       icon: "",
-      text: "Banner",
-      path: "/banner",
-      name: "banner",
-    },
-    {
-      icon: "",
-      text: "Precarga",
-      path: "/preload",
-      name: "precarga",
-    },
-    {
-      icon: "",
       text: "Entradas",
       path: "/entradas",
       name: "list-min",
       children: [
         {
-          icon: "now-ui-icons files_paper",
-          text: "Buscar ",
+          icon: "",
+          text: "Todas",
+          path: "/entradas",
+        },
+        {
+          icon: "",
+          text: "Buscar",
           path: "/entradas",
         },
       ],
