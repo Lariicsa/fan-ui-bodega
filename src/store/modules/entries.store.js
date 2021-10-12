@@ -14,6 +14,7 @@ const entries = {
     entriesResults: [],
     entriesDetail: [],
     entriesOrigin: "",
+    preloadEntryId: "",
     assignedEmployee: "",
     loader: false,
     status: false,
@@ -50,6 +51,9 @@ const entries = {
 
     GET_ENTRIE_DETAILS: (state, payload) => {
       state.entriesDetail = payload;
+    },
+    GET_PRELOAD_RESPONSE: (state, payload) => {
+      state.preloadEntryId = payload;
     },
   },
 
@@ -93,9 +97,12 @@ const entries = {
       try {
         const res = await addPreload(data);
         let success = res.status;
+        let preloadId = res.data.payload.preloadId;
+        console.log('preloadId:', preloadId);
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("FETCH_STATUS", true);
+          commit("GET_PRELOAD_RESPONSE", preloadId);
         }
         console.log(res);
       } catch (error) {
@@ -206,7 +213,10 @@ const entries = {
       }
     },
     currentStatus(state) {
-      return state.status
+      return state.status;
+    },
+    currentEntryId(state) {
+      return state.preloadEntryId
     }
   },
 };

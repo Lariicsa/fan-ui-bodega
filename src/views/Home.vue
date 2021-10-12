@@ -81,6 +81,7 @@ export default {
     TableDetail,
     TableSimple,
   },
+
   data() {
     return {
       idTyped: "",
@@ -134,12 +135,24 @@ export default {
 
     loadEntries() {
       console.log("clic");
-      this.$store.dispatch("loadEntrieFromCounting", {
-        countId: this.countId,
-        type: "ENTRADA",
-        fromTo: this.fromTo,
-        assignedTo: this.assignedTo,
-      });
+      this.$store
+        .dispatch("loadEntrieFromCounting", {
+          countId: this.countId,
+          type: "ENTRADA",
+          fromTo: this.fromTo,
+          assignedTo: this.assignedTo,
+        })
+        .then(() => {
+          if (this.status) {
+            this.$router.push({
+              name: "EntrySuccess",
+              params:{ countingId: this.countId}
+            });
+            setTimeout(() => {
+              this.$store.commit("FETCH_LOADER_STATUS", false)
+            }, 300);
+          }
+        });
     },
   },
 
@@ -176,8 +189,8 @@ export default {
           "Precio",
           "preUbicación",
           "Ubicaicón",
-          
-          "status"
+
+          "status",
         ],
         rows: this.countingDetails,
       };
