@@ -145,7 +145,8 @@ export default {
         .then(() => {
           if (this.status) {
             this.$router.push({
-              name: "EntrieLoaded"
+              name: "EntrySuccess",
+              params:{ countingId: this.countId}
             });
             setTimeout(() => {
               this.$store.commit("FETCH_LOADER_STATUS", false)

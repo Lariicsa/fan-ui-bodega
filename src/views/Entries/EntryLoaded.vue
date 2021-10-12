@@ -1,6 +1,5 @@
 <template>
   <div class="container__box">
-        <strong>Loaded</strong>
     <Loader v-show="loader" />
     <h4>Información de entrada</h4>
     <div class="row between center">
@@ -22,7 +21,7 @@ import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapGetters } from "vuex";
 export default {
-  name: "EntrieLoaded",
+  name: "EntryLoaded",
 
   components: {
     Finder,
