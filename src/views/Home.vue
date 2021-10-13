@@ -9,7 +9,7 @@
           v-model="idTyped"
         />
       </div>
-      <div v-show="mainTableData !== null" class="col">
+      <div v-if="showTable" class="col">
         <div class="row between entries__top">
           <h4>Conteo: #{{ countId }}</h4>
           <FanButton
@@ -128,13 +128,12 @@ export default {
     },
 
     getEntriesData(typed) {
-      this.$store.dispatch("getEntriesCountData", typed).then(() => {
+      this.$store.dispatch("getItemsCountData", typed).then(() => {
         this.$store.dispatch("getEntriesCountDetail", typed);
       });
     },
 
     loadEntries() {
-      console.log("clic");
       this.$store
         .dispatch("loadEntrieFromCounting", {
           countId: this.countId,
@@ -146,10 +145,11 @@ export default {
           if (this.status) {
             this.$router.push({
               name: "EntrySuccess",
-              params:{ countingId: this.countId}
+              params: { countingId: this.countId },
             });
             setTimeout(() => {
-              this.$store.commit("FETCH_LOADER_STATUS", false)
+              this.$store.commit("FETCH_LOADER_STATUS", false);
+              this.$store.commit("GET_COUNTING_DATA", null);
             }, 300);
           }
         });
@@ -158,6 +158,15 @@ export default {
 
   computed: {
     ...mapGetters(["countingDetails"]),
+    showTable() {
+      let id = this.countId;
+      let exists = this.mainTableData;
+      if (exists != null && id) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     mainTableData() {
       return this.$store.state.entries.countingData;
     },

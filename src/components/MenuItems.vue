@@ -56,6 +56,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.currentPath
+  },
+
   methods: {
     collapseItem(index, item) {
       if (item.children != null) {
