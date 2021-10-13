@@ -1,5 +1,6 @@
 import {
   addPreload,
+  allPreloads,
   getCountingOrder,
   getOrderDetail,
   getPreload,
@@ -58,6 +59,15 @@ const entries = {
   },
 
   actions: {
+    async getAllPreloads({ commit }) {
+      try {
+        const res = await allPreloads();
+        console.log("all", res);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     async getItemsCountData({ commit }, idC) {
       commit("FETCH_LOADER_STATUS", true);
       try {
