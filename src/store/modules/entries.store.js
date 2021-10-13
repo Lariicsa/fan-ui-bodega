@@ -16,6 +16,7 @@ const entries = {
     entriesDetail: [],
     entriesOrigin: "",
     preloadEntryId: "",
+    preloadsAll: [],
     assignedEmployee: "",
     loader: false,
     status: false,
@@ -56,14 +57,22 @@ const entries = {
     GET_PRELOAD_RESPONSE: (state, payload) => {
       state.preloadEntryId = payload;
     },
+    FETCH_ALL_PRELOADS: (state, payload) => {
+      state.preloadsAll = payload;
+    },
   },
 
   actions: {
     async getAllPreloads({ commit }) {
+      commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await allPreloads();
+        const items = res.data.payload;
+        commit("FETCH_LOADER_STATUS", false);
+        commit("FETCH_ALL_PRELOADS", items);
         console.log("all", res);
       } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
         console.log(error);
       }
     },
@@ -166,6 +175,24 @@ const entries = {
   },
 
   getters: {
+    currentPreloads(state) {
+      const items = state.preloadsAll;
+      let formated = items.map((item) => {
+        return {
+          preload_id: item.preload_id,
+          total_items: item.total_items,
+          from_to: item.from_to,
+          action_type: item.action_type,
+          assigned_to: item.assigned_to,
+          created_at: item.created_at,
+          created_by: item.created_by,
+          num_order: item.num_order,
+          status: item.status,
+        };
+      });
+      return formated;
+    },
+
     countingDetails(state) {
       const items = state.countingDetail;
       if (items !== null) {
