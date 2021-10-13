@@ -110,6 +110,7 @@ select {
   &in {
     @extend .container__;
     background-color: $white;
+    margin-left: 18rem;
     margin-top: 4rem;
     padding: 0;
     //width: calc(100% - 18rem);
