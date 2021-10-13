@@ -31,7 +31,7 @@
     <div class="tableDetail__bottom">
       <div
         class="tableDetail__scrollable-in"
-        :style="'margin-left:' + cols + '%'"
+  
       >
         <div
           :class="'tableDetail__header ' + 'cols' + cols"
