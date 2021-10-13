@@ -1,5 +1,8 @@
 <template>
   <div class="container__box">
+    <div class="row">
+      <h4>Registrar nuevo conteo</h4>
+    </div>
     <Loader v-show="loader" />
     <div class="col">
       <div class="row center">
