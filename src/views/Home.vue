@@ -2,7 +2,7 @@
   <div class="container__box">
     <Loader v-show="loader" />
     <div class="col">
-      <div class="row between center">
+      <div class="row center">
         <Finder
           phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
@@ -10,7 +10,7 @@
         />
       </div>
       <div v-if="showTable" class="col">
-        <div class="row between entries__top">
+        <div class="row right entries__top">
           <h4>Conteo: #{{ countId }}</h4>
           <FanButton
             text="Detalles"
