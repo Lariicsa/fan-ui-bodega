@@ -11,12 +11,16 @@
       <div v-if="showTable" class="row center">
         <TableDetail :item="tableData" :topCols="8" :cols="12" />
       </div>
+      <div v-if="exists" class="row center">
+        <Message type="notfound robot">No existe ID de entrada</Message>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import Finder from "@/components/Finder";
 import Loader from "@/components/Loader.vue";
+import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapGetters } from "vuex";
@@ -26,6 +30,7 @@ export default {
   components: {
     Finder,
     Loader,
+    Message,
     TableDetail,
     TableSimple,
   },
@@ -106,6 +111,15 @@ export default {
         rows: this.entryDataDetails,
       };
       return table;
+    },
+
+    exists() {
+      let status = this.$store.state.entries.statusResponse;
+      if (status == 400) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

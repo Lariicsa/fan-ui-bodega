@@ -52,6 +52,7 @@
           <TableSimple :item="tableDataDetails" :cols="7" />
         </div>
       </Modal>
+      <Message type="warning robot" v-show="exists">No existe ID de conteo</Message>
     </div>
   </div>
 </template>
@@ -60,6 +61,7 @@
 import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
+import Message from "@/components/Message";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
@@ -76,6 +78,7 @@ export default {
     FanButton,
     Finder,
     Loader,
+    Message,
     Modal,
     RadioOption,
     TableDetail,
@@ -239,6 +242,15 @@ export default {
     status() {
       return this.$store.state.entries.status;
     },
+
+    exists(){
+      let status =this.$store.state.entries.statusResponse
+      if(status == 400){
+        return true
+      }else {
+        return false
+      }
+    }
   },
 };
 </script>

@@ -14,6 +14,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 import TableSimple from "@/components/TableSimple.vue";
 export default {
   name: "EntriesAll",
