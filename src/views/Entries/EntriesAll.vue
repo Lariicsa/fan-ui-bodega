@@ -1,11 +1,14 @@
 <template>
   <div class="container__box">
- <div class="row">
-   <h4>Entradas</h4>
-   <p>{{itemData.preload_id}}</p>
- </div>
     <div class="row">
-      <TableSimple :item="tableDataDetails" :cols="9" @rowClick="getDetails($event)" />
+      <h4>Entradas</h4>
+    </div>
+    <div class="row">
+      <TableSimple
+        :item="tableDataDetails"
+        :cols="9"
+        @rowClick="goToDetail($event)"
+      />
     </div>
   </div>
 </template>
@@ -21,8 +24,8 @@ export default {
 
   data() {
     return {
-      itemData: ''
-    }
+      itemData: "",
+    };
   },
   mounted() {
     this.getAllPreloads();
@@ -30,9 +33,13 @@ export default {
 
   methods: {
     ...mapActions(["getAllPreloads"]),
-    getDetails(index){
-      this.itemData = index
-    }
+
+    goToDetail(index) {
+      this.$router.push({
+        name: "EntryLoaded",
+        params: { entryId: index.preload_id },
+      });
+    },
   },
 
   computed: {
