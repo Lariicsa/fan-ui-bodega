@@ -60,6 +60,7 @@ export default {
   methods: {
     rowClick(index) {
      this.$emit("rowClick", index)
+     console.log(index);
     }
   },
 

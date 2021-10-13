@@ -190,17 +190,12 @@ export default {
       const table = {
         head: [
           "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
           "Precio",
-          "preUbicación",
-          "Ubicaicón",
-
-          "status",
         ],
         rows: this.countingDetails,
       };

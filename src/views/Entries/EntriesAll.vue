@@ -2,9 +2,10 @@
   <div class="container__box">
  <div class="row">
    <h4>Entradas</h4>
+   <p>{{itemData.preload_id}}</p>
  </div>
     <div class="row">
-      <TableSimple :item="tableDataDetails" :cols="9" />
+      <TableSimple :item="tableDataDetails" :cols="9" @rowClick="getDetails($event)" />
     </div>
   </div>
 </template>
@@ -17,12 +18,21 @@ export default {
   components: {
     TableSimple,
   },
+
+  data() {
+    return {
+      itemData: ''
+    }
+  },
   mounted() {
     this.getAllPreloads();
   },
 
   methods: {
     ...mapActions(["getAllPreloads"]),
+    getDetails(index){
+      this.itemData = index
+    }
   },
 
   computed: {
