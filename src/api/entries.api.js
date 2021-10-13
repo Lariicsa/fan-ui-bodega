@@ -5,6 +5,7 @@ const POST_PRELOAD = "/v1/warehouse/preloads";
 const GET_COUNTING_DETAIL = "/v1/warehouse/counts/";
 const GET_PRELOAD = "/v1/warehouse/preloads/";
 const GET_PRELOAD_DETAIL = "/v1/warehouse/preloads/";
+const GET_PRELOADS_ALL = "v1/warehouse/preloads";
 
 const getCountingOrder = (idCount) => MAIN_SERVICE.get(GET_COUNTING + idCount);
 const addPreload = ({ countId, type, fromTo, assignedTo }) =>
@@ -16,5 +17,14 @@ const getOrderDetail = (idCounting) =>
 const getPreload = (preloadId) => MAIN_SERVICE.get(GET_PRELOAD + preloadId);
 const preloadDetail = (idPreload) =>
   MAIN_SERVICE.get(GET_PRELOAD_DETAIL + idPreload + "/detail?limit=90&page=1");
+const allPreloads = () =>
+  MAIN_SERVICE.get(GET_PRELOADS_ALL + "?limit=10&page=1");
 
-export { getCountingOrder, addPreload, getOrderDetail, getPreload, preloadDetail };
+export {
+  getCountingOrder,
+  addPreload,
+  getOrderDetail,
+  getPreload,
+  preloadDetail,
+  allPreloads,
+};

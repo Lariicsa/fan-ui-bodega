@@ -94,6 +94,7 @@ export default {
   },
 
   created() {
+    this.$store.dispatch("getAllPreloads")
     let ls = localStorage.getItem("jwt");
     if (ls === null) {
       localStorage.setItem(
