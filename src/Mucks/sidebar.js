@@ -11,18 +11,24 @@ export default {
       text: "Entradas",
       path: "/entradas",
       name: "list-min",
-      children: [
-        {
-          icon: "",
-          text: "Todas",
-          path: "/entradas",
-        },
-        {
-          icon: "",
-          text: "Buscar",
-          path: "/entradas",
-        },
-      ],
+      // children: [
+      //   {
+      //     icon: "",
+      //     text: "Todas",
+      //     path: "/entradas",
+      //   },
+      //   {
+      //     icon: "",
+      //     text: "Buscar",
+      //     path: "/entradas",
+      //   },
+      // ],
+    },
+    {
+      icon: "",
+      text: "Entradas disponibles",
+      path: "/entradas/disponibles",
+      name: "dashboard",
     },
     {
       icon: "",

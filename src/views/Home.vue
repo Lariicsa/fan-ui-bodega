@@ -1,5 +1,8 @@
 <template>
   <div class="container__box">
+    <div class="row">
+      <h4>Registrar nuevo conteo</h4>
+    </div>
     <Loader v-show="loader" />
     <div class="col">
       <div class="row center">
@@ -53,6 +56,11 @@
         </div>
       </Modal>
     </div>
+    <div class="row center">
+      <Message type="notfound robot" v-show="exists"
+        >Sin información de conteo</Message
+      >
+    </div>
   </div>
 </template>
 
@@ -60,6 +68,7 @@
 import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
+import Message from "@/components/Message";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
@@ -76,6 +85,7 @@ export default {
     FanButton,
     Finder,
     Loader,
+    Message,
     Modal,
     RadioOption,
     TableDetail,
@@ -94,7 +104,6 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("getAllPreloads")
     let ls = localStorage.getItem("jwt");
     if (ls === null) {
       localStorage.setItem(
@@ -238,6 +247,15 @@ export default {
 
     status() {
       return this.$store.state.entries.status;
+    },
+
+    exists() {
+      let status = this.$store.state.entries.statusResponse;
+      if (status == 400) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

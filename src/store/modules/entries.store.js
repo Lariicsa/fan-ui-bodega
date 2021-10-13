@@ -104,6 +104,10 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
@@ -131,6 +135,10 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
@@ -139,12 +147,12 @@ const entries = {
       try {
         const res = await getPreload(preloadId);
         let entrieRes = res.data.payload;
-        let succes = res.status;
-        if (succes == 200) {
+        let success = res.status;
+        if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_ENTRIE_BY_ID", entrieRes);
+          commit("FETCH_RESPONSE_STATUS", success);
         }
-
         console.log("getPreloaded", entrieRes);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);

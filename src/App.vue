@@ -3,7 +3,7 @@
     <div class="wrapper">
       <Header
         :width="
-          isOpen ? 'width: calc(100% - 24rem)' : 'width: calc(100% - 6.4rem)'
+          isOpen ? 'width: calc(100% - 18rem)' : 'width: calc(100% - 6.4rem)'
         "
       />
       <div class="container__main">
@@ -34,7 +34,7 @@ export default {
 
   data() {
     return {
-      isOpen: false,
+      isOpen: true,
       sidebarMenu: sidebarItems.items,
     };
   },
@@ -42,7 +42,6 @@ export default {
   methods: {
     expandMenu() {
       this.isOpen = !this.isOpen;
-      console.log("clic");
     },
   },
 };
