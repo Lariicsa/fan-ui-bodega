@@ -52,7 +52,11 @@
           <TableSimple :item="tableDataDetails" :cols="7" />
         </div>
       </Modal>
-      <Message type="warning robot" v-show="exists">No existe ID de conteo</Message>
+    </div>
+    <div class="row center">
+      <Message type="notfound robot" v-show="exists"
+        >Sin información de conteo</Message
+      >
     </div>
   </div>
 </template>
@@ -97,7 +101,6 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("getAllPreloads")
     let ls = localStorage.getItem("jwt");
     if (ls === null) {
       localStorage.setItem(
@@ -243,14 +246,14 @@ export default {
       return this.$store.state.entries.status;
     },
 
-    exists(){
-      let status =this.$store.state.entries.statusResponse
-      if(status == 400){
-        return true
-      }else {
-        return false
+    exists() {
+      let status = this.$store.state.entries.statusResponse;
+      if (status == 400) {
+        return true;
+      } else {
+        return false;
       }
-    }
+    },
   },
 };
 </script>

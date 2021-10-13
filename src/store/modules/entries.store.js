@@ -104,6 +104,10 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
