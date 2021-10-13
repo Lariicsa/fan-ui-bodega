@@ -18,5 +18,9 @@
 
   &__top {
     margin: 4rem 0;
+
+    & > .btn__secondary {
+      margin-left: 2.4rem;
+    }
   }
 }

@@ -112,7 +112,8 @@ select {
     background-color: $white;
     margin-top: 4rem;
     padding: 0;
-    width: calc(100% - 18rem);
+    //width: calc(100% - 18rem);
+    width: 100%;
     height: calc(100% - 6.4rem);
   }
 

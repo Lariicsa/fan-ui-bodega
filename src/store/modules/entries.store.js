@@ -20,6 +20,7 @@ const entries = {
     assignedEmployee: "",
     loader: false,
     status: false,
+    statusResponse: undefined,
   },
 
   mutations: {
@@ -45,6 +46,9 @@ const entries = {
     },
     FETCH_STATUS: (state, payload) => {
       state.status = payload;
+    },
+    FETCH_RESPONSE_STATUS: (state, payload) => {
+      state.statusResponse = payload;
     },
 
     GET_ENTRIE_BY_ID: (state, payload) => {
@@ -157,11 +161,15 @@ const entries = {
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_ENTRIE_DETAILS", items);
+          commit("FETCH_RESPONSE_STATUS", success);
         }
         console.log("PreloadDetail", items);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 

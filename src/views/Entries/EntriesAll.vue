@@ -1,10 +1,14 @@
 <template>
   <div class="container__box">
- <div class="row">
-   <h4>Entradas</h4>
- </div>
     <div class="row">
-      <TableSimple :item="tableDataDetails" :cols="9" />
+      <h4>Entradas</h4>
+    </div>
+    <div class="row">
+      <TableSimple
+        :item="tableDataDetails"
+        :cols="9"
+        @rowClick="goToDetail($event)"
+      />
     </div>
   </div>
 </template>
@@ -17,12 +21,25 @@ export default {
   components: {
     TableSimple,
   },
+
+  data() {
+    return {
+      itemData: "",
+    };
+  },
   mounted() {
     this.getAllPreloads();
   },
 
   methods: {
     ...mapActions(["getAllPreloads"]),
+
+    goToDetail(index) {
+      this.$router.push({
+        name: "EntryLoaded",
+        params: { entryId: index.preload_id },
+      });
+    },
   },
 
   computed: {

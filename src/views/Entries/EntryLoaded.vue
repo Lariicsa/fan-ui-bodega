@@ -1,14 +1,14 @@
 <template>
-  <div class="container__box">
+  <div class="col">
     <Loader v-show="loader" />
-    <h4>Información de entrada</h4>
-    <div class="row between center">
+    <h4>Buscar entrada registrada</h4>
+    <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
         @search="getEntrieInfo(idTyped)"
         v-model="idTyped"
       />
-      <div class="row center">
+      <div v-if="showTable" class="row center">
         <TableDetail :item="tableData" :topCols="8" :cols="12" />
       </div>
     </div>
@@ -65,6 +65,15 @@ export default {
     ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
     loader() {
       return this.$store.state.entries.loader;
+    },
+
+    showTable() {
+      let status = this.$store.state.entries.statusResponse;
+      if (status == 200) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     tableData() {
