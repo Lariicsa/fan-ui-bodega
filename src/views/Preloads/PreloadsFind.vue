@@ -25,7 +25,7 @@ import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapGetters } from "vuex";
 export default {
-  name: "EntryLoaded",
+  name: "PreloadsFind",
 
   components: {
     Finder,

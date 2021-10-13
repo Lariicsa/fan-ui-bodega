@@ -11,6 +11,27 @@ const routes = [
     component: Home,
   },
   {
+    path: "/precargas",
+    redirect: "/precargas/buscar",
+    name: "Preloads",
+    component: () => import("@/views/Preloads/Preloads.vue"),
+    children: [
+      {
+        path: "buscar",
+        name: "PreloadsFind",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadsFind.vue"),
+      },
+
+      {
+        path: "disponibles",
+        name: "PreloadsAll",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadsAll.vue"),
+      },
+    ],
+  },
+  {
     path: "/entradas",
     redirect: "/entradas/buscar",
     name: "Entries",
