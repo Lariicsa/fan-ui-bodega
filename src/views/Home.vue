@@ -97,7 +97,7 @@ export default {
     if (ls === null) {
       localStorage.setItem(
         "jwt",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1YmMwNjg1OC01YzQ0LTQyZWMtOWExZC0xZGQ5NzYwYjBlZGIiLCJlbWFpbCI6Imxhcmlzc2FAZmFudGFzdGljb2NvbWljLmNvbSIsInJvbGUiOiJlbXBsb3llZSIsImlzcyI6ImZhbnRhc3RpY28gYXBpIiwiaWF0IjoxNjMyOTQ4MzI0fQ.JEZuHIGQqN9a_3ilEX4sYqOD1cfL1hatyhCOl4UswjQ"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZTdjNzc3MS1lYWY2LTRlNWUtOTJmYy01YTA3NGQ2OGM0MWEiLCJlbWFpbCI6Im5hdGhhbmllbEBmYW50YXN0aWNvY29taWMuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNzIjoiZmFudGFzdGljbyBhcGkiLCJpYXQiOjE2MzQyMzE3MzJ9.jaSitYOtnXQRAYgNcYXbnj3bep1fgaE6uelV3o2G95k"
       );
     }
   },
