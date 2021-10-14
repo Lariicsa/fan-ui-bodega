@@ -2,6 +2,7 @@
   <div class="container__box">
     <div class="row">
       <h4>Entradas</h4>
+      <strong @click="updateProdLocation">Prelocate</strong>
     </div>
     <div class="row">
       <TableSimple
@@ -34,6 +35,10 @@ export default {
 
   methods: {
     ...mapActions(["getAllPreloads"]),
+
+    updateProdLocation(){
+      this.$store.dispatch("setPreloadLocation")
+    },
 
     goToDetail(index) {
       this.$router.push({

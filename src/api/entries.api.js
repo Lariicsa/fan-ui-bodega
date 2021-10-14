@@ -5,7 +5,8 @@ const POST_PRELOAD = "/v1/warehouse/preloads";
 const GET_COUNTING_DETAIL = "/v1/warehouse/counts/";
 const GET_PRELOAD = "/v1/warehouse/preloads/";
 const GET_PRELOAD_DETAIL = "/v1/warehouse/preloads/";
-const GET_PRELOADS_ALL = "v1/warehouse/preloads";
+const GET_PRELOADS_ALL = "/v1/warehouse/preloads";
+const UPDATE_PRELOAD_LOCATION = "/v1/warehouse/preload_details";
 
 const getCountingOrder = (idCount) => MAIN_SERVICE.get(GET_COUNTING + idCount);
 const addPreload = ({ countId, type, fromTo, assignedTo }) =>
@@ -19,6 +20,11 @@ const preloadDetail = (idPreload) =>
   MAIN_SERVICE.get(GET_PRELOAD_DETAIL + idPreload + "/detail?limit=90&page=1");
 const allPreloads = () =>
   MAIN_SERVICE.get(GET_PRELOADS_ALL + "?limit=10&page=1");
+const updatePreloadLocation = ({ action, id, finalLocation }) =>
+  MAIN_SERVICE.put(UPDATE_PRELOAD_LOCATION, {
+    action,
+    detail: { id, finalLocation },
+  });
 
 export {
   getCountingOrder,
@@ -27,4 +33,5 @@ export {
   getPreload,
   preloadDetail,
   allPreloads,
+  updatePreloadLocation,
 };

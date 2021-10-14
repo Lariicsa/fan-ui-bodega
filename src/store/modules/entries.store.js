@@ -5,6 +5,7 @@ import {
   getOrderDetail,
   getPreload,
   preloadDetail,
+  updatePreloadLocation,
 } from "@/api/entries.api";
 
 const entries = {
@@ -178,6 +179,22 @@ const entries = {
           let status = error.response.status;
           commit("FETCH_RESPONSE_STATUS", status);
         }
+      }
+    },
+
+    async setPreloadLocation({ commit }, data) {
+      try {
+        const entryLocation = {
+          action: "UPDATE_LOCATION",
+         
+            id: 10,
+            finalLocation: "R11N4T13",
+
+        };
+        const res = await updatePreloadLocation(entryLocation);
+        console.log("res", res);
+      } catch (error) {
+        console.log(error.response);
       }
     },
 
