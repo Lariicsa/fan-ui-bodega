@@ -10,8 +10,7 @@ export default {
       icon: "",
       text: "Precargas",
       path: "/precargas",
-      name: "list-min",
-
+      name: "finder",
     },
     {
       icon: "",
@@ -22,7 +21,19 @@ export default {
       icon: "",
       text: "Precargas disponibles",
       path: "/precargas/disponibles",
-      name: "dashboard",
+      name: "list-min",
+    },
+    {
+      icon: "",
+      text: "Entradas",
+      path: "/entradas",
+      name: "entradas", 
+    },
+    {
+      icon: "",
+      text: "Entradas pendientes",
+      path: "/entradas/disponibles",
+      name: "entradas", 
     },
     {
       icon: "",

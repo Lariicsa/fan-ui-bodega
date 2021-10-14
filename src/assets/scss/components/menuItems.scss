@@ -56,13 +56,17 @@
         &:after {
           @include icon("banner", $blackio);
         }
-      }
-
+      }     
       &.dashboard {
         &:after {
-          @include icon("dashboard", $blackio);
+          @include icon("pencil", $blackio);
         }
       }
+      &.finder {
+        &:after {
+          @include icon("finder", $blackio);
+        }
+      } 
       &.list-min {
         &:after {
           @include icon("list-min", $blackio);
@@ -91,7 +95,12 @@
 
   &.dashboard > a {
     &:after {
-      @include icon("dashboard", $dusk);
+      @include icon("pencil", $dusk);
+    }
+  }
+  &.finder > a {
+    &:after {
+      @include icon("finder", $dusk);
     }
   }
   &.list-min > a {
