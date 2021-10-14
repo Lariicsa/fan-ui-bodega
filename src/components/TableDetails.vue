@@ -29,10 +29,7 @@
     </div>
 
     <div class="tableDetail__bottom">
-      <div
-        class="tableDetail__scrollable-in"
-  
-      >
+      <div class="tableDetail__scrollable-in">
         <div
           :class="'tableDetail__header ' + 'cols' + cols"
           :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
@@ -67,10 +64,12 @@
                 row[col]
               "
               :key="n * 3.2 + 1"
-              v-html="
-                `<div class='tableDetail__cell-in'>` + col + '</div>' + row[col]
-              "
-            ></div>
+            >
+              {{ row[col] }}
+            </div>
+
+              <slot v-bind:nrow="row"></slot>
+
           </div>
         </div>
       </div>
@@ -97,6 +96,10 @@ export default {
     colmodifier: {
       type: String,
     },
+    extracell: {
+      type: Number,
+      default: 0
+    }
   },
 
   methods: {

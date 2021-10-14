@@ -278,17 +278,18 @@ const entries = {
         let formated = items.map((ele) => {
           let elems = {
             detail_id: ele.detail_id,
-            quantity: ele.quantity,
+            //quantity: ele.quantity,
             product_id: ele.product_id,
             description: ele.description,
             brand: ele.brand,
             line: ele.line,
             control: ele.control,
-            pre_location: ele.pre_location,
-            final_location: ele.final_location,
-            updated_by: ele.updated_by,
-            updated_at: ele.updated_at,
             status: ele.status,
+            pre_location: ele.pre_location,
+            //final_location: ele.final_location,
+            // updated_by: ele.updated_by,
+            // updated_at: ele.updated_at,
+           
           };
           return elems;
         });
