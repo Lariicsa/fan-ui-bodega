@@ -1,16 +1,19 @@
 <template>
   <div class="container__box">
+    <div class="row">
+      <h4>Registrar nuevo conteo</h4>
+    </div>
     <Loader v-show="loader" />
     <div class="col">
-      <div class="row between center">
+      <div class="row center">
         <Finder
           phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
           v-model="idTyped"
         />
       </div>
-      <div v-show="mainTableData !== null" class="col">
-        <div class="row between entries__top">
+      <div v-if="showTable" class="col">
+        <div class="row right entries__top">
           <h4>Conteo: #{{ countId }}</h4>
           <FanButton
             text="Detalles"
@@ -53,6 +56,11 @@
         </div>
       </Modal>
     </div>
+    <div class="row center">
+      <Message type="notfound robot" v-show="exists"
+        >Sin información de conteo</Message
+      >
+    </div>
   </div>
 </template>
 
@@ -60,6 +68,7 @@
 import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
+import Message from "@/components/Message";
 import Modal from "@/components/ModalContainer";
 import RadioOption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
@@ -76,11 +85,13 @@ export default {
     FanButton,
     Finder,
     Loader,
+    Message,
     Modal,
     RadioOption,
     TableDetail,
     TableSimple,
   },
+
   data() {
     return {
       idTyped: "",
@@ -127,24 +138,45 @@ export default {
     },
 
     getEntriesData(typed) {
-      this.$store.dispatch("getEntriesCountData", typed).then(() => {
+      this.$store.dispatch("getItemsCountData", typed).then(() => {
         this.$store.dispatch("getEntriesCountDetail", typed);
       });
     },
 
     loadEntries() {
-      console.log("clic");
-      this.$store.dispatch("loadEntrieFromCounting", {
-        countId: this.countId,
-        type: "ENTRADA",
-        fromTo: this.fromTo,
-        assignedTo: this.assignedTo,
-      });
+      this.$store
+        .dispatch("loadEntrieFromCounting", {
+          countId: this.countId,
+          type: "ENTRADA",
+          fromTo: this.fromTo,
+          assignedTo: this.assignedTo,
+        })
+        .then(() => {
+          if (this.status) {
+            this.$router.push({
+              name: "EntrySuccess",
+              params: { countingId: this.countId },
+            });
+            setTimeout(() => {
+              this.$store.commit("FETCH_LOADER_STATUS", false);
+              this.$store.commit("GET_COUNTING_DATA", null);
+            }, 300);
+          }
+        });
     },
   },
 
   computed: {
     ...mapGetters(["countingDetails"]),
+    showTable() {
+      let id = this.countId;
+      let exists = this.mainTableData;
+      if (exists != null && id) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     mainTableData() {
       return this.$store.state.entries.countingData;
     },
@@ -167,17 +199,12 @@ export default {
       const table = {
         head: [
           "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
           "Precio",
-          "preUbicación",
-          "Ubicaicón",
-          
-          "status"
         ],
         rows: this.countingDetails,
       };
@@ -220,6 +247,15 @@ export default {
 
     status() {
       return this.$store.state.entries.status;
+    },
+
+    exists() {
+      let status = this.$store.state.entries.statusResponse;
+      if (status == 400) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

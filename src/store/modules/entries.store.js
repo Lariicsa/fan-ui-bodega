@@ -1,5 +1,6 @@
 import {
   addPreload,
+  allPreloads,
   getCountingOrder,
   getOrderDetail,
   getPreload,
@@ -14,9 +15,12 @@ const entries = {
     entriesResults: [],
     entriesDetail: [],
     entriesOrigin: "",
+    preloadEntryId: "",
+    preloadsAll: [],
     assignedEmployee: "",
     loader: false,
     status: false,
+    statusResponse: undefined,
   },
 
   mutations: {
@@ -43,6 +47,9 @@ const entries = {
     FETCH_STATUS: (state, payload) => {
       state.status = payload;
     },
+    FETCH_RESPONSE_STATUS: (state, payload) => {
+      state.statusResponse = payload;
+    },
 
     GET_ENTRIE_BY_ID: (state, payload) => {
       state.entriesResults = payload;
@@ -51,10 +58,30 @@ const entries = {
     GET_ENTRIE_DETAILS: (state, payload) => {
       state.entriesDetail = payload;
     },
+    GET_PRELOAD_RESPONSE: (state, payload) => {
+      state.preloadEntryId = payload;
+    },
+    FETCH_ALL_PRELOADS: (state, payload) => {
+      state.preloadsAll = payload;
+    },
   },
 
   actions: {
-    async getEntriesCountData({ commit }, idC) {
+    async getAllPreloads({ commit }) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = await allPreloads();
+        const items = res.data.payload;
+        commit("FETCH_LOADER_STATUS", false);
+        commit("FETCH_ALL_PRELOADS", items);
+        console.log("all", res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error);
+      }
+    },
+
+    async getItemsCountData({ commit }, idC) {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getCountingOrder(idC);
@@ -77,6 +104,10 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
@@ -93,14 +124,21 @@ const entries = {
       try {
         const res = await addPreload(data);
         let success = res.status;
+        let preloadId = res.data.payload.preloadId;
+        console.log("preloadId:", preloadId);
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("FETCH_STATUS", true);
+          commit("GET_PRELOAD_RESPONSE", preloadId);
         }
         console.log(res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
@@ -109,12 +147,12 @@ const entries = {
       try {
         const res = await getPreload(preloadId);
         let entrieRes = res.data.payload;
-        let succes = res.status;
-        if (succes == 200) {
+        let success = res.status;
+        if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_ENTRIE_BY_ID", entrieRes);
+          commit("FETCH_RESPONSE_STATUS", success);
         }
-
         console.log("getPreloaded", entrieRes);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
@@ -131,11 +169,15 @@ const entries = {
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_ENTRIE_DETAILS", items);
+          commit("FETCH_RESPONSE_STATUS", success);
         }
         console.log("PreloadDetail", items);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
       }
     },
 
@@ -149,6 +191,24 @@ const entries = {
   },
 
   getters: {
+    currentPreloads(state) {
+      const items = state.preloadsAll;
+      let formated = items.map((item) => {
+        return {
+          preload_id: item.preload_id,
+          total_items: item.total_items,
+          from_to: item.from_to,
+          action_type: item.action_type,
+          assigned_to: item.assigned_to,
+          created_at: item.created_at,
+          created_by: item.created_by,
+          num_order: item.num_order,
+          status: item.status,
+        };
+      });
+      return formated;
+    },
+
     countingDetails(state) {
       const items = state.countingDetail;
       if (items !== null) {
@@ -206,8 +266,11 @@ const entries = {
       }
     },
     currentStatus(state) {
-      return state.status
-    }
+      return state.status;
+    },
+    currentEntryId(state) {
+      return state.preloadEntryId;
+    },
   },
 };
 

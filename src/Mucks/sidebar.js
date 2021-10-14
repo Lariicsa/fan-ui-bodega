@@ -8,21 +8,21 @@ export default {
     },
     {
       icon: "",
-      text: "Entradas",
-      path: "/entradas",
+      text: "Precargas",
+      path: "/precargas",
       name: "list-min",
-      children: [
-        {
-          icon: "",
-          text: "Todas",
-          path: "/entradas",
-        },
-        {
-          icon: "",
-          text: "Buscar",
-          path: "/entradas",
-        },
-      ],
+
+    },
+    {
+      icon: "",
+      text: "Precargas buscar",
+      name: "dashboard",
+    },
+    {
+      icon: "",
+      text: "Precargas disponibles",
+      path: "/precargas/disponibles",
+      name: "dashboard",
     },
     {
       icon: "",

@@ -11,23 +11,63 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/precargas",
+    redirect: "/precargas/buscar",
+    name: "Preloads",
+    component: () => import("@/views/Preloads/Preloads.vue"),
+    children: [
+      {
+        path: "buscar",
+        name: "PreloadsFind",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadsFind.vue"),
+      },
+
+      {
+        path: "disponibles",
+        name: "PreloadsAll",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadsAll.vue"),
+      },
+    ],
   },
   {
     path: "/entradas",
-    name: "EntrieLoaded",
-    component: () =>
-      import(
-        /* webpackChunkName: "entries" */ "../views/Entries/EntrieLoaded.vue"
-      ),
+    redirect: "/entradas/buscar",
+    name: "Entries",
+    component: () => import("@/views/Entries/Entries.vue"),
+    children: [
+      {
+        path: "buscar",
+        name: "EntryLoaded",
+        props: true,
+        component: () => import("@/views/Entries/EntryLoaded.vue"),
+      },
+      {
+        path: "registro/:countingId",
+        name: "EntrySuccess",
+        props: true,
+        component: () => import("@/views/Entries/EntrySuccess.vue"),
+      },
+      {
+        path: "disponibles",
+        name: "EntriesAll",
+        props: true,
+        component: () => import("@/views/Entries/EntriesAll.vue"),
+      },
+    ],
   },
 ];
 
 const router = new VueRouter({
   mode: "history",
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
   base: process.env.BASE_URL,
   routes,
 });
