@@ -187,8 +187,8 @@ const entries = {
       try {
         const entryLocation = {
           action: "UPDATE_LOCATION",
-          id: 10,
-          finalLocation: "R11N4T13",
+          id: data.detail_id,
+          finalLocation: data.final_location,
         };
         const res = await updatePreloadLocation(entryLocation);
         console.log("res", res);
@@ -282,10 +282,10 @@ const entries = {
             product_id: ele.product_id,
             description: ele.description,
             brand: ele.brand,
-            line: ele.line,
+            //line: ele.line,
             control: ele.control,
             status: ele.status,
-            pre_location: ele.pre_location,
+            //pre_location: ele.pre_location,
             //final_location: ele.final_location,
             // updated_by: ele.updated_by,
             // updated_at: ele.updated_at,

@@ -9,15 +9,15 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="9">
+        <TableDetail :item="tableData" :topCols="8" :cols="7">
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols9">
+            <div class="tableDetail__cell cols7">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
-                :autofocus="false"
+                :updateValue="slotProps.nrow.final_location"
                 :name="slotProps.nrow.id_product"
                 type="text"
-                @onBlur="updateLocation(slotProps.nrow)"
+                @keyupEnter="updateLocation(slotProps.nrow)"
                 v-model="slotProps.nrow.final_location"
                 :showError="false"
                 typemsg="error"
@@ -62,9 +62,9 @@ export default {
     return {
       idTyped: "",
       loadEntryId: this.entryId,
-      locationField: "",
     };
   },
+
 
   created() {
     this.selectFunction();
@@ -72,6 +72,7 @@ export default {
 
   methods: {
     updateLocation(txt) {
+      this.$store.dispatch("setPreloadLocation", txt)
       console.log("view", txt);
     },
 
@@ -122,14 +123,13 @@ export default {
           "Clave",
           "Descripción",
           "Editorial",
-          "Línea",
+         // "Línea",
           "Control",
           // "preUbicación",
           //"Actualización",
           "Status",
           "Ubicación",
           //"Fecha",
-          ,
         ],
         rows: this.entryDataDetails,
       };

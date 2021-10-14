@@ -67,9 +67,7 @@
             >
               {{ row[col] }}
             </div>
-
               <slot v-bind:nrow="row"></slot>
-
           </div>
         </div>
       </div>

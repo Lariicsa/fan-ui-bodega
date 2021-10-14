@@ -1,7 +1,11 @@
 <template>
   <div class="textfield" :class="showError ? 'error' : ''">
     <div class="textfield__title" v-if="titleLabel">{{ titleLabel }}</div>
-    <label :class="this.value && titleLabel == undefined ? 'filled' : ''" :for="name">{{ phName }}</label>
+    <label
+      :class="this.value && titleLabel == undefined ? 'filled' : ''"
+      :for="name"
+      >{{ phName }}</label
+    >
     <input
       :name="name"
       :type="type"
@@ -36,8 +40,10 @@ export default {
     "disabled",
     "phName",
     "autofocus",
-    "maxlength"
+    "maxlength",
   ],
+
+
   mounted() {
     if (this.autofocus) this.$refs.input.focus();
   },
@@ -56,7 +62,7 @@ export default {
     },
     onBlur() {
       this.$emit("onBlur");
-    }
+    },
   },
 };
 </script>
