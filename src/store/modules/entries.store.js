@@ -6,6 +6,7 @@ import {
   getPreload,
   preloadDetail,
   updatePreloadLocation,
+  updatePreloadStatus,
 } from "@/api/entries.api";
 
 const entries = {
@@ -186,13 +187,25 @@ const entries = {
       try {
         const entryLocation = {
           action: "UPDATE_LOCATION",
-         
-            id: 10,
-            finalLocation: "R11N4T13",
-
+          id: 10,
+          finalLocation: "R11N4T13",
         };
         const res = await updatePreloadLocation(entryLocation);
         console.log("res", res);
+      } catch (error) {
+        console.log(error.response);
+      }
+    },
+
+    async updatePreloadsStatus({ commit }, data) {
+      try {
+        const newStatus = {
+          action: "UPDATE_STATUS",
+          id: "6df2e541-8592-480a-8c35-f1f14ebbcd44",
+          newStatus: "registrado en inventario",
+        };
+        const res = await updatePreloadStatus(newStatus);
+        console.log("resstatus", res);
       } catch (error) {
         console.log(error.response);
       }
