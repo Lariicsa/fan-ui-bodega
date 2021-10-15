@@ -11,8 +11,8 @@
       <div v-if="showTable" class="row center">
         <TableSupport
           :item="tableData"
-          :topCols="11"
-          :cols="11"
+          :topCols="8"
+          :cols="10"
           colExceptions="final_location"
         >
           <template v-slot:default="slotProps">
@@ -96,7 +96,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["preloadDataResult", "entryDataDetails", "currentStatus"]),
+    ...mapGetters(["preloadDataResult", "preloadDataDetails", "currentStatus"]),
     loader() {
       return this.$store.state.entries.loader;
     },
@@ -116,8 +116,8 @@ export default {
           "Cantidad",
           "Transacción",
           "Desde",
+           "Fecha",
           "Creado por",
-          "Fecha",
           "Asignado a",
           "#Orden",
           "Status",
@@ -126,7 +126,6 @@ export default {
         head: [
           "Ubicación",
           "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
@@ -137,7 +136,7 @@ export default {
           "Actualización",
           "Status",
         ],
-        rows: this.entryDataDetails,
+        rows: this.preloadDataDetails,
       };
       return table;
     },
