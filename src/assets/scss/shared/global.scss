@@ -100,7 +100,7 @@ select {
   }
 
   &main {
-    background-color: $pale-grey-two;
+    background-color: $light-sky-blue-two;
     @extend .container__;
     justify-content: flex-end;
     margin: 0;
@@ -209,7 +209,7 @@ hr {
 }
 
 .wrapper {
-  background-color: $pale-grey-two;
+  background-color: $light-sky-blue-two;
   display: flex;
   padding: 0;
   flex-direction: column;
