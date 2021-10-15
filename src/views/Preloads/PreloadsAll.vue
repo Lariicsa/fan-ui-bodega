@@ -13,6 +13,7 @@
       <TableSimple
         :item="tableDataDetails"
         :cols="9"
+        modifier="hasHover"
         @rowClick="goToDetail($event)"
       />
     </div>

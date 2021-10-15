@@ -13,6 +13,7 @@
           :item="tableData"
           :topCols="8"
           :cols="10"
+          modifier="hasHover"
           colExceptions="final_location"
         >
           <template v-slot:default="slotProps">

@@ -22,7 +22,7 @@
           />
         </div>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
+          <TableDetail :item="tabledata" :topCols="6" :cols="3"  />
         </div>
         <div class="row between entries__setting">
           <Dropdown
