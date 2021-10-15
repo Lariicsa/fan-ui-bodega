@@ -9,7 +9,22 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="12" />
+        <TableDetail :item="tableData" :topCols="8" :cols="7">
+          <template v-slot:default="slotProps">
+            <div class="tableDetail__cell cols7">
+              <Inputfield
+                :placeholder="slotProps.nrow.final_location"
+                :updateValue="slotProps.nrow.final_location"
+                :name="slotProps.nrow.id_product"
+                type="text"
+                @keyupEnter="updateLocation(slotProps.nrow)"
+                v-model="slotProps.nrow.final_location"
+                :showError="false"
+                typemsg="error"
+              />
+            </div>
+          </template>
+        </TableDetail>
       </div>
       <div v-if="exists" class="row center">
         <Message type="notfound robot">No existe ID de entrada</Message>
@@ -19,6 +34,7 @@
 </template>
 <script>
 import Finder from "@/components/Finder";
+import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
@@ -29,6 +45,7 @@ export default {
 
   components: {
     Finder,
+    Inputfield,
     Loader,
     Message,
     TableDetail,
@@ -48,11 +65,17 @@ export default {
     };
   },
 
+
   created() {
     this.selectFunction();
   },
 
   methods: {
+    updateLocation(txt) {
+      this.$store.dispatch("setPreloadLocation", txt)
+      console.log("view", txt);
+    },
+
     selectFunction() {
       if (this.entryId != undefined) {
         this.getEntrieInfo(this.entryId);
@@ -95,18 +118,18 @@ export default {
         ],
         topRows: this.entryDataResult,
         head: [
-          "idProducto",
-          "Cantidad",
+          "id",
+          // "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
-          "Línea",
+         // "Línea",
           "Control",
-          "preUbicación",
-          "Ubicación",
-          "Actualización",
-          "Fecha",
+          // "preUbicación",
+          //"Actualización",
           "Status",
+          "Ubicación",
+          //"Fecha",
         ],
         rows: this.entryDataDetails,
       };

@@ -39,6 +39,11 @@ export default {
     };
   },
 
+  mounted() {
+    this.sidebarMenu
+    console.log(this.sidebarMenu);
+  },
+
   methods: {
     expandMenu() {
       this.isOpen = !this.isOpen;
