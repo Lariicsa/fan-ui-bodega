@@ -148,14 +148,14 @@ const entries = {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getPreload(preloadId);
-        let entrieRes = res.data.payload;
+        let preloadRes = res.data.payload;
         let success = res.status;
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
-          commit("GET_PRELOAD_BY_ID", entrieRes);
+          commit("GET_PRELOAD_BY_ID", preloadRes);
           commit("FETCH_RESPONSE_STATUS", success);
         }
-        console.log("getPreloaded", entrieRes);
+        console.log("getPreloaded", preloadRes);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error);
@@ -257,6 +257,22 @@ const entries = {
       }
     },
 
+    preloadDataResult(state) {
+      let item = state.entriesResults;
+      const formated = {
+        total_items: item.total_items,
+        action_type: item.action_type,
+        from_to: item.from_to,
+        created_by: item.created_by,
+        created_at: item.created_at,
+        assigned_to: item.assigned_to,
+        num_order: item.num_order,
+        status: item.status,
+      };
+
+      return formated;
+    },
+
     entryDataResult(state) {
       let item = state.entriesResults;
       const formated = {
@@ -271,6 +287,30 @@ const entries = {
       };
 
       return formated;
+    },
+
+    preloadDataDetails(state) {
+      let items = state.entriesDetail.items;
+      if (items != undefined) {
+        let formated = items.map((ele) => {
+          let elems = {
+            detail_id: ele.detail_id,
+            quantity: ele.quantity,
+            product_id: ele.product_id,
+            description: ele.description,
+            brand: ele.brand,
+            line: ele.line,
+            control: ele.control,
+            status: ele.status,
+            //pre_location: ele.pre_location,
+            updated_by: ele.updated_by,
+            updated_at: ele.updated_at,
+            final_location: ele.final_location,
+          };
+          return elems;
+        });
+        return formated;
+      }
     },
     entryDataDetails(state) {
       let items = state.entriesDetail.items;
@@ -295,6 +335,7 @@ const entries = {
         return formated;
       }
     },
+
     currentStatus(state) {
       return state.status;
     },

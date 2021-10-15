@@ -96,7 +96,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
+    ...mapGetters(["preloadDataResult", "entryDataDetails", "currentStatus"]),
     loader() {
       return this.$store.state.entries.loader;
     },
@@ -122,7 +122,7 @@ export default {
           "#Orden",
           "Status",
         ],
-        topRows: this.entryDataResult,
+        topRows: this.preloadDataResult,
         head: [
           "Ubicación",
           "id",
