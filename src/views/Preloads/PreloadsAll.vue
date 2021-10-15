@@ -1,7 +1,7 @@
 <template>
   <div class="container__box">
     <div class="row">
-      <h4>Entradas</h4>
+      <h4>Precargas</h4>
     </div>
     <div class="row">
       <br />

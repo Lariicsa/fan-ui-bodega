@@ -51,6 +51,7 @@
             :key="i"
             @click="rowClick(row)"
           >
+            <slot v-bind:nrow="row"></slot>
             <div
               v-for="(col, n) in columns"
               :class="
@@ -75,7 +76,7 @@
 </template>
 <script>
 export default {
-  name: "TableDetail",
+  name: "TableSupport",
 
   props: {
     item: {
@@ -95,8 +96,12 @@ export default {
     },
     extracell: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    colExceptions: {
+      type: String,
+      default: "",
+    },
   },
 
   methods: {
@@ -110,7 +115,13 @@ export default {
       if (this.item.rows.length === 0) {
         return [];
       }
-      return Object.keys(this.item.rows[0]);
+      const cols = Object.keys(this.item.rows[0]);
+
+      let finalcols = cols.filter((ele) => {
+        return ![this.colExceptions].includes(ele);
+      });
+
+      return finalcols;
     },
 
     cellWidth() {

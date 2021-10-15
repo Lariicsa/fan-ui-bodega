@@ -9,9 +9,14 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="7">
+        <TableSupport
+          :item="tableData"
+          :topCols="11"
+          :cols="11"
+          colExceptions="final_location"
+        >
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols7">
+            <div class="tableDetail__cell cols11">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
                 :updateValue="slotProps.nrow.final_location"
@@ -24,7 +29,7 @@
               />
             </div>
           </template>
-        </TableDetail>
+        </TableSupport>
       </div>
       <div v-if="exists" class="row center">
         <Message type="notfound robot">No existe ID de entrada</Message>
@@ -39,6 +44,7 @@ import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
+import TableSupport from "../../components/TableSupport";
 import { mapGetters } from "vuex";
 export default {
   name: "PreloadsFind",
@@ -50,6 +56,7 @@ export default {
     Message,
     TableDetail,
     TableSimple,
+    TableSupport,
   },
 
   props: {
@@ -65,14 +72,13 @@ export default {
     };
   },
 
-
   created() {
     this.selectFunction();
   },
 
   methods: {
     updateLocation(txt) {
-      this.$store.dispatch("setPreloadLocation", txt)
+      this.$store.dispatch("setPreloadLocation", txt);
       console.log("view", txt);
     },
 
@@ -118,18 +124,18 @@ export default {
         ],
         topRows: this.entryDataResult,
         head: [
+          "Ubicación",
           "id",
-          // "Cantidad",
+          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
-         // "Línea",
+          "Línea",
           "Control",
           // "preUbicación",
-          //"Actualización",
+          "Fecha",
+          "Actualización",
           "Status",
-          "Ubicación",
-          //"Fecha",
         ],
         rows: this.entryDataDetails,
       };
