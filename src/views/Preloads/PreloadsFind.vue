@@ -8,16 +8,16 @@
         @search="getPreloadInfo(idTyped)"
         v-model="idTyped"
       />
-      <div v-if="showTable" class="row center">
+      <div v-if="showTable" class="row center entry__row">
         <TableSupport
           :item="tableData"
-          :topCols="8"
+          :topCols="7"
           :cols="10"
           modifier="hasHover"
           colExceptions="final_location"
         >
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols11">
+            <div class="tableDetail__cell cols10">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
                 :updateValue="slotProps.nrow.final_location"
@@ -117,10 +117,9 @@ export default {
           "Cantidad",
           "Transacción",
           "Desde",
-           "Fecha",
+          "Fecha",
           "Creado por",
           "Asignado a",
-          "#Orden",
           "Status",
         ],
         topRows: this.preloadDataResult,
@@ -132,7 +131,6 @@ export default {
           "Editorial",
           "Línea",
           "Control",
-          // "preUbicación",
           "Fecha",
           "Actualización",
           "Status",

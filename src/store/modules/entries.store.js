@@ -232,7 +232,6 @@ const entries = {
           assigned_to: item.assigned_to,
           created_at: item.created_at,
           created_by: item.created_by,
-          num_order: item.num_order,
           status: item.status,
         };
       });
@@ -294,7 +293,6 @@ const entries = {
         created_at: item.created_at,
         created_by: item.created_by,
         assigned_to: item.assigned_to,
-        num_order: item.num_order,
         status: item.status,
       };
 
