@@ -4,29 +4,31 @@
       <h4>Precargas</h4>
     </div>
     <div class="row">
-      <br />
-      <strong @click="updateProdLocation">Prelocate</strong>
-      <br />
-      <strong @click="updateProdStatus">Status</strong>
-    </div>
-    <div class="row">
       <TableSimple
         :item="tableDataDetails"
         :cols="8"
         modifier="hasHover"
+        colExceptions="status"
         @rowClick="goToDetail($event)"
-      />
+      >
+        <template v-slot:default="slotProps">
+          <div class="tableDetail__cell cols8">
+            <Label :type="slotProps.nrow.status" />
+          </div>
+        </template>
+      </TableSimple>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-
+import Label from "@/components/Label";
 import TableSimple from "@/components/TableSimple.vue";
 export default {
   name: "PreloadsAll",
 
   components: {
+    Label,
     TableSimple,
   },
 
@@ -71,7 +73,6 @@ export default {
           "Transacción",
           "Editor",
           "Asignado a",
-          //"#Orden",temporally hiden
           "Status",
         ],
         rows: this.currentPreloads,
