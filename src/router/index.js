@@ -39,9 +39,9 @@ const routes = [
     children: [
       {
         path: "buscar",
-        name: "EntryLoaded",
+        name: "EntryFind",
         props: true,
-        component: () => import("@/views/Entries/EntryLoaded.vue"),
+        component: () => import("@/views/Entries/EntryFind.vue"),
       },
       {
         path: "registro/:countingId",

@@ -10,7 +10,7 @@
         <strong
           ><router-link
             :to="{
-              name: 'EntryLoaded',
+              name: 'EntryFind',
               params: { entryId: currentEntryId },
             }"
             >{{ currentEntryId }}</router-link

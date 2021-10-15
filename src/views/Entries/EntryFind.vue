@@ -25,7 +25,7 @@ import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapGetters } from "vuex";
 export default {
-  name: "EntryLoaded",
+  name: "EntryFind",
 
   components: {
     Finder,
@@ -95,7 +95,7 @@ export default {
         ],
         topRows: this.entryDataResult,
         head: [
-          "idProducto",
+          "id",
           "Cantidad",
           "Clave",
           "Descripción",
