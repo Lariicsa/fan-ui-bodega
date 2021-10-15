@@ -12,7 +12,8 @@
     <div class="row">
       <TableSimple
         :item="tableDataDetails"
-        :cols="9"
+        :cols="8"
+        modifier="hasHover"
         @rowClick="goToDetail($event)"
       />
     </div>
@@ -51,8 +52,8 @@ export default {
 
     goToDetail(index) {
       this.$router.push({
-        name: "EntryLoaded",
-        params: { entryId: index.preload_id },
+        name: "PreloadsFind",
+        params: { preloadId: index.preload_id },
       });
     },
   },
@@ -70,7 +71,7 @@ export default {
           "Transacción",
           "Editor",
           "Asignado a",
-          "#Orden",
+          //"#Orden",temporally hiden
           "Status",
         ],
         rows: this.currentPreloads,

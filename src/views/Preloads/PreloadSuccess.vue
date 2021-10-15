@@ -1,17 +1,18 @@
 <template>
   <div class="container__box">
-    <h3>Success!</h3>
+    <h3>Precarga registrada</h3>
     <div class="row">
       <p>
-        El conteo <strong>{{ countingId }}</strong> se ha registrado con éxito
+        El conteo <strong>{{ preloadId }}</strong> se ha registrado con éxito
       </p>
+      <br />
       <p>
-        El ID de entrada es
+        El ID de la precarga es:
         <strong
           ><router-link
             :to="{
-              name: 'EntryFind',
-              params: { entryId: currentPreloadId },
+              name: 'PreloadsFind',
+              params: { preloadId: currentPreloadId },
             }"
             >{{ currentPreloadId }}</router-link
           ></strong
@@ -23,9 +24,9 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "EntrySuccess",
+  name: "PreloadSuccess",
   props: {
-    countingId: {
+    preloadId: {
       required: true,
     },
   },

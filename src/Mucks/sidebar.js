@@ -26,7 +26,7 @@ export default {
     },
     {
       icon: "",
-      text: "Entradas disponibles",
+      text: "Inventario",
       path: "/entradas/disponibles",
       name: "availables", 
     },
