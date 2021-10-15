@@ -198,7 +198,7 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
-          "id",
+          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",

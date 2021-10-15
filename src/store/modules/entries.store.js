@@ -239,6 +239,23 @@ const entries = {
       return formated;
     },
 
+    countingMainDetails(state) {
+      const items = state.countingDataDetail;
+      if (items !== null) {
+        const sorted = items.sort(function(a, b) {
+          if (a.id < b.id) {
+            return -1;
+          }
+          if (a.id > b.id) {
+            return 1;
+          }
+
+          return 0;
+        });
+        return sorted;
+      }
+    },
+
     countingDetails(state) {
       const items = state.countingDetail;
       if (items !== null) {
@@ -253,7 +270,18 @@ const entries = {
             price: ele.price,
           };
         });
-        return detail;
+
+        const sorted = detail.sort(function(a, b) {
+          if (a.brand < b.brand) {
+            return -1;
+          }
+          if (a.brand > b.brand) {
+            return 1;
+          }
+
+          return 0;
+        });
+        return sorted;
       }
     },
 
