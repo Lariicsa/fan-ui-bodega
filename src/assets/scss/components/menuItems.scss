@@ -52,29 +52,20 @@
     }
     &.selected {
       color: $blackio;
-      &.banner {
+      &.availables {
         &:after {
-          @include icon("banner", $blackio);
+          @include icon("list-check", $blackio);
         }
-      }     
+      }
       &.dashboard {
         &:after {
           @include icon("pencil", $blackio);
         }
       }
-      &.search {
-        &:after {
-          @include icon("search", $blackio);
-        }
-      } 
+
       &.list-min {
         &:after {
           @include icon("list-min", $blackio);
-        }
-      }
-      &.logs {
-        &:after {
-          @include icon("logs", $blackio);
         }
       }
       &.logout {
@@ -82,19 +73,27 @@
           @include icon("logout", $blackio);
         }
       }
+      &.logs {
+        &:after {
+          @include icon("hero", $blackio);
+        }
+      }
       &.pending {
         &:after {
           @include icon("pending", $blackio);
         }
       }
+      &.search {
+        &:after {
+          @include icon("search", $blackio);
+        }
+      }
     }
   }
 
-  &.banner {
-    & > a {
-      &:after {
-        @include icon("banner", $dusk);
-      }
+  &.availables > a {
+    &:after {
+      @include icon("list-check", $dusk);
     }
   }
 
@@ -103,19 +102,10 @@
       @include icon("pencil", $dusk);
     }
   }
-  &.search > a {
-    &:after {
-      @include icon("search", $dusk);
-    }
-  }
+
   &.list-min > a {
     &:after {
       @include icon("list-min", $dusk);
-    }
-  }
-  &.logs > a {
-    &:after {
-      @include icon("logs", $dusk);
     }
   }
   &.logout > a {
@@ -123,9 +113,19 @@
       @include icon("logout", $dusk);
     }
   }
+  &.logs > a {
+    &:after {
+      @include icon("hero", $dusk);
+    }
+  }
   &.pending > a {
     &:after {
       @include icon("pending", $dusk);
+    }
+  }
+  &.search > a {
+    &:after {
+      @include icon("search", $dusk);
     }
   }
 }

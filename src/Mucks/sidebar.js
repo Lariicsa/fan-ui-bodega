@@ -2,33 +2,33 @@ export default {
   items: [
     {
       icon: "",
-      text: "Inicio",
+      text: "Nuevo conteo",
       path: "/",
       name: "dashboard",
     },
     {
       icon: "",
-      text: "Precargas",
-      path: "/precargas",
-      name: "list-min",
+      text: "Buscar Precarga",
+      path: "/precargas/buscar",
+      name: "search",
     },
     {
       icon: "",
       text: "Precargas disponibles",
       path: "/precargas/disponibles",
-      name: "list-min",
+      name: "pending",
     },
     {
       icon: "",
-      text: "Entradas",
-      path: "/entradas",
+      text: "Buscar entrada",
+      path: "/entradas/buscar",
       name: "search", 
     },
     {
       icon: "",
-      text: "Entradas pendientes",
+      text: "Entradas disponibles",
       path: "/entradas/disponibles",
-      name: "pending", 
+      name: "availables", 
     },
     {
       icon: "",

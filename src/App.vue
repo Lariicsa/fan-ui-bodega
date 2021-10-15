@@ -3,7 +3,7 @@
     <div class="wrapper">
       <Header
         :width="
-          isOpen ? 'width: calc(100% - 18rem)' : 'width: calc(100% - 6.4rem)'
+          isOpen ? 'width: 100%' : 'width: calc(100% - 6.4rem)'
         "
       />
       <div class="container__main">
