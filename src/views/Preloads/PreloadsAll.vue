@@ -12,7 +12,7 @@
     <div class="row">
       <TableSimple
         :item="tableDataDetails"
-        :cols="9"
+        :cols="8"
         modifier="hasHover"
         @rowClick="goToDetail($event)"
       />
@@ -71,7 +71,7 @@ export default {
           "Transacción",
           "Editor",
           "Asignado a",
-          "#Orden",
+          //"#Orden",temporally hiden
           "Status",
         ],
         rows: this.currentPreloads,
