@@ -1,0 +1,5 @@
+.fLabel {
+ &__assigned {
+   @include label($light-sky-blue-two, $french-blue, "Asignado");
+ }
+}
