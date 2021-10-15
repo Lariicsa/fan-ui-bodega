@@ -10,6 +10,12 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  //route for testing
+  {
+    path: "/devtest",
+    name: "Testing",
+    component: () => import("@/views/Testing.vue"),
+  },
   {
     path: "/precargas",
     redirect: "/precargas/buscar",
