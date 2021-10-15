@@ -4,6 +4,12 @@
       <h4>Precargas</h4>
     </div>
     <div class="row">
+      <br />
+      <strong @click="updateProdLocation">Prelocate</strong>
+      <br />
+      <strong @click="updateProdStatus">Status</strong>
+    </div>
+    <div class="row">
       <TableSimple
         :item="tableDataDetails"
         :cols="9"
@@ -34,6 +40,14 @@ export default {
 
   methods: {
     ...mapActions(["getAllPreloads"]),
+
+    updateProdLocation() {
+      this.$store.dispatch("setPreloadLocation");
+    },
+
+    updateProdStatus() {
+      this.$store.dispatch("updatePreloadsStatus");
+    },
 
     goToDetail(index) {
       this.$router.push({

@@ -5,6 +5,8 @@ import {
   getOrderDetail,
   getPreload,
   preloadDetail,
+  updatePreloadLocation,
+  updatePreloadStatus,
 } from "@/api/entries.api";
 
 const entries = {
@@ -181,6 +183,34 @@ const entries = {
       }
     },
 
+    async setPreloadLocation({ commit }, data) {
+      try {
+        const entryLocation = {
+          action: "UPDATE_LOCATION",
+          id: data.detail_id,
+          finalLocation: data.final_location,
+        };
+        const res = await updatePreloadLocation(entryLocation);
+        console.log("res", res);
+      } catch (error) {
+        console.log(error.response);
+      }
+    },
+
+    async updatePreloadsStatus({ commit }, data) {
+      try {
+        const newStatus = {
+          action: "UPDATE_STATUS",
+          id: "6df2e541-8592-480a-8c35-f1f14ebbcd44",
+          newStatus: "registrado en inventario",
+        };
+        const res = await updatePreloadStatus(newStatus);
+        console.log("resstatus", res);
+      } catch (error) {
+        console.log(error.response);
+      }
+    },
+
     setEntrieOrigin({ commit }, origin) {
       commit("SET_ENTRIES_ORIGIN", origin);
     },
@@ -254,11 +284,11 @@ const entries = {
             brand: ele.brand,
             line: ele.line,
             control: ele.control,
-            pre_location: ele.pre_location,
-            final_location: ele.final_location,
+            status: ele.status,
+            //pre_location: ele.pre_location,
             updated_by: ele.updated_by,
             updated_at: ele.updated_at,
-            status: ele.status,
+            final_location: ele.final_location,
           };
           return elems;
         });

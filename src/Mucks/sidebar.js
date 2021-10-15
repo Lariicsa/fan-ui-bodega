@@ -10,12 +10,7 @@ export default {
       icon: "",
       text: "Precargas",
       path: "/precargas",
-      name: "search",
-    },
-    {
-      icon: "",
-      text: "Precargas buscar",
-      name: "dashboard",
+      name: "list-min",
     },
     {
       icon: "",
@@ -39,13 +34,13 @@ export default {
       icon: "",
       text: "Logs",
       path: "/logs",
-      name: "logs", 
+      name: "logs",
     },
     {
       icon: "",
       text: "Cerrar Sesión",
       path: "/logout",
-      name: "logout ", 
+      name: "logout ",
     },
   ],
 };
