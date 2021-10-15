@@ -5,7 +5,7 @@
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
-        @search="getEntrieInfo(idTyped)"
+        @search="getPreloadInfo(idTyped)"
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center">
@@ -60,7 +60,7 @@ export default {
   },
 
   props: {
-    entryId: {
+    preloadId: {
       type: String,
     },
   },
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       idTyped: "",
-      loadEntryId: this.entryId,
+      loadPreloadId: this.preloadId,
     };
   },
 
@@ -83,12 +83,12 @@ export default {
     },
 
     selectFunction() {
-      if (this.entryId != undefined) {
-        this.getEntrieInfo(this.entryId);
+      if (this.preloadId != undefined) {
+        this.getPreloadInfo(this.preloadId);
       }
     },
 
-    getEntrieInfo(entrieId) {
+    getPreloadInfo(entrieId) {
       this.$store.dispatch("getPreloaded", entrieId).then(() => {
         this.$store.dispatch("getPreloadDetail", entrieId);
       });

@@ -40,7 +40,7 @@ const entries = {
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
     },
-    SET_ENTRIES_ORIGIN: (state, payload) => {
+    SET_PRELOAD_ORIGIN: (state, payload) => {
       state.entriesOrigin = payload;
     },
     SET_ASSIGNED_EMPLOYEE: (state, payload) => {
@@ -53,11 +53,11 @@ const entries = {
       state.statusResponse = payload;
     },
 
-    GET_ENTRIE_BY_ID: (state, payload) => {
+    GET_PRELOAD_BY_ID: (state, payload) => {
       state.entriesResults = payload;
     },
 
-    GET_ENTRIE_DETAILS: (state, payload) => {
+    GET_PRELOAD_DETAILS: (state, payload) => {
       state.entriesDetail = payload;
     },
     GET_PRELOAD_RESPONSE: (state, payload) => {
@@ -113,14 +113,14 @@ const entries = {
       }
     },
 
-    async getEntriesCountDetail({ commit }, idC) {
+    async getCountingDetail({ commit }, idC) {
       const res = await getOrderDetail(idC);
       let items = res.data.payload;
       commit("GET_COUNTING_DETAILS", items);
       console.log("details", res);
     },
 
-    async loadEntrieFromCounting({ commit }, data) {
+    async loadPreloadFromCounting({ commit }, data) {
       commit("FETCH_LOADER_STATUS", true);
       console.log("data", data);
       try {
@@ -152,7 +152,7 @@ const entries = {
         let success = res.status;
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
-          commit("GET_ENTRIE_BY_ID", entrieRes);
+          commit("GET_PRELOAD_BY_ID", entrieRes);
           commit("FETCH_RESPONSE_STATUS", success);
         }
         console.log("getPreloaded", entrieRes);
@@ -170,7 +170,7 @@ const entries = {
         const items = res.data.payload;
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
-          commit("GET_ENTRIE_DETAILS", items);
+          commit("GET_PRELOAD_DETAILS", items);
           commit("FETCH_RESPONSE_STATUS", success);
         }
         console.log("PreloadDetail", items);
@@ -211,8 +211,8 @@ const entries = {
       }
     },
 
-    setEntrieOrigin({ commit }, origin) {
-      commit("SET_ENTRIES_ORIGIN", origin);
+    setPreloadOrigin({ commit }, origin) {
+      commit("SET_PRELOAD_ORIGIN", origin);
     },
 
     setAssignedTo({ commit }, name) {
@@ -298,7 +298,7 @@ const entries = {
     currentStatus(state) {
       return state.status;
     },
-    currentEntryId(state) {
+    currentPreloadId(state) {
       return state.preloadEntryId;
     },
   },

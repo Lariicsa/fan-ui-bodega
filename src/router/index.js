@@ -29,6 +29,12 @@ const routes = [
         props: true,
         component: () => import("@/views/Preloads/PreloadsAll.vue"),
       },
+      {
+        path: "registro/:preloadId",
+        name: "PreloadSuccess",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadSuccess.vue"),
+      },
     ],
   },
   {
