@@ -62,9 +62,9 @@
           @include icon("pencil", $blackio);
         }
       }
-      &.finder {
+      &.search {
         &:after {
-          @include icon("finder", $blackio);
+          @include icon("search", $blackio);
         }
       } 
       &.list-min {
@@ -80,6 +80,11 @@
       &.logout {
         &:after {
           @include icon("logout", $blackio);
+        }
+      }
+      &.pending {
+        &:after {
+          @include icon("pending", $blackio);
         }
       }
     }
@@ -98,9 +103,9 @@
       @include icon("pencil", $dusk);
     }
   }
-  &.finder > a {
+  &.search > a {
     &:after {
-      @include icon("finder", $dusk);
+      @include icon("search", $dusk);
     }
   }
   &.list-min > a {
@@ -116,6 +121,11 @@
   &.logout > a {
     &:after {
       @include icon("logout", $dusk);
+    }
+  }
+  &.pending > a {
+    &:after {
+      @include icon("pending", $dusk);
     }
   }
 }

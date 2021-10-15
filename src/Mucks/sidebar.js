@@ -10,7 +10,7 @@ export default {
       icon: "",
       text: "Precargas",
       path: "/precargas",
-      name: "finder",
+      name: "search",
     },
     {
       icon: "",
@@ -27,13 +27,13 @@ export default {
       icon: "",
       text: "Entradas",
       path: "/entradas",
-      name: "entradas", 
+      name: "search", 
     },
     {
       icon: "",
       text: "Entradas pendientes",
       path: "/entradas/disponibles",
-      name: "entradas", 
+      name: "pending", 
     },
     {
       icon: "",
