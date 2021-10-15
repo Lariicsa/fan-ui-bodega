@@ -51,6 +51,7 @@
             :key="i"
             @click="rowClick(row)"
           >
+            <slot v-bind:nrow="row"></slot>
             <div
               v-for="(col, n) in columns"
               :class="
@@ -67,7 +68,6 @@
             >
               {{ row[col] }}
             </div>
-              <slot v-bind:nrow="row"></slot>
           </div>
         </div>
       </div>
@@ -96,12 +96,12 @@ export default {
     },
     extracell: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    colExceptions:{
+    colExceptions: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
 
   methods: {
@@ -115,12 +115,12 @@ export default {
       if (this.item.rows.length === 0) {
         return [];
       }
-     const cols =  Object.keys(this.item.rows[0])
+      const cols = Object.keys(this.item.rows[0]);
 
-     let finalcols = cols.filter(ele =>{
-       return ![this.colExceptions].includes(ele)
-     })
-      
+      let finalcols = cols.filter((ele) => {
+        return ![this.colExceptions].includes(ele);
+      });
+
       return finalcols;
     },
 

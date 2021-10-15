@@ -11,12 +11,12 @@
       <div v-if="showTable" class="row center">
         <TableSupport
           :item="tableData"
-          :topCols="8"
-          :cols="8"
+          :topCols="11"
+          :cols="11"
           colExceptions="final_location"
         >
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols7">
+            <div class="tableDetail__cell cols11">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
                 :updateValue="slotProps.nrow.final_location"
@@ -124,18 +124,18 @@ export default {
         ],
         topRows: this.entryDataResult,
         head: [
+          "Ubicación",
           "id",
-          // "Cantidad",
+          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
-          // "Línea",
+          "Línea",
           "Control",
           // "preUbicación",
-          //"Actualización",
+          "Fecha",
+          "Actualización",
           "Status",
-          "Ubicación",
-          //"Fecha",
         ],
         rows: this.entryDataDetails,
       };

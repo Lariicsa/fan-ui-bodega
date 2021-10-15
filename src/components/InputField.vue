@@ -2,7 +2,7 @@
   <div class="textfield" :class="showError ? 'error' : ''">
     <div class="textfield__title" v-if="titleLabel">{{ titleLabel }}</div>
     <label
-    v-show="phName"
+      v-show="phName"
       :class="this.value && titleLabel == undefined ? 'filled' : ''"
       :for="name"
       >{{ phName }}</label
@@ -43,7 +43,6 @@ export default {
     "autofocus",
     "maxlength",
   ],
-
 
   mounted() {
     if (this.autofocus) this.$refs.input.focus();
