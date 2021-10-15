@@ -9,7 +9,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="7">
+        <TableDetail :item="tableData" :topCols="8" :cols="8">
           <template v-slot:default="slotProps">
             <div class="tableDetail__cell cols7">
               <Inputfield
