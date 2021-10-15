@@ -2,6 +2,7 @@
   <div class="textfield" :class="showError ? 'error' : ''">
     <div class="textfield__title" v-if="titleLabel">{{ titleLabel }}</div>
     <label
+    v-show="phName"
       :class="this.value && titleLabel == undefined ? 'filled' : ''"
       :for="name"
       >{{ phName }}</label
