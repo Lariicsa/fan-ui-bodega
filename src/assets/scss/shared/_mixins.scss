@@ -103,12 +103,14 @@
   font-size: 1rem;
   font-weight: 500;
   width: auto;
-  max-width: 7.2rem;
+  max-width: 8.2rem;
   position: relative;
   text-indent: -900rem;
   &:after {
     content: $content;
     text-indent: 0.1rem;
+    text-align: center;
+    margin: auto;
     display: block;
     position: relative;
   }

@@ -2,4 +2,25 @@
  &__assigned {
    @include label($light-sky-blue-two, $french-blue, "Asignado");
  }
+ &__placing {
+  @include label($aqua-blue-g1, $black-green, "Acomodando");
+}
+&__placed {
+  @include label($light-mint, $french-blue, "Acomodado");
+}
+&__assorting {
+  @include label($duck-egg-blue, $french-blue, "Surtiendo");
+}
+&__assorted {
+  @include label($light-mint, $french-blue, "Surtido");
+}
+&__checking {
+  @include label($light-mint, $french-blue, "Cotejando");
+}
+&__checked {
+  @include label($light-mint, $french-blue, "Cotejado");
+}
+&__registered {
+  @include label($light-mint, $pine, "Registrado");
+}
 }

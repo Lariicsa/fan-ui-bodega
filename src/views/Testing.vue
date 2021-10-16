@@ -5,6 +5,13 @@
     </div>
     <div class="col">
       <Label type="assigned" />
+      <Label type="placing" />
+      <Label type="placed" />
+      <Label type="assorting" />
+      <Label type="assorted" />
+      <Label type="checking" />
+      <Label type="checked" />
+      <Label type="registered" />
     </div>
   </div>
 </template>
