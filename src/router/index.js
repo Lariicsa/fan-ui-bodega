@@ -35,6 +35,12 @@ const routes = [
         props: true,
         component: () => import("@/views/Preloads/PreloadsAll.vue"),
       },
+      {
+        path: "registro/:preloadId",
+        name: "PreloadSuccess",
+        props: true,
+        component: () => import("@/views/Preloads/PreloadSuccess.vue"),
+      },
     ],
   },
   {
@@ -45,9 +51,9 @@ const routes = [
     children: [
       {
         path: "buscar",
-        name: "EntryLoaded",
+        name: "EntryFind",
         props: true,
-        component: () => import("@/views/Entries/EntryLoaded.vue"),
+        component: () => import("@/views/Entries/EntryFind.vue"),
       },
       {
         path: "registro/:countingId",
