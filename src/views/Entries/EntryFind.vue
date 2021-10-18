@@ -6,14 +6,11 @@
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
-        @search="findEntryBy(key)"
-
+        @search="findEntryBy(paramValue)"
+        v-model="paramValue"
       />
-      <div  class="row center">
-        <TableSimple
-        :item="tableDataDetails"
-        :cols="9"
-      />
+      <div class="row center">
+        <TableSimple :item="tableDataDetails" :cols="9" />
       </div>
       <div v-if="exists" class="row center">
         <Message type="notfound robot">No existe ID de entrada</Message>
@@ -39,43 +36,36 @@ export default {
     TableSimple,
   },
 
-  props: {
-    entryId: {
-      type: String,
-    },
-  },
+  // props: {
+  //   entryId: {
+  //     type: String,
+  //   },
+  // },
 
   data() {
     return {
       idTyped: "",
-      loadEntryId: this.entryId,
-      paramType: ''
+      paramType: "",
+      paramValue: "",
     };
   },
 
-  created() {
-    this.selectFunction();
-  },
-
   methods: {
-    selectFunction() {
-      if (this.entryId != undefined) {
-        this.getEntrieInfo(this.entryId);
-      }
-    },
-
     findEntryBy(key) {
-      let param = this.paramType
+      let param = this.paramType;
       switch (param) {
-        case value:
-          
+        case "barcode":
+          this.$store.dispatch("findEntryByParam", `?barcode=${key}`);
           break;
-      
+
+        case "productKey":
+          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
+          break;
+
         default:
-          this.$store.dispatch("findEntryByParam",`?name=${key}`)
+          this.$store.dispatch("findEntryByParam", `?name=${key}`);
           break;
       }
-      
     },
 
     getEntrieInfo(entrieId) {
@@ -113,7 +103,7 @@ export default {
           "Editor",
           "Cantidad",
         ],
-        rows: this.entryDataDetails,
+        rows: this.entryDataResult,
       };
       return table;
     },

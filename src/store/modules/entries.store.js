@@ -70,6 +70,10 @@ const entries = {
     FETCH_ALL_PRELOADS: (state, payload) => {
       state.preloadsAll = payload;
     },
+
+    GET_ENTRIES_RESULT:(state,payload)=> {
+      state.entriesResults = payload
+    }
   },
 
   actions: {
@@ -247,7 +251,9 @@ const entries = {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await  findEntryByParam(param)
+        let result = res.data.payload
         commit("FETCH_LOADER_STATUS", false);
+        commit("GET_ENTRIES_RESULT", result)
         console.log('found', res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
@@ -337,18 +343,18 @@ const entries = {
 
     entryDataResult(state) {
       let item = state.entriesResults;
-      const formated = {
-        total_items: item.total_items,
-        action_type: item.action_type,
-        from_to: item.from_to,
-        created_by: item.created_by,
-        created_at: item.created_at,
-        assigned_to: item.assigned_to,
-        num_order: item.num_order,
-        status: item.status,
-      };
+      // const formated = {
+      //   total_items: item.total_items,
+      //   action_type: item.action_type,
+      //   from_to: item.from_to,
+      //   created_by: item.created_by,
+      //   created_at: item.created_at,
+      //   assigned_to: item.assigned_to,
+      //   num_order: item.num_order,
+      //   status: item.status,
+      // };
 
-      return formated;
+      return item;
     },
 
     preloadDataDetails(state) {
