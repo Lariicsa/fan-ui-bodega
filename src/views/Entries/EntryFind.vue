@@ -2,6 +2,7 @@
   <div class="col">
     <Loader v-show="loader" />
     <h4>Buscar entrada</h4>
+    <strong @click="findEntryBy()">Find</strong>
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
@@ -57,6 +58,10 @@ export default {
       if (this.entryId != undefined) {
         this.getEntrieInfo(this.entryId);
       }
+    },
+
+    findEntryBy() {
+      this.$store.dispatch("findEntryByParam")
     },
 
     getEntrieInfo(entrieId) {
