@@ -7,6 +7,8 @@ import {
   preloadDetail,
   updatePreloadLocation,
   updatePreloadStatus,
+  findEntryByParam,
+  updateEntryStatus
 } from "@/api/entries.api";
 
 const entries = {
@@ -198,17 +200,36 @@ const entries = {
     },
 
     async updatePreloadsStatus({ commit }, data) {
+      commit("FETCH_LOADER_STATUS", true);
       try {
         const newStatus = {
           action: "UPDATE_STATUS",
-          id: "6df2e541-8592-480a-8c35-f1f14ebbcd44",
-          newStatus: "registrado en inventario",
+          id: data.id,
+          newStatus: data.newStatus
         };
         const res = await updatePreloadStatus(newStatus);
+        let status = res.status
+        if(status == 200) {
+          commit("FETCH_LOADER_STATUS", false);
+        }
         console.log("resstatus", res);
       } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
       }
+    },
+
+    async updateEntryLocation({commit}, data) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = updateEntryStatus(data)
+        commit("FETCH_LOADER_STATUS", false);
+        console.log('entrulocation', res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
+
     },
 
     setPreloadOrigin({ commit }, origin) {
@@ -217,6 +238,18 @@ const entries = {
 
     setAssignedTo({ commit }, name) {
       commit("SET_ASSIGNED_EMPLOYEE", name);
+    },
+
+    async findEntryByParam({commit}, param) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = await  findEntryByParam('?name=batman')
+        commit("FETCH_LOADER_STATUS", false);
+        console.log('found', res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
     },
   },
 
@@ -377,6 +410,10 @@ const entries = {
     currentPreloadId(state) {
       return state.preloadEntryId;
     },
+
+    currentEntryStatus(state) {
+     return state.entriesResults.status
+    }
   },
 };
 
