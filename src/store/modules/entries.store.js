@@ -7,6 +7,7 @@ import {
   preloadDetail,
   updatePreloadLocation,
   updatePreloadStatus,
+  findEntryByParam
 } from "@/api/entries.api";
 
 const entries = {
@@ -217,6 +218,18 @@ const entries = {
 
     setAssignedTo({ commit }, name) {
       commit("SET_ASSIGNED_EMPLOYEE", name);
+    },
+
+    async findEntryByParam({commit}, param) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = await  findEntryByParam('?name=secret+clown')
+        commit("FETCH_LOADER_STATUS", false);
+        console.log('found', res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
     },
   },
 
