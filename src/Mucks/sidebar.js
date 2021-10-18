@@ -20,14 +20,8 @@ export default {
     },
     {
       icon: "",
-      text: "Buscar entrada",
-      path: "/entradas/buscar",
-      name: "search", 
-    },
-    {
-      icon: "",
       text: "Inventario",
-      path: "/entradas/disponibles",
+      path: "/entradas/buscar",
       name: "availables", 
     },
     {

@@ -8,7 +8,8 @@ import {
   updatePreloadLocation,
   updatePreloadStatus,
   findEntryByParam,
-  updateEntryStatus
+  updateEntryStatus,
+  latestsEntries,
 } from "@/api/entries.api";
 
 const entries = {
@@ -71,9 +72,9 @@ const entries = {
       state.preloadsAll = payload;
     },
 
-    GET_ENTRIES_RESULT:(state,payload)=> {
-      state.entriesResults = payload
-    }
+    GET_ENTRIES_RESULT: (state, payload) => {
+      state.entriesResults = payload;
+    },
   },
 
   actions: {
@@ -211,11 +212,11 @@ const entries = {
         const newStatus = {
           action: "UPDATE_STATUS",
           id: data.id,
-          newStatus: data.newStatus
+          newStatus: data.newStatus,
         };
         const res = await updatePreloadStatus(newStatus);
-        let status = res.status
-        if(status == 200) {
+        let status = res.status;
+        if (status == 200) {
           commit("FETCH_LOADER_STATUS", false);
         }
         console.log("resstatus", res);
@@ -225,17 +226,16 @@ const entries = {
       }
     },
 
-    async updateEntryLocation({commit}, data) {
+    async updateEntryLocation({ commit }, data) {
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = updateEntryStatus(data)
+        const res = updateEntryStatus(data);
         commit("FETCH_LOADER_STATUS", false);
-        console.log('entrulocation', res);
+        console.log("entrulocation", res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
       }
-
     },
 
     setPreloadOrigin({ commit }, origin) {
@@ -246,15 +246,29 @@ const entries = {
       commit("SET_ASSIGNED_EMPLOYEE", name);
     },
 
-    async findEntryByParam({commit}, param) {
-      console.log('param', param);
+    async findEntryByParam({ commit }, param) {
+      console.log("param", param);
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = await  findEntryByParam(param)
-        let result = res.data.payload
+        const res = await findEntryByParam(param);
+        let result = res.data.payload;
         commit("FETCH_LOADER_STATUS", false);
-        commit("GET_ENTRIES_RESULT", result)
-        console.log('found', res);
+        commit("GET_ENTRIES_RESULT", result);
+        console.log("found", res);
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+      }
+    },
+
+    async getLatestEntries({ commit }) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = await latestsEntries();
+        let result = res.data.payload;
+        commit("FETCH_LOADER_STATUS", false);
+        commit("GET_ENTRIES_RESULT", result);
+        console.log("entries", res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
@@ -421,8 +435,8 @@ const entries = {
     },
 
     currentEntryStatus(state) {
-     return state.preloadResults.status
-    }
+      return state.preloadResults.status;
+    },
   },
 };
 

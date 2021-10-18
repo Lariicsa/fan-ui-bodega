@@ -5,7 +5,7 @@
 
     <div class="row between">
       <Finder
-        phText="Ingresa el Id de precarga"
+        phText="Ingresa tu búsqueda"
         @search="findEntryBy(paramValue)"
         v-model="paramValue"
       />
@@ -24,7 +24,7 @@ import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "EntryFind",
 
@@ -50,7 +50,12 @@ export default {
     };
   },
 
+  mounted(){
+    this.getLatestEntries()
+  },
+
   methods: {
+    ...mapActions(["getLatestEntries"]),
     findEntryBy(key) {
       let param = this.paramType;
       switch (param) {

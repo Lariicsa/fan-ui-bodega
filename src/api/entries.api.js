@@ -38,6 +38,7 @@ const updateEntryStatus = ({action, id, location}) => MAIN_SERVICE.put(PUT_UPDAT
   preload: { id, location}})
 const findEntryByParam = (param) =>
   MAIN_SERVICE.get(GET_PRODUCTS_SEARCH + param);
+const latestsEntries = () => MAIN_SERVICE.get(GET_PRODUCTS_SEARCH)
 
 export {
   getCountingOrder,
@@ -49,5 +50,6 @@ export {
   updatePreloadLocation,
   updatePreloadStatus,
   findEntryByParam,
-  updateEntryStatus
+  updateEntryStatus,
+  latestsEntries
 };
