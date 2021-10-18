@@ -14,9 +14,9 @@
           :topCols="7"
           :cols="10"
           modifier="hasHover"
-          colExceptions="final_location"
+          colExceptions="final_location, status"
         >
-          <template v-slot:default="slotProps">
+          <template v-slot:firstRow="slotProps">
             <div class="tableDetail__cell cols10">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
@@ -30,6 +30,11 @@
               />
             </div>
           </template>
+          <template v-slot:lastRow="otherProps">
+          <div class="tableDetail__cell cols10">
+            <Label :type="otherProps.lrow.status" />
+          </div>
+        </template>
         </TableSupport>
         <div class="row sm right entry__endrow">
           <FanButton
@@ -49,6 +54,7 @@
 import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Inputfield from "@/components/InputField";
+import Label from "@/components/Label";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
@@ -62,6 +68,7 @@ export default {
     FanButton,
     Finder,
     Inputfield,
+    Label,
     Loader,
     Message,
     TableDetail,
@@ -200,6 +207,11 @@ export default {
       let status = this.currentEntryStatus;
 
       switch (status) {
+        case "asignado":
+          return (this.lastButton = {
+            text: "Acomodar en Rack",
+            func: this.arrangeOnRack,
+          });
         case "acomodando":
           return (this.lastButton = {
             text: "Finalizar Acomodo",
