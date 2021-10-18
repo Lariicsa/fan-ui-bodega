@@ -107,12 +107,8 @@ export default {
     let ls = localStorage.getItem("jwt");
     if (ls === null) {
       localStorage.setItem(
-        "jwt",
-<<<<<<< HEAD
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4ODlmZGI3OC05MjY3LTQ5N2ItYmMxNC05ODc0MzhiZDUwYWUiLCJlbWFpbCI6Im5hdGhhbmllbEBmYW50YXN0aWNvY29taWMuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNzIjoiZmFudGFzdGljbyBhcGkiLCJpYXQiOjE2MzQxNTcyMjl9.7VbuNrRPDiXWN5mJgy9WozZZyrUQjJnwGroYI83p1wg"
-=======
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZTdjNzc3MS1lYWY2LTRlNWUtOTJmYy01YTA3NGQ2OGM0MWEiLCJlbWFpbCI6Im5hdGhhbmllbEBmYW50YXN0aWNvY29taWMuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNzIjoiZmFudGFzdGljbyBhcGkiLCJpYXQiOjE2MzQyMzE3MzJ9.jaSitYOtnXQRAYgNcYXbnj3bep1fgaE6uelV3o2G95k"
->>>>>>> 7a6bd3a846cc4d76ba8fc421863647798f0f62a8
+        "jwt",      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4ODlmZGI3OC05MjY3LTQ5N2ItYmMxNC05ODc0MzhiZDUwYWUiLCJlbWFpbCI6Im5hdGhhbmllbEBmYW50YXN0aWNvY29taWMuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNzIjoiZmFudGFzdGljbyBhcGkiLCJpYXQiOjE2MzQxNTcyMjl9.7VbuNrRPDiXWN5mJgy9WozZZyrUQjJnwGroYI83p1wg"
+
       );
     }
   },
