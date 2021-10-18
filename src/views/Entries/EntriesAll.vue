@@ -4,6 +4,11 @@
       <h4>Entradas</h4>
     </div>
     <div class="row">
+      <Finder
+        phText="Ingresa el Id de precarga"
+        @search="getEntrieInfo(idTyped)"
+        v-model="idTyped"
+      />
       <TableSimple
         :item="tableDataDetails"
         :cols="9"
@@ -14,12 +19,15 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-
+import Finder from "@/components/Finder";
+import Loader from "@/components/Loader.vue";
 import TableSimple from "@/components/TableSimple.vue";
 export default {
   name: "EntriesAll",
 
   components: {
+    Finder,
+    Loader,
     TableSimple,
   },
 

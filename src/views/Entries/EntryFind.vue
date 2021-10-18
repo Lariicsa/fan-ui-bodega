@@ -2,19 +2,43 @@
   <div class="col">
     <Loader v-show="loader" />
     <h4>Buscar entrada</h4>
-    <strong @click="findEntryBy()">Find</strong>
-    <div class="row between">
-      <Finder
-        phText="Ingresa el Id de precarga"
-        @search="getEntrieInfo(idTyped)"
-        v-model="idTyped"
-      />
-      <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="12" />
+
+    <div class="row between entry__filters">
+      <div class="row entry__finder">
+        <Finder
+          phText="Ingresa tu búsqueda"
+          @search="findEntryBy(paramValue)"
+          v-model="paramValue"
+        />
       </div>
-      <div v-if="exists" class="row center">
-        <Message type="notfound robot">No existe ID de entrada</Message>
+
+      <div class="row entry__radios">
+        <Radiooption
+          v-model="paramType"
+          textOption="Por nombre"
+          id="name"
+          @click="selectParamKey(paramType)"
+        />
+        <Radiooption
+          v-model="paramType"
+          textOption="Por clave"
+          id="productKey"
+          @click="selectParamKey(paramType)"
+        />
+        <Radiooption
+          v-model="paramType"
+          textOption="Por código de barras"
+          id="barcode"
+          @click="selectParamKey(paramType)"
+        />
       </div>
+    </div>
+
+    <div class="row center">
+      <TableSimple :item="tableDataDetails" :cols="9" />
+    </div>
+    <div v-if="exists" class="row center">
+      <Message type="notfound robot">No existe ID de entrada</Message>
     </div>
   </div>
 </template>
@@ -22,9 +46,10 @@
 import Finder from "@/components/Finder";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
+import Radiooption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "EntryFind",
 
@@ -32,36 +57,42 @@ export default {
     Finder,
     Loader,
     Message,
+    Radiooption,
     TableDetail,
     TableSimple,
-  },
-
-  props: {
-    entryId: {
-      type: String,
-    },
   },
 
   data() {
     return {
       idTyped: "",
-      loadEntryId: this.entryId,
+      paramType: "name",
+      paramValue: "",
     };
   },
 
-  created() {
-    this.selectFunction();
+  mounted() {
+    this.getLatestEntries();
   },
 
   methods: {
-    selectFunction() {
-      if (this.entryId != undefined) {
-        this.getEntrieInfo(this.entryId);
-      }
-    },
+    ...mapActions(["getLatestEntries"]),
 
-    findEntryBy() {
-      this.$store.dispatch("findEntryByParam")
+    selectParamKey(paramType) {},
+    findEntryBy(key) {
+      let param = this.paramType;
+      switch (param) {
+        case "barcode":
+          this.$store.dispatch("findEntryByParam", `?barcode=${key}`);
+          break;
+
+        case "productKey":
+          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
+          break;
+
+        default:
+          this.$store.dispatch("findEntryByParam", `?name=${key}`);
+          break;
+      }
     },
 
     getEntrieInfo(entrieId) {
@@ -86,34 +117,20 @@ export default {
       }
     },
 
-    tableData() {
+    tableDataDetails() {
       const table = {
-        topHead: [
-          "Cantidad",
-          "Transacción",
-          "Desde",
-          "Creado por",
-          "Fecha",
-          "Asignado a",
-          "#Orden",
-          "Status",
-        ],
-        topRows: this.entryDataResult,
         head: [
-          "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
-          "preUbicación",
           "Ubicación",
           "Actualización",
-          "Fecha",
-          "Status",
+          "Editor",
+          "Cantidad",
         ],
-        rows: this.entryDataDetails,
+        rows: this.entryDataResult,
       };
       return table;
     },

@@ -225,7 +225,7 @@ export default {
         case "registrado en inventario":
           return (this.lastButton = {
             text: "Reubicar",
-            func: "",
+            func: this.registerInInventory,//temporal
           });
       }
     },
