@@ -1,6 +1,5 @@
 <template>
   <div class="col">
-    ·{{ currentEntryStatus }}
     <Loader v-show="loader" />
     <h4>Buscar precarga</h4>
     <div class="row between">

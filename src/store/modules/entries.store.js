@@ -243,7 +243,7 @@ const entries = {
     async findEntryByParam({commit}, param) {
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = await  findEntryByParam('?name=secret+clown')
+        const res = await  findEntryByParam('?name=batman')
         commit("FETCH_LOADER_STATUS", false);
         console.log('found', res);
       } catch (error) {
