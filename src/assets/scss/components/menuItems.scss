@@ -75,7 +75,7 @@
       }
       &.logs {
         &:after {
-          @include icon("hero", $blackio);
+          @include icon("calendar", $blackio);
         }
       }
       &.pending {
@@ -115,7 +115,7 @@
   }
   &.logs > a {
     &:after {
-      @include icon("hero", $dusk);
+      @include icon("calendar", $dusk);
     }
   }
   &.pending > a {

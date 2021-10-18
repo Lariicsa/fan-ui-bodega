@@ -1,5 +1,26 @@
 .fLabel {
- &__asignado {
-   @include label($light-sky-blue-two, $french-blue, "Asignado");
- }
+  &__asignado {
+    @include label($light-mint, $pine, "Asignado");
+  }
+  &__acomodando {
+    @include label($greyish-yellow, $coral, "Acomodando");
+  }
+  &__acomodado {
+    @include label($pale-grey, $bluerple, "Acomodado");
+  }
+  &__surtiendo {
+    @include label($pale-pink, $tomato, "Surtiendo");
+  }
+  &__surtido {
+    @include label($pale-purple, $rouge, "Surtido");
+  }
+  &__cotejando {
+    @include label($pale-peach, $faded-orange, "Cotejando");
+  }
+  &__cotejado {
+    @include label($light-sky-blue-two, $bluerple, "Cotejado");
+  }
+  &__registrado {
+    @include label($green-vue, $white, "Registrado");
+  }
 }
