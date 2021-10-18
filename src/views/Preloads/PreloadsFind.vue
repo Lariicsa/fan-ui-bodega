@@ -1,5 +1,6 @@
 <template>
   <div class="col">
+    ·{{ currentEntryStatus }}
     <Loader v-show="loader" />
     <h4>Buscar precarga</h4>
     <div class="row between">
@@ -31,6 +32,13 @@
             </div>
           </template>
         </TableSupport>
+        <div class="row sm right entry__endrow">
+          <FanButton
+            :text="showButton.text"
+            ui="primary"
+            @btnClick="showButton.func"
+          />
+        </div>
       </div>
       <div v-if="exists" class="row center">
         <Message type="notfound robot">No existe ID de entrada</Message>
@@ -39,18 +47,20 @@
   </div>
 </template>
 <script>
+import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
 import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
-import TableSupport from "../../components/TableSupport";
+import TableSupport from "@/components/TableSupport";
 import { mapGetters } from "vuex";
 export default {
   name: "PreloadsFind",
 
   components: {
+    FanButton,
     Finder,
     Inputfield,
     Loader,
@@ -70,6 +80,10 @@ export default {
     return {
       idTyped: "",
       loadPreloadId: this.preloadId,
+      lastButton: {
+        text: "Acomodar en Rack",
+        func: null,
+      },
     };
   },
 
@@ -78,9 +92,47 @@ export default {
   },
 
   methods: {
+    arrangeOnRack() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "acomodando",
+          id: this.idTyped,
+        })
+        .then(() => {
+          this.getPreloadInfo(this.idTyped);
+        });
+    },
+
+    setToArranged() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "acomodado",
+          id: this.idTyped,
+        })
+        .then(() => {
+          this.getPreloadInfo(this.idTyped);
+        });
+    },
+
+    registerInInventory() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "registrado en inventario",
+          id: this.idTyped,
+        })
+        .then(() => {
+          this.getPreloadInfo(this.idTyped);
+        });
+    },
+
     updateLocation(txt) {
       this.$store.dispatch("setPreloadLocation", txt);
       console.log("view", txt);
+    },
+
+    updateEntryLocation(entriId) {
+      console.log("entry", entriId);
+      // this.$store.dispatch("updateEntryLocation",entriId)
     },
 
     selectFunction() {
@@ -97,7 +149,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["preloadDataResult", "preloadDataDetails", "currentStatus"]),
+    ...mapGetters([
+      "preloadDataResult",
+      "preloadDataDetails",
+      "currentStatus",
+      "currentEntryStatus",
+    ]),
     loader() {
       return this.$store.state.entries.loader;
     },
@@ -138,6 +195,28 @@ export default {
         rows: this.preloadDataDetails,
       };
       return table;
+    },
+
+    showButton() {
+      let status = this.currentEntryStatus;
+
+      switch (status) {
+        case "acomodando":
+          return (this.lastButton = {
+            text: "Finalizar Acomodo",
+            func: this.setToArranged,
+          });
+        case "acomodado":
+          return (this.lastButton = {
+            text: "Registrar en Stock",
+            func: this.registerInInventory,
+          });
+        case "registrado en inventario":
+          return (this.lastButton = {
+            text: "Reubicar",
+            func: "",
+          });
+      }
     },
 
     exists() {

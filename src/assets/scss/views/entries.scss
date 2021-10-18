@@ -1,5 +1,9 @@
-.entry{
-  &__row{
+.entry {
+  &__row {
     margin: 2.4rem 0;
+  }
+
+  &__endrow {
+    margin: 1.6rem 0 1.6rem auto;
   }
 }
