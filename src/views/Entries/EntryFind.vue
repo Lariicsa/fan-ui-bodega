@@ -2,15 +2,18 @@
   <div class="col">
     <Loader v-show="loader" />
     <h4>Buscar entrada</h4>
-    <strong @click="findEntryBy()">Find</strong>
+
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
-        @search="getEntrieInfo(idTyped)"
-        v-model="idTyped"
+        @search="findEntryBy(key)"
+
       />
-      <div v-if="showTable" class="row center">
-        <TableDetail :item="tableData" :topCols="8" :cols="12" />
+      <div  class="row center">
+        <TableSimple
+        :item="tableDataDetails"
+        :cols="9"
+      />
       </div>
       <div v-if="exists" class="row center">
         <Message type="notfound robot">No existe ID de entrada</Message>
@@ -46,6 +49,7 @@ export default {
     return {
       idTyped: "",
       loadEntryId: this.entryId,
+      paramType: ''
     };
   },
 
@@ -60,8 +64,18 @@ export default {
       }
     },
 
-    findEntryBy() {
-      this.$store.dispatch("findEntryByParam")
+    findEntryBy(key) {
+      let param = this.paramType
+      switch (param) {
+        case value:
+          
+          break;
+      
+        default:
+          this.$store.dispatch("findEntryByParam",`?name=${key}`)
+          break;
+      }
+      
     },
 
     getEntrieInfo(entrieId) {
@@ -86,32 +100,18 @@ export default {
       }
     },
 
-    tableData() {
+    tableDataDetails() {
       const table = {
-        topHead: [
-          "Cantidad",
-          "Transacción",
-          "Desde",
-          "Creado por",
-          "Fecha",
-          "Asignado a",
-          "#Orden",
-          "Status",
-        ],
-        topRows: this.entryDataResult,
         head: [
-          "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
-          "preUbicación",
           "Ubicación",
           "Actualización",
-          "Fecha",
-          "Status",
+          "Editor",
+          "Cantidad",
         ],
         rows: this.entryDataDetails,
       };
