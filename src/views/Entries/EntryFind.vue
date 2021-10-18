@@ -3,18 +3,42 @@
     <Loader v-show="loader" />
     <h4>Buscar entrada</h4>
 
-    <div class="row between">
-      <Finder
-        phText="Ingresa tu búsqueda"
-        @search="findEntryBy(paramValue)"
-        v-model="paramValue"
-      />
-      <div class="row center">
-        <TableSimple :item="tableDataDetails" :cols="9" />
+    <div class="row between entry__filters">
+      <div class="row entry__finder">
+        <Finder
+          phText="Ingresa tu búsqueda"
+          @search="findEntryBy(paramValue)"
+          v-model="paramValue"
+        />
       </div>
-      <div v-if="exists" class="row center">
-        <Message type="notfound robot">No existe ID de entrada</Message>
+
+      <div class="row entry__radios">
+        <Radiooption
+          v-model="paramType"
+          textOption="Por nombre"
+          id="name"
+          @click="selectParamKey(paramType)"
+        />
+        <Radiooption
+          v-model="paramType"
+          textOption="Por clave"
+          id="productKey"
+          @click="selectParamKey(paramType)"
+        />
+        <Radiooption
+          v-model="paramType"
+          textOption="Por código de barras"
+          id="barcode"
+          @click="selectParamKey(paramType)"
+        />
       </div>
+    </div>
+
+    <div class="row center">
+      <TableSimple :item="tableDataDetails" :cols="9" />
+    </div>
+    <div v-if="exists" class="row center">
+      <Message type="notfound robot">No existe ID de entrada</Message>
     </div>
   </div>
 </template>
@@ -22,6 +46,7 @@
 import Finder from "@/components/Finder";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
+import Radiooption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapActions, mapGetters } from "vuex";
@@ -32,30 +57,27 @@ export default {
     Finder,
     Loader,
     Message,
+    Radiooption,
     TableDetail,
     TableSimple,
   },
 
-  // props: {
-  //   entryId: {
-  //     type: String,
-  //   },
-  // },
-
   data() {
     return {
       idTyped: "",
-      paramType: "",
+      paramType: "name",
       paramValue: "",
     };
   },
 
-  mounted(){
-    this.getLatestEntries()
+  mounted() {
+    this.getLatestEntries();
   },
 
   methods: {
     ...mapActions(["getLatestEntries"]),
+
+    selectParamKey(paramType) {},
     findEntryBy(key) {
       let param = this.paramType;
       switch (param) {
