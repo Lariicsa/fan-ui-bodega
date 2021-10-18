@@ -37,7 +37,7 @@ export default {
 
     goToDetail(index) {
       this.$router.push({
-        name: "EntryLoaded",
+        name: "EntryFind",
         params: { entryId: index.preload_id },
       });
     },

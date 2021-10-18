@@ -5,18 +5,19 @@
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
-        @search="getEntrieInfo(idTyped)"
+        @search="getPreloadInfo(idTyped)"
         v-model="idTyped"
       />
-      <div v-if="showTable" class="row center">
+      <div v-if="showTable" class="row center entry__row">
         <TableSupport
           :item="tableData"
-          :topCols="11"
-          :cols="11"
+          :topCols="7"
+          :cols="10"
+          modifier="hasHover"
           colExceptions="final_location"
         >
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols11">
+            <div class="tableDetail__cell cols10">
               <Inputfield
                 :placeholder="slotProps.nrow.final_location"
                 :updateValue="slotProps.nrow.final_location"
@@ -60,7 +61,7 @@ export default {
   },
 
   props: {
-    entryId: {
+    preloadId: {
       type: String,
     },
   },
@@ -68,7 +69,7 @@ export default {
   data() {
     return {
       idTyped: "",
-      loadEntryId: this.entryId,
+      loadPreloadId: this.preloadId,
     };
   },
 
@@ -83,12 +84,12 @@ export default {
     },
 
     selectFunction() {
-      if (this.entryId != undefined) {
-        this.getEntrieInfo(this.entryId);
+      if (this.preloadId != undefined) {
+        this.getPreloadInfo(this.preloadId);
       }
     },
 
-    getEntrieInfo(entrieId) {
+    getPreloadInfo(entrieId) {
       this.$store.dispatch("getPreloaded", entrieId).then(() => {
         this.$store.dispatch("getPreloadDetail", entrieId);
       });
@@ -96,7 +97,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
+    ...mapGetters(["preloadDataResult", "preloadDataDetails", "currentStatus"]),
     loader() {
       return this.$store.state.entries.loader;
     },
@@ -116,28 +117,25 @@ export default {
           "Cantidad",
           "Transacción",
           "Desde",
-          "Creado por",
           "Fecha",
+          "Creado por",
           "Asignado a",
-          "#Orden",
           "Status",
         ],
-        topRows: this.entryDataResult,
+        topRows: this.preloadDataResult,
         head: [
           "Ubicación",
           "id",
-          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
           "Línea",
           "Control",
-          // "preUbicación",
           "Fecha",
           "Actualización",
           "Status",
         ],
-        rows: this.entryDataDetails,
+        rows: this.preloadDataDetails,
       };
       return table;
     },

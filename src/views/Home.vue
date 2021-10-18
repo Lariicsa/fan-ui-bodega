@@ -22,7 +22,7 @@
           />
         </div>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
+          <TableDetail :item="tabledata" :topCols="6" :cols="3"  />
         </div>
         <div class="row between entries__setting">
           <Dropdown
@@ -31,7 +31,7 @@
             variant="form"
             :options="stores"
             name="idStore"
-            @onChange="setEntrieOrigin(selectedStore)"
+            @onChange="setPreloadOrigin(selectedStore)"
           />
           <Dropdown
             v-model="selectedEmployee"
@@ -124,9 +124,9 @@ export default {
 
   methods: {
     ...mapActions([
-      "setEntrieOrigin",
+      "setPreloadOrigin",
       "setAssignedTo",
-      "loadEntrieFromCounting",
+      "loadPreloadFromCounting",
     ]),
 
     showCountingDetails() {
@@ -143,13 +143,13 @@ export default {
 
     getEntriesData(typed) {
       this.$store.dispatch("getItemsCountData", typed).then(() => {
-        this.$store.dispatch("getEntriesCountDetail", typed);
+        this.$store.dispatch("getCountingDetail", typed);
       });
     },
 
     loadEntries() {
       this.$store
-        .dispatch("loadEntrieFromCounting", {
+        .dispatch("loadPreloadFromCounting", {
           countId: this.countId,
           type: "ENTRADA",
           fromTo: this.fromTo,
@@ -158,8 +158,8 @@ export default {
         .then(() => {
           if (this.status) {
             this.$router.push({
-              name: "EntrySuccess",
-              params: { countingId: this.countId },
+              name: "PreloadSuccess",
+              params: { preloadId: this.countId },
             });
             setTimeout(() => {
               this.$store.commit("FETCH_LOADER_STATUS", false);
@@ -202,7 +202,7 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
-          "id",
+          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",

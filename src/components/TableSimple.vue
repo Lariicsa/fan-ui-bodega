@@ -30,15 +30,17 @@
               `<div class='simpleTable__cell-in'>` + col + '</div>' + row[col]
             "
           ></div>
+           <slot v-bind:nrow="row"></slot>
         </div>
         <div class="simpleTable__row">
-          <slot></slot>
+          <slot name="extraRow"></slot>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+
 export default {
   name: "TableSimple",
 
@@ -54,7 +56,11 @@ export default {
     },
     colmodifier: {
       type: String
-    }
+    },
+    colExceptions: {
+      type: String,
+      default: "",
+    },
   },
 
   methods: {
@@ -65,11 +71,17 @@ export default {
   },
 
   computed: {
-    columns: function columns() {
+     columns: function columns() {
       if (this.item.rows.length === 0) {
         return [];
       }
-      return Object.keys(this.item.rows[0]);
+      const cols = Object.keys(this.item.rows[0]);
+
+      let finalcols = cols.filter((ele) => {
+        return ![this.colExceptions].includes(ele);
+      });
+
+      return finalcols;
     },
 
     cellWidth() {

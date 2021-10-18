@@ -40,7 +40,7 @@ const entries = {
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
     },
-    SET_ENTRIES_ORIGIN: (state, payload) => {
+    SET_PRELOAD_ORIGIN: (state, payload) => {
       state.entriesOrigin = payload;
     },
     SET_ASSIGNED_EMPLOYEE: (state, payload) => {
@@ -53,11 +53,11 @@ const entries = {
       state.statusResponse = payload;
     },
 
-    GET_ENTRIE_BY_ID: (state, payload) => {
+    GET_PRELOAD_BY_ID: (state, payload) => {
       state.entriesResults = payload;
     },
 
-    GET_ENTRIE_DETAILS: (state, payload) => {
+    GET_PRELOAD_DETAILS: (state, payload) => {
       state.entriesDetail = payload;
     },
     GET_PRELOAD_RESPONSE: (state, payload) => {
@@ -113,14 +113,14 @@ const entries = {
       }
     },
 
-    async getEntriesCountDetail({ commit }, idC) {
+    async getCountingDetail({ commit }, idC) {
       const res = await getOrderDetail(idC);
       let items = res.data.payload;
       commit("GET_COUNTING_DETAILS", items);
       console.log("details", res);
     },
 
-    async loadEntrieFromCounting({ commit }, data) {
+    async loadPreloadFromCounting({ commit }, data) {
       commit("FETCH_LOADER_STATUS", true);
       console.log("data", data);
       try {
@@ -148,14 +148,14 @@ const entries = {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getPreload(preloadId);
-        let entrieRes = res.data.payload;
+        let preloadRes = res.data.payload;
         let success = res.status;
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
-          commit("GET_ENTRIE_BY_ID", entrieRes);
+          commit("GET_PRELOAD_BY_ID", preloadRes);
           commit("FETCH_RESPONSE_STATUS", success);
         }
-        console.log("getPreloaded", entrieRes);
+        console.log("getPreloaded", preloadRes);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error);
@@ -170,7 +170,7 @@ const entries = {
         const items = res.data.payload;
         if (success == 200) {
           commit("FETCH_LOADER_STATUS", false);
-          commit("GET_ENTRIE_DETAILS", items);
+          commit("GET_PRELOAD_DETAILS", items);
           commit("FETCH_RESPONSE_STATUS", success);
         }
         console.log("PreloadDetail", items);
@@ -211,8 +211,8 @@ const entries = {
       }
     },
 
-    setEntrieOrigin({ commit }, origin) {
-      commit("SET_ENTRIES_ORIGIN", origin);
+    setPreloadOrigin({ commit }, origin) {
+      commit("SET_PRELOAD_ORIGIN", origin);
     },
 
     setAssignedTo({ commit }, name) {
@@ -232,11 +232,27 @@ const entries = {
           assigned_to: item.assigned_to,
           created_at: item.created_at,
           created_by: item.created_by,
-          num_order: item.num_order,
           status: item.status,
         };
       });
       return formated;
+    },
+
+    countingMainDetails(state) {
+      const items = state.countingDataDetail;
+      if (items !== null) {
+        const sorted = items.sort(function(a, b) {
+          if (a.id < b.id) {
+            return -1;
+          }
+          if (a.id > b.id) {
+            return 1;
+          }
+
+          return 0;
+        });
+        return sorted;
+      }
     },
 
     countingDetails(state) {
@@ -253,8 +269,34 @@ const entries = {
             price: ele.price,
           };
         });
-        return detail;
+
+        const sorted = detail.sort(function(a, b) {
+          if (a.brand < b.brand) {
+            return -1;
+          }
+          if (a.brand > b.brand) {
+            return 1;
+          }
+          return 0;
+        });
+
+        return sorted;
       }
+    },
+
+    preloadDataResult(state) {
+      let item = state.entriesResults;
+      const formated = {
+        total_items: item.total_items,
+        action_type: item.action_type,
+        from_to: item.from_to,
+        created_at: item.created_at,
+        created_by: item.created_by,
+        assigned_to: item.assigned_to,
+        status: item.status,
+      };
+
+      return formated;
     },
 
     entryDataResult(state) {
@@ -271,6 +313,39 @@ const entries = {
       };
 
       return formated;
+    },
+
+    preloadDataDetails(state) {
+      let items = state.entriesDetail.items;
+      if (items != undefined) {
+        let formated = items.map((ele) => {
+          let elems = {
+            detail_id: ele.detail_id,
+            product_id: ele.product_id,
+            description: ele.description,
+            brand: ele.brand,
+            line: ele.line,
+            control: ele.control,
+            //pre_location: ele.pre_location,
+            updated_by: ele.updated_by,
+            updated_at: ele.updated_at,
+            final_location: ele.final_location,
+            status: ele.status,
+          };
+          return elems;
+        });
+
+        const sorted = formated.sort(function(a, b) {
+          if (a.detail_id < b.detail_id) {
+            return -1;
+          }
+          if (a.detail_id > b.detail_id) {
+            return 1;
+          }
+          return 0;
+        });
+        return sorted;
+      }
     },
     entryDataDetails(state) {
       let items = state.entriesDetail.items;
@@ -295,10 +370,11 @@ const entries = {
         return formated;
       }
     },
+
     currentStatus(state) {
       return state.status;
     },
-    currentEntryId(state) {
+    currentPreloadId(state) {
       return state.preloadEntryId;
     },
   },
