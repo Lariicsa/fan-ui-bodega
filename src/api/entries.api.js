@@ -34,7 +34,7 @@ const updatePreloadStatus = ({ action, id, newStatus }) =>
     action,
     preload: { id, newStatus },
   });
-const updateEntryStatus = ({action, id, location}) => MAIN_SERVICE.put(PUT_UPDATE_ENTRY_LOCATION, { action,
+const updateEntryLocation = ({action, id, location}) => MAIN_SERVICE.put(PUT_UPDATE_ENTRY_LOCATION, { action,
   preload: { id, location}})
 const findEntryByParam = (param) =>
   MAIN_SERVICE.get(GET_PRODUCTS_SEARCH + param);
@@ -50,6 +50,6 @@ export {
   updatePreloadLocation,
   updatePreloadStatus,
   findEntryByParam,
-  updateEntryStatus,
+  updateEntryLocation,
   latestsEntries
 };

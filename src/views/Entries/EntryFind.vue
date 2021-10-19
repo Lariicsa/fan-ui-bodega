@@ -1,18 +1,19 @@
 <template>
   <div class="col">
     <Loader v-show="loader" />
-    <h4>Buscar entrada</h4>
+    <h4>Inventario</h4>
 
     <div class="row between entry__filters">
       <div class="row entry__finder">
         <Finder
-          phText="Ingresa tu búsqueda"
+          phText="Buscar producto"
           @search="findEntryBy(paramValue)"
           v-model="paramValue"
         />
       </div>
 
       <div class="row entry__radios">
+        <!-- refactor -->
         <Radiooption
           v-model="paramType"
           textOption="Por nombre"
@@ -35,7 +36,21 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="9" />
+      <TableSimple
+        :item="tableDataDetails"
+        :cols="10"
+        colExceptions=""
+      >
+        <template v-slot:default="slotProps">
+          <div class="tableDetail__cell cols10">
+            <FanButton
+              text="Reubicar"
+              ui="secondary"
+              @btnClick="loadEntries(slotProps.nrow)"
+            />
+          </div>
+        </template>
+      </TableSimple>
     </div>
     <div v-if="exists" class="row center">
       <Message type="notfound robot">No existe ID de entrada</Message>
@@ -43,7 +58,9 @@
   </div>
 </template>
 <script>
+import FanButton from "@/components/Button";
 import Finder from "@/components/Finder";
+import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import Radiooption from "@/components/RadioOption";
@@ -54,7 +71,9 @@ export default {
   name: "EntryFind",
 
   components: {
+    FanButton,
     Finder,
+    Inputfield,
     Loader,
     Message,
     Radiooption,
@@ -100,6 +119,15 @@ export default {
         this.$store.dispatch("getPreloadDetail", entrieId);
       });
     },
+
+    updateItemLocation(entry) {
+      console.log("entry", entry);
+      this.$store.dispatch("updateEntryLocation", {
+        action: "UPDATE_LOCATION",
+        id: entry.id,
+        location: entry.location,
+      });
+    },
   },
 
   computed: {
@@ -125,10 +153,11 @@ export default {
           "Editorial",
           "Línea",
           "Control",
-          "Ubicación",
           "Actualización",
           "Editor",
           "Cantidad",
+          "Ubicación",
+          "",
         ],
         rows: this.entryDataResult,
       };

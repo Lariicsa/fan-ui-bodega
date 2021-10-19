@@ -69,9 +69,11 @@ export default {
           "id",
           "Cantidad",
           "Desde",
+           "Movimiento",
+           "Editor",
           "Fecha",
-          "Transacción",
-          "Editor",
+         
+          
           "Asignado a",
           "Status",
         ],

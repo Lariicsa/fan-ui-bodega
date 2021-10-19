@@ -10,11 +10,11 @@ Guía para uso de componentes
 <Label  type="clases modificadoras" />
 ```
 * Valores de `type`
-  - assigned
-  - placing 
-  - placed
-  - assorting
-  - assorted
-  - checking
-  - checked
-  - registered
+  - asignado
+  - acomodando
+  - acomodado
+  - surtiendo
+  - surtido
+  - cotejando
+  - cotejado
+  - registrado
