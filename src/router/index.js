@@ -18,12 +18,12 @@ const routes = [
   },
   {
     path: "/precargas",
-    redirect: "/precargas/buscar/:preloadId",
+    redirect: "/precargas/buscar/:preloadId?",
     name: "Preloads",
     component: () => import("@/views/Preloads/Preloads.vue"),
     children: [
       {
-        path: "buscar/:preloadId",
+        path: "buscar/:preloadId?",
         name: "PreloadsFind",
         props: true,
         component: () => import("@/views/Preloads/PreloadsFind.vue"),
