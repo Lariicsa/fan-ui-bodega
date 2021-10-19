@@ -8,7 +8,7 @@ import {
   updatePreloadLocation,
   updatePreloadStatus,
   findEntryByParam,
-  updateEntryStatus,
+  updateEntryLocation,
   latestsEntries,
 } from "@/api/entries.api";
 
@@ -229,7 +229,7 @@ const entries = {
     async updateEntryLocation({ commit }, data) {
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = updateEntryStatus(data);
+        const res = await updateEntryLocation(data);
         commit("FETCH_LOADER_STATUS", false);
         console.log("entrulocation", res);
       } catch (error) {

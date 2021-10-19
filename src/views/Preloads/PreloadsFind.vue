@@ -136,11 +136,6 @@ export default {
       console.log("view", txt);
     },
 
-    updateEntryLocation(entriId) {
-      console.log("entry", entriId);
-      // this.$store.dispatch("updateEntryLocation",entriId)
-    },
-
     selectFunction() {
       if (this.preloadId != undefined) {
         this.getPreloadInfo(this.preloadId);
