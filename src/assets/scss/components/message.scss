@@ -1,9 +1,28 @@
 .message {
+  position: relative;
+
+  &__list {
+    position: fixed;
+    top: 4.4rem;
+    left: 20vw;
+    z-index: 101;
+    width: 58vw;
+
+    @include until($desktop) {
+      width: 88vw;
+      left: 5vw;
+    }
+  }
+
   &__error {
     @include msg-color("error");
     & > p {
       font-size: inherit;
       color: inherit;
+    }
+
+    &.hide {
+      display: none;
     }
   }
   &__info {
@@ -12,6 +31,10 @@
       font-size: inherit;
       color: inherit;
     }
+
+    &.hide {
+      display: none;
+    }
   }
   &__success {
     @include msg-color("success");
@@ -19,12 +42,29 @@
       font-size: inherit;
       color: inherit;
     }
+
+    &.hide {
+      display: none;
+    }
   }
   &__warning {
     @include msg-color("warning");
+    z-index: 102 !important;
     & > p {
       font-size: inherit;
       color: inherit;
+    }
+
+    &.hide {
+      display: none;
+    }
+
+    & > .text {
+      width: 100%;
+
+      & > p {
+        margin: 1rem 0;
+      }
     }
   }
   &__text {
@@ -54,16 +94,148 @@
     @include mobile {
       flex-direction: column;
     }
-    & > p {
+    & > .text {
       font-size: $big-size;
       font-weight: $semibold;
       color: $blackio;
-      text-indent: 1rem;
       letter-spacing: -0.1rem;
+
+      & > p.advice {
+        font-size: $regular-size;
+        text-indent: 0;
+        text-align: left;
+        letter-spacing: initial;
+      }
+
+      & > .title {
+        display: inline-block;
+        text-indent: 0;
+        font-size: $big-size - 0.1;
+        margin-bottom: 1.6rem;
+      }
+
+      &.center {
+        text-align: center;
+      }
+      &.left {
+        letter-spacing: normal;
+        text-align: left;
+        line-height: 2.4rem;
+      }
+      &.right {
+        letter-spacing: normal;
+        text-align: right;
+        line-height: 2.4rem;
+      }
+    }
+  }
+
+  &__infotext {
+    border: 0.1rem solid $aqua-blue;
+    border-radius: $radius;
+    box-shadow: none;
+    padding: 2.4rem 3.2rem;
+    font-size: $big-size;
+    font-weight: $semibold;
+    color: $blackio;
+    text-align: center;
+    width: 100%;
+    @include tablet {
+      flex-direction: column;
+      padding: 1.2rem;
+    }
+    & > .text {
+      font-size: $big-size;
+      font-weight: $semibold;
+      color: $blackio;
+      letter-spacing: -0.1rem;
+
+      & > p.advice {
+        font-size: $regular-size;
+        text-indent: 0;
+        text-align: left;
+        letter-spacing: initial;
+      }
+
+      & > .title {
+        display: inline-block;
+        text-indent: 0;
+        font-size: $big-size - 0.1;
+        margin-bottom: 1.6rem;
+      }
+
+      &.center {
+        text-align: center;
+      }
+      &.left {
+        letter-spacing: normal;
+        text-align: left;
+        line-height: 2.4rem;
+      }
+      &.right {
+        letter-spacing: normal;
+        text-align: right;
+        line-height: 2.4rem;
+      }
     }
   }
 
   &__emoji {
     font-size: $tiny-title;
+    position: relative;
+    &.explode {
+      &:after {
+        content: "🤯";
+      }
+    }
+    &.heart {
+      &:after {
+        content: "😍";
+      }
+    }
+    &.neutral {
+      &:after {
+        content: "😐";
+      }
+    }
+    &.robot {
+      &:after {
+        content: "🤖";
+      }
+    }
+    &.smile {
+      &:after {
+        content: "😃";
+      }
+    }
+  }
+
+  &__close {
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    color: $sepia;
+    position: absolute;
+    right: 1.6rem;
+    top: 1.6rem;
+    &:hover {
+      cursor: pointer;
+    }
+
+    .message__error & {
+      @include icon("cross-thin", $purple-brown);
+    }
+
+    .message__info & {
+      @include icon("cross-thin", $dark-grey-blue);
+    }
+
+    .message__success & {
+      @include icon("cross-thin", $pine);
+    }
+
+    .message__warning & {
+      @include icon("cross-thin", $sepia);
+    }
   }
 }

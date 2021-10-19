@@ -56,9 +56,9 @@
         </div>
       </Modal>
     </div>
-    <div class="row center">
-      <Message type="notfound robot" v-show="notFound"
-        >Sin información de conteo</Message
+    <div v-if="errorResponse == 400" class="row center">
+      <Message type="notfound robot" 
+        >{{errorMessage}}</Message
       >
     </div>
   </div>
@@ -248,6 +248,10 @@ export default {
     status() {
       console.log('status', this.$store.state.entries.status);
       return this.$store.state.entries.status;
+    },
+
+    errorResponse() {
+      return this.$store.state.statusError
     },
 
     statusResponse() {

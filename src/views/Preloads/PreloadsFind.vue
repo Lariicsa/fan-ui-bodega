@@ -45,7 +45,10 @@
         </div>
       </div>
       <div v-if="exists" class="row center">
-        <Message type="notfound robot">No existe ID de entrada</Message>
+        <Message :showmsg="exists" type="notfound robot">No existe ID de entrada</Message>
+      </div>
+      <div v-if="errorResponse == 400" class="row center">
+        <Message :showmsg="true"  type="warning fixed" :showClose="true"  @clicMsg="closeWarning()">{{errorMessage}}</Message>
       </div>
     </div>
   </div>
@@ -98,6 +101,11 @@ export default {
   },
 
   methods: {
+
+    closeWarning() {
+      this.$store.commit("FETCH_RESPONSE_ERROR_STATUS", undefined)
+    },
+
     arrangeOnRack() {
       this.$store
         .dispatch("updatePreloadsStatus", {
@@ -170,6 +178,14 @@ export default {
     ]),
     loader() {
       return this.$store.state.entries.loader;
+    },
+
+    errorResponse() {
+      return this.$store.state.entries.statusError
+    },
+
+    errorMessage(){
+      return this.$store.state.entries.errorMessage
     },
 
     showTable() {

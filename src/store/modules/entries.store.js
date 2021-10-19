@@ -28,6 +28,8 @@ const entries = {
     loader: false,
     status: false,
     statusResponse: undefined,
+    statusError: undefined,
+    errorMessage: "",
   },
 
   mutations: {
@@ -55,7 +57,12 @@ const entries = {
       state.status = payload;
     },
     FETCH_RESPONSE_STATUS: (state, payload) => {
+      console.log("mut", payload);
       state.statusResponse = payload;
+    },
+    FETCH_RESPONSE_ERROR_STATUS: (state, payload) => {
+      console.log("muterr", payload);
+      state.statusError = payload;
     },
 
     GET_PRELOAD_BY_ID: (state, payload) => {
@@ -74,6 +81,10 @@ const entries = {
 
     GET_ENTRIES_RESULT: (state, payload) => {
       state.entriesResults = payload;
+    },
+
+    GET_ERROR_MESSAGE: (state, payload) => {
+      state.errorMessage = payload;
     },
   },
 
@@ -117,7 +128,7 @@ const entries = {
         console.log(error.response);
         if (error.response) {
           let status = error.response.status;
-          commit("FETCH_RESPONSE_STATUS", status);
+          commit("FETCH_RESPONSE_ERROR_STATUS", status);
         }
       }
     },
@@ -148,7 +159,7 @@ const entries = {
         console.log(error.response);
         if (error.response) {
           let status = error.response.status;
-          commit("FETCH_RESPONSE_STATUS", status);
+          commit("FETCH_RESPONSE_ERROR_STATUS", status);
         }
       }
     },
@@ -187,7 +198,7 @@ const entries = {
         commit("FETCH_LOADER_STATUS", false);
         if (error.response) {
           let status = error.response.status;
-          commit("FETCH_RESPONSE_STATUS", status);
+          commit("FETCH_RESPONSE_ERROR_STATUS", status);
         }
       }
     },
@@ -223,6 +234,13 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let statuserr = error.response.status;
+          let message = error.response.data.message;
+          console.log("message", message);
+          commit("FETCH_RESPONSE_ERROR_STATUS", statuserr);
+          commit("GET_ERROR_MESSAGE", message);
+        }
       }
     },
 
@@ -235,6 +253,10 @@ const entries = {
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          let status = error.response.status;
+          commit("FETCH_RESPONSE_ERROR_STATUS", status);
+        }
       }
     },
 
