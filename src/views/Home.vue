@@ -22,7 +22,7 @@
           />
         </div>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="3"  />
+          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
         </div>
         <div class="row between entries__setting">
           <Dropdown
@@ -57,7 +57,7 @@
       </Modal>
     </div>
     <div class="row center">
-      <Message type="notfound robot" v-show="exists"
+      <Message type="notfound robot" v-show="notFound"
         >Sin información de conteo</Message
       >
     </div>
@@ -170,8 +170,8 @@ export default {
     ...mapGetters(["countingDetails"]),
     showTable() {
       let id = this.countId;
-      let exists = this.mainTableData;
-      if (exists != null && id) {
+      let notFound = this.mainTableData;
+      if (notFound != null && id) {
         return true;
       } else {
         return false;
@@ -246,16 +246,30 @@ export default {
     },
 
     status() {
+      console.log('status', this.$store.state.entries.status);
       return this.$store.state.entries.status;
     },
 
-    exists() {
-      let status = this.$store.state.entries.statusResponse;
-      if (status == 400) {
-        return true;
-      } else {
-        return false;
+    statusResponse() {
+      console.log('statusResponse',this.$store.state.entries.statusResponse);
+      return this.$store.state.entries.statusResponse;
+    },
+
+    notFound() {
+      let status = this.statusResponse;
+      switch (status) {
+        case 400:
+          return true;
+        case 200:
+          return false;
+        default:
+          return false;
       }
+      // if (status == 400) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
     },
   },
 };

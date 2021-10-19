@@ -72,8 +72,6 @@ export default {
            "Movimiento",
            "Editor",
           "Fecha",
-         
-          
           "Asignado a",
           "Status",
         ],
