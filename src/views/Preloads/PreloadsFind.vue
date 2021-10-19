@@ -31,10 +31,10 @@
             </div>
           </template>
           <template v-slot:lastRow="otherProps">
-          <div class="tableDetail__cell cols10">
-            <Label :type="otherProps.lrow.status" />
-          </div>
-        </template>
+            <div class="tableDetail__cell cols10">
+              <Label :type="otherProps.lrow.status" />
+            </div>
+          </template>
         </TableSupport>
         <div class="row sm right entry__endrow">
           <FanButton
@@ -102,12 +102,12 @@ export default {
       this.$store
         .dispatch("updatePreloadsStatus", {
           newStatus: "acomodando",
-          id: this.idTyped || this.preloadId,
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
         })
         .then(() => {
-          if(this.preloadId == ''){
+          if (this.preloadId == "") {
             this.getPreloadInfo(this.idTyped);
-          }else {
+          } else {
             this.getPreloadInfo(this.preloadId);
           }
         });
@@ -117,12 +117,12 @@ export default {
       this.$store
         .dispatch("updatePreloadsStatus", {
           newStatus: "acomodado",
-          id: this.idTyped || this.preloadId,
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
         })
         .then(() => {
-          if(this.preloadId == ''){
+          if (this.preloadId == "") {
             this.getPreloadInfo(this.idTyped);
-          }else {
+          } else {
             this.getPreloadInfo(this.preloadId);
           }
         });
@@ -132,12 +132,12 @@ export default {
       this.$store
         .dispatch("updatePreloadsStatus", {
           newStatus: "registrado en inventario",
-          id: this.idTyped || this.preloadId,
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
         })
         .then(() => {
-          if(this.preloadId == ''){
+          if (this.preloadId == "") {
             this.getPreloadInfo(this.idTyped);
-          }else {
+          } else {
             this.getPreloadInfo(this.preloadId);
           }
         });
@@ -232,9 +232,8 @@ export default {
         case "registrado en inventario":
           return (this.lastButton = {
             text: "Reubicar",
-            func: this.registerInInventory,//temporal
+            func: this.registerInInventory, //temporal
           });
-
       }
     },
 
