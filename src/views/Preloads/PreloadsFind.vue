@@ -189,7 +189,7 @@ export default {
           "Editorial",
           "Línea",
           "Control",
-          "Fecha",
+          "Editor",
           "Actualización",
           "Status",
         ],
