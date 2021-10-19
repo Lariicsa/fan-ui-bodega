@@ -23,13 +23,11 @@
     overflow-y: auto;
 
     &-in {
+      margin: 0 auto;
       overflow: auto;
       width: 100%;
       flex-wrap: nowrap;
-
-      @include until(1024px) {
-        min-width: 96rem;
-      }
+      min-width: 100vw;
     }
   }
   &__cell {

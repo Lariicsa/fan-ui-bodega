@@ -44,10 +44,10 @@
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
-            text="Reubicar"
-            ui="secondary"
-            @btnClick="loadEntries(slotProps.nrow)"
-          />
+              text="Reubicar"
+              ui="secondary"
+              @btnClick="loadEntries(slotProps.nrow)"
+            />
           </div>
         </template>
       </TableSimple>
@@ -157,7 +157,7 @@ export default {
           "Editor",
           "Cantidad",
           "Ubicación",
-          ""
+          "",
         ],
         rows: this.entryDataResult,
       };

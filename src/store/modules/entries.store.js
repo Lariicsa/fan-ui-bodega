@@ -357,18 +357,24 @@ const entries = {
 
     entryDataResult(state) {
       let item = state.entriesResults;
-      // const formated = {
-      //   total_items: item.total_items,
-      //   action_type: item.action_type,
-      //   from_to: item.from_to,
-      //   created_by: item.created_by,
-      //   created_at: item.created_at,
-      //   assigned_to: item.assigned_to,
-      //   num_order: item.num_order,
-      //   status: item.status,
-      // };
 
-      return item;
+      let sorted = item.map((ele) => {
+        const formated = {
+          product_id: ele.product_id,
+          description: ele.description,
+          brand: ele.brand,
+          line: ele.line,
+          control: ele.control,
+          //pre_location: ele.pre_location,
+          updated_at: ele.updated_at,
+          updated_by: ele.updated_by,
+          total_items: ele.total_items,
+          final_location: ele.final_location,
+        };
+        return formated;
+      });
+
+      return sorted;
     },
 
     preloadDataDetails(state) {
