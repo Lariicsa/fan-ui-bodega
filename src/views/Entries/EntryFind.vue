@@ -36,19 +36,23 @@
     </div>
 
     <div class="row center">
-      <TableSimple
-        :item="tableDataDetails"
-        :cols="10"
-        colExceptions=""
-      >
+      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="">
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
               text="Reubicar"
               ui="secondary"
-              @btnClick="loadEntries(slotProps.nrow)"
+              @btnClick="showBox(slotProps.nrow)"
             />
           </div>
+          <Modal
+            :showBox="showUpdateBox === slotProps.nrow.product_id"
+            @closeModal="hideBox()"
+          >
+            <div class="box__full">
+              {{ slotProps.nrow }}
+            </div>
+          </Modal>
         </template>
       </TableSimple>
     </div>
@@ -63,6 +67,7 @@ import Finder from "@/components/Finder";
 import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
+import Modal from "@/components/ModalContainer";
 import Radiooption from "@/components/RadioOption";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
@@ -76,6 +81,7 @@ export default {
     Inputfield,
     Loader,
     Message,
+    Modal,
     Radiooption,
     TableDetail,
     TableSimple,
@@ -86,6 +92,7 @@ export default {
       idTyped: "",
       paramType: "name",
       paramValue: "",
+      showUpdateBox: null,
     };
   },
 
@@ -96,7 +103,13 @@ export default {
   methods: {
     ...mapActions(["getLatestEntries"]),
 
-    selectParamKey(paramType) {},
+    showBox(prod) {
+      this.showUpdateBox = prod.product_id;
+    },
+
+    hideBox() {
+      this.showUpdateBox = false;
+    },
     findEntryBy(key) {
       let param = this.paramType;
       switch (param) {
@@ -124,8 +137,10 @@ export default {
       console.log("entry", entry);
       this.$store.dispatch("updateEntryLocation", {
         action: "UPDATE_LOCATION",
-        id: entry.id,
-        location: entry.location,
+        productId,
+        location,
+        newLocation,
+        quantity,
       });
     },
   },

@@ -247,7 +247,15 @@ const entries = {
     async updateEntryLocation({ commit }, data) {
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = await updateEntryLocation(data);
+        const updating = {
+          action: data.action,
+          inventory: data.inventory,
+          productId: data.productId,
+          location: data.location,
+          newLocation: data.newLocation,
+          quantity: data.quantity,
+        };
+        const res = await updateEntryLocation(updating);
         commit("FETCH_LOADER_STATUS", false);
         console.log("entrulocation", res);
       } catch (error) {
