@@ -269,11 +269,6 @@ export default {
         default:
           return false;
       }
-      // if (status == 400) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
     },
   },
 };

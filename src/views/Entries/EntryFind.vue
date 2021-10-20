@@ -36,19 +36,29 @@
     </div>
 
     <div class="row center">
-      <TableSimple
-        :item="tableDataDetails"
-        :cols="10"
-        colExceptions=""
-      >
+      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="">
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
               text="Reubicar"
               ui="secondary"
-              @btnClick="loadEntries(slotProps.nrow)"
+              @btnClick="showBox(slotProps.nrow)"
             />
           </div>
+          <Modal
+            :showBox="showUpdateBox === slotProps.nrow.product_id"
+            @closeModal="hideBox()"
+          >
+            <RelocateForm
+              :item="slotProps.nrow"
+              :formTitle="'Reubicar producto ' + slotProps.nrow.product_id"
+              @actionForm="updateItemLocation"
+              @close="hideBox()"
+              class="box"
+              btnOk="Reubicar"
+              btnCancel="Cancelar"
+            />
+          </Modal>
         </template>
       </TableSimple>
     </div>
@@ -63,7 +73,9 @@ import Finder from "@/components/Finder";
 import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
+import Modal from "@/components/ModalContainer";
 import Radiooption from "@/components/RadioOption";
+import RelocateForm from "@/components/Forms/UpdatingLocationForm";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapActions, mapGetters } from "vuex";
@@ -76,7 +88,9 @@ export default {
     Inputfield,
     Loader,
     Message,
+    Modal,
     Radiooption,
+    RelocateForm,
     TableDetail,
     TableSimple,
   },
@@ -86,6 +100,7 @@ export default {
       idTyped: "",
       paramType: "name",
       paramValue: "",
+      showUpdateBox: null,
     };
   },
 
@@ -96,7 +111,13 @@ export default {
   methods: {
     ...mapActions(["getLatestEntries"]),
 
-    selectParamKey(paramType) {},
+    showBox(prod) {
+      this.showUpdateBox = prod.product_id;
+    },
+
+    hideBox() {
+      this.showUpdateBox = false;
+    },
     findEntryBy(key) {
       let param = this.paramType;
       switch (param) {
@@ -122,11 +143,22 @@ export default {
 
     updateItemLocation(entry) {
       console.log("entry", entry);
-      this.$store.dispatch("updateEntryLocation", {
-        action: "UPDATE_LOCATION",
-        id: entry.id,
-        location: entry.location,
-      });
+      if (entry.newLocation !== null && entry.newLocation !== "") {
+        this.$store
+          .dispatch("updateEntryLocation", {
+            action: "UPDATE_LOCATION",
+            productId: entry.productId,
+            location: entry.location,
+            newLocation: entry.newLocation,
+            quantity: parseInt(entry.quantity),
+          })
+          .then(() => {
+            this.hideBox();
+            setTimeout(() => {
+              location.reload()
+            }, 100);
+          });
+      }
     },
   },
 

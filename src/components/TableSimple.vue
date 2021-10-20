@@ -16,21 +16,30 @@
 
       <div class="simpleTable__scrollable">
         <div
-          :class="'simpleTable__row ' + 'cols' + cols + ' '+ modifier"
+          :class="'simpleTable__row ' + 'cols' + cols + ' ' + modifier"
           :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
           v-for="(row, i) in item.rows"
           :key="i"
-          @click="rowClick(row)"
+          @click.stop="rowClick(row)"
         >
           <div
             v-for="(col, n) in columns"
-            :class="'simpleTable__cell ' + 'cols' + cols+ ' '+colmodifier+n+' '+row[col]"
+            :class="
+              'simpleTable__cell ' +
+              'cols' +
+              cols +
+              ' ' +
+              colmodifier +
+              n +
+              ' ' +
+              row[col]
+            "
             :key="n * 3.2 + 1"
             v-html="
               `<div class='simpleTable__cell-in'>` + col + '</div>' + row[col]
             "
           ></div>
-           <slot v-bind:nrow="row"></slot>
+          <slot v-bind:nrow="row"></slot>
         </div>
         <div class="simpleTable__row">
           <slot name="extraRow"></slot>
@@ -40,7 +49,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: "TableSimple",
 
@@ -52,10 +60,10 @@ export default {
       type: Number,
     },
     modifier: {
-      type: String
+      type: String,
     },
     colmodifier: {
-      type: String
+      type: String,
     },
     colExceptions: {
       type: String,
@@ -65,13 +73,12 @@ export default {
 
   methods: {
     rowClick(index) {
-     this.$emit("rowClick", index)
-     console.log(index);
-    }
+      this.$emit("rowClick", index);
+    },
   },
 
   computed: {
-     columns: function columns() {
+    columns: function columns() {
       if (this.item.rows.length === 0) {
         return [];
       }

@@ -15,8 +15,9 @@
     width: 100%;
     height: 5.6rem;
     position: relative;
-    &.disabled {
-      background-color: $light-blue-grey;
+    &:disabled {
+      background-color: $pale-grey;
+      color: $blue-grey;
       border: 0.1rem solid $light-sky-blue;
       cursor: not-allowed;
     }
