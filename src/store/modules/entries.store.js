@@ -244,7 +244,7 @@ const entries = {
       }
     },
 
-    async updateEntryLocation({ commit }, data) {
+    async updateEntryLocation({ commit, dispatch }, data) {
       commit("FETCH_LOADER_STATUS", true);
       try {
         const updating = {
@@ -256,8 +256,14 @@ const entries = {
           quantity: data.quantity,
         };
         const res = await updateEntryLocation(updating);
-        commit("FETCH_LOADER_STATUS", false);
+        let success = res.data.status
+        if(success == 200) {
+          
+          dispatch("getLatestEntries")
+        }
         console.log("entrulocation", res);
+        commit("FETCH_LOADER_STATUS", false);
+       
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);

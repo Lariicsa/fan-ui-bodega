@@ -5,30 +5,50 @@
       <div class="row">
         <h4>{{ formTitle }}</h4>
       </div>
-      <!-- <Dropdown
-        v-model="$v.userAddress.estado.$model"
-        phName="Estado"
-        variant="form"
-        :options="estados"
-        :name="userAddress.estado"
-        :error="$v.userAddress.estado.$error"
-        @onChange="setEstadoSelected($v.userAddress.estado.$model)"
-      />
       <Inputfield
-        phName="Alias de dirección:"
-        :autofocus="true"
-        name="alias"
+        phName="Clave de producto"
+        name="productId"
         type="text"
-        @onBlur="checkDuplicate(userAddress.alias)"
-        v-model="userAddress.alias"
-        :showError="!$v.userAddress.alias.regexAlias || isDuplicatedAlias"
+        v-model="$v.dataDetails.productId.$model"
+        :showError="$v.dataDetails.productId.$error"
         typemsg="error"
       >
-        <span v-if="isDuplicatedAlias">Ya usaste ese nombre</span>
-        <span v-if="!$v.userAddress.alias.regexAlias"
-          >Sólo se permiten letras y/ó números, sin espacios</span
+        <span v-if="$v.dataDetails.productId.$error">* Campo obligatorio</span>
+      </Inputfield>
+
+      <Inputfield
+        :disabled="true"
+        :placeholder="$v.dataDetails.location.$model"
+        name="location"
+        type="text"
+        v-model="$v.dataDetails.location.$model"
+        typemsg="error"
+      >
+      </Inputfield>
+
+      <Inputfield
+        phName="Nueva ubicación"
+        name="newLocation"
+        type="text"
+        v-model="$v.dataDetails.newLocation.$model"
+        :showError="$v.dataDetails.newLocation.$error"
+        typemsg="error"
+      >
+        <span v-if="$v.dataDetails.newLocation.$error"
+          >* Campo obligatorio</span
         >
-      </Inputfield> -->
+      </Inputfield>
+
+      <Inputfield
+        phName="Cantidad"
+        name="quantity"
+        type="number"
+        v-model="$v.dataDetails.quantity.$model"
+        :showError="$v.dataDetails.quantity.$error"
+        typemsg="error"
+      >
+        <span v-if="$v.dataDetails.quantity.$error">* Campo obligatorio</span>
+      </Inputfield>
 
       <div class="box__buttons">
         <FanButton @btnClick="close" :text="btnCancel" ui="secondary" />
@@ -39,6 +59,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { required } from "vuelidate/lib/validators";
 import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
 import Inputfield from "@/components/InputField";
@@ -55,33 +76,50 @@ export default {
     Loader,
   },
 
+  mounted() {
+    this.item;
+    this.dataDetails;
+  },
+
   data() {
     return {
       dataDetails: {
-        action: "",
-        productId: "",
-        location: "",
-        newLocation: "",
-        quantity: null,
+        action: "UPDATE_LOCATION",
+        productId: this.item.product_id,
+        location: this.item.final_location,
+        newLocation: this.newLocation,
+        quantity: this.item.quantity,
       },
     };
   },
 
-  validations: {},
+  validations: {
+    dataDetails: {
+      action: { required },
+      productId: { required },
+      location: { required },
+      newLocation: { required },
+      quantity: { required },
+    },
+  },
+
+  watch: {
+    newLocation: function(val) {
+      this.dataDetails.newLocation = val
+    },
+    $route: 'actionForm'
+  },
 
   methods: {
     close() {
       this.$emit("close");
     },
+    
+    actionForm(data) {
+      this.$emit("actionForm", data)
+    },
   },
   computed: {
-    estados() {
-      let estados = this.estadosList.map((item) => {
-        return { value: item, text: item };
-      });
-      return estados;
-    },
-
     loader() {
       return this.$store.state.entries.loader;
     },

@@ -49,9 +49,15 @@
             :showBox="showUpdateBox === slotProps.nrow.product_id"
             @closeModal="hideBox()"
           >
-            <div class="box__full">
-              {{ slotProps.nrow }}
-            </div>
+            <RelocateForm
+              :item="slotProps.nrow"
+              :formTitle="'Reubicar producto ' + slotProps.nrow.product_id"
+              @actionForm="updateItemLocation"
+              @close="hideBox()"
+              class="box"
+              btnOk="Reubicar"
+              btnCancel="Cancelar"
+            />
           </Modal>
         </template>
       </TableSimple>
@@ -69,6 +75,7 @@ import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
 import Modal from "@/components/ModalContainer";
 import Radiooption from "@/components/RadioOption";
+import RelocateForm from "@/components/Forms/UpdatingLocationForm";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import { mapActions, mapGetters } from "vuex";
@@ -83,6 +90,7 @@ export default {
     Message,
     Modal,
     Radiooption,
+    RelocateForm,
     TableDetail,
     TableSimple,
   },
@@ -135,13 +143,22 @@ export default {
 
     updateItemLocation(entry) {
       console.log("entry", entry);
-      this.$store.dispatch("updateEntryLocation", {
-        action: "UPDATE_LOCATION",
-        productId,
-        location,
-        newLocation,
-        quantity,
-      });
+      if (entry.newLocation !== null && entry.newLocation !== "") {
+        this.$store
+          .dispatch("updateEntryLocation", {
+            action: "UPDATE_LOCATION",
+            productId: entry.productId,
+            location: entry.location,
+            newLocation: entry.newLocation,
+            quantity: parseInt(entry.quantity),
+          })
+          .then(() => {
+            this.hideBox();
+            setTimeout(() => {
+              location.reload()
+            }, 100);
+          });
+      }
     },
   },
 
