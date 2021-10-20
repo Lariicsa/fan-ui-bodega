@@ -6,19 +6,19 @@
     @include label($greyish-yellow, $coral, "Acomodando");
   }
   &__acomodado {
-    @include label($pale-grey, $bluerple, "Acomodado");
+    @include label($lavender, $purple-brown, "Acomodado");
   }
   &__surtiendo {
     @include label($pale-pink, $tomato, "Surtiendo");
   }
   &__surtido {
-    @include label($pale-purple, $rouge, "Surtido");
+    @include label($matt-pink, $rouge, "Surtido");
   }
   &__cotejando {
-    @include label($pale-peach, $faded-orange, "Cotejando");
+    @include label($pale-peach, $purple-brown, "Cotejando");
   }
   &__cotejado {
-    @include label($light-sky-blue-two, $bluerple, "Cotejado");
+    @include label($light-sky-blue-two, $ocean-blue, "Cotejado");
   }
   &__registrado {
     @include label($green-vue, $white, "Registrado");
