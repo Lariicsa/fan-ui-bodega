@@ -9,8 +9,7 @@ const GET_PRELOADS_ALL = "/v1/warehouse/preloads";
 const UPDATE_PRELOAD_LOCATION = "/v1/warehouse/preload_details";
 const UPDATE_PRELOAD_STATUS = "/v1/warehouse/preloads";
 const GET_PRODUCTS_SEARCH = "/v1/warehouse/products";
-const PUT_UPDATE_ENTRY_LOCATION ="/v1/warehouse/inventory"
-
+const PUT_UPDATE_ENTRY_LOCATION = "/v1/warehouse/inventory";
 
 const getCountingOrder = (idCount) => MAIN_SERVICE.get(GET_COUNTING + idCount);
 const addPreload = ({ countId, type, fromTo, assignedTo }) =>
@@ -34,11 +33,25 @@ const updatePreloadStatus = ({ action, id, newStatus }) =>
     action,
     preload: { id, newStatus },
   });
-const updateEntryLocation = ({action, id, location}) => MAIN_SERVICE.put(PUT_UPDATE_ENTRY_LOCATION, { action,
-  preload: { id, location}})
+const updateEntryLocation = ({
+  action,
+  productId,
+  location,
+  newLocation,
+  quantity,
+}) =>
+  MAIN_SERVICE.put(PUT_UPDATE_ENTRY_LOCATION, {
+    action,
+    inventory: {
+      productId,
+      location,
+      newLocation,
+      quantity,
+    },
+  });
 const findEntryByParam = (param) =>
   MAIN_SERVICE.get(GET_PRODUCTS_SEARCH + param);
-const latestsEntries = () => MAIN_SERVICE.get(GET_PRODUCTS_SEARCH)
+const latestsEntries = () => MAIN_SERVICE.get(GET_PRODUCTS_SEARCH);
 
 export {
   getCountingOrder,
@@ -51,5 +64,5 @@ export {
   updatePreloadStatus,
   findEntryByParam,
   updateEntryLocation,
-  latestsEntries
+  latestsEntries,
 };
