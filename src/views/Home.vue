@@ -57,7 +57,7 @@
       </Modal>
     </div>
 
-    <div class="row md center entry__row">
+    <div v-if="notFound" class="row md center entry__row">
       <Message type="notfound robot" :showmsg="notFound">
         Conteo no encontrado
       </Message>
