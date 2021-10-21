@@ -44,10 +44,12 @@
         name="quantity"
         type="number"
         v-model="$v.dataDetails.quantity.$model"
-        :showError="$v.dataDetails.quantity.$error"
+        :showError="$v.dataDetails.quantity.$error ||  errorQty"
         typemsg="error"
+        @keyup="validateQuantity($v.dataDetails.quantity.$model)"
       >
         <span v-if="$v.dataDetails.quantity.$error">* Campo obligatorio</span>
+        <span v-if="errorQty">La cantidad es mayor a la actual</span>
       </Inputfield>
 
       <div class="box__buttons">
@@ -58,7 +60,6 @@
   </transition>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
 import { required } from "vuelidate/lib/validators";
 import Dropdown from "@/components/Dropdown";
 import FanButton from "@/components/Button";
@@ -90,6 +91,7 @@ export default {
         newLocation: this.newLocation,
         quantity: this.item.quantity,
       },
+      errorQty: false
     };
   },
 
@@ -113,6 +115,14 @@ export default {
   methods: {
     close() {
       this.$emit("close");
+    },
+
+    validateQuantity(val){
+      if(val > this.item.total_items){
+        this.errorQty = true
+      }else {
+        this.errorQty = false
+      }
     },
 
     actionForm(data) {
