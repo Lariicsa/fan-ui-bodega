@@ -57,7 +57,6 @@ const entries = {
       state.status = payload;
     },
     FETCH_RESPONSE_STATUS: (state, payload) => {
-      console.log("mut", payload);
       state.statusResponse = payload;
     },
     FETCH_RESPONSE_ERROR_STATUS: (state, payload) => {
@@ -109,8 +108,7 @@ const entries = {
         const res = await getCountingOrder(idC);
         const payload = res.data.payload;
         let success = res.status;
-        if (success) {
-          commit("FETCH_LOADER_STATUS", false);
+        if (success == 200) {
           let mainData = {
             count_id: payload.count_id,
             created_by: payload.created_by,
@@ -121,23 +119,44 @@ const entries = {
           let dataDetail = payload.brands;
           commit("GET_COUNTING_DATA", mainData);
           commit("GET_COUNTING_DATA_DETAIL", dataDetail);
+          commit("FETCH_RESPONSE_STATUS", success);
+          commit("FETCH_RESPONSE_ERROR_STATUS", success);
+
+          if (payload.length > 1) {
+            commit("FETCH_RESPONSE_STATUS", 400);
+            commit("FETCH_RESPONSE_ERROR_STATUS", 400);
+            commit("FETCH_LOADER_STATUS", false);
+          }
         }
-        console.log(res);
+        commit("FETCH_LOADER_STATUS", false);
+        // console.log(res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error.response);
+        // console.log(error.response);
         if (error.response) {
           let status = error.response.status;
+          console.log("status", status);
           commit("FETCH_RESPONSE_ERROR_STATUS", status);
+          commit("FETCH_RESPONSE_STATUS", status);
         }
       }
     },
 
     async getCountingDetail({ commit }, idC) {
-      const res = await getOrderDetail(idC);
-      let items = res.data.payload;
-      commit("GET_COUNTING_DETAILS", items);
-      console.log("details", res);
+      try {
+        const res = await getOrderDetail(idC);
+        let items = res.data.payload;
+        if (items.length) {
+          commit("GET_COUNTING_DETAILS", items);
+        }
+      } catch (error) {
+        if (error.response) {
+          let status = error.response.status;
+          console.log('err', error.response);
+        commit("FETCH_RESPONSE_ERROR_STATUS", status);
+        //commit("FETCH_RESPONSE_STATUS", status);
+        }
+      }
     },
 
     async loadPreloadFromCounting({ commit }, data) {
@@ -156,7 +175,7 @@ const entries = {
         console.log(res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        console.log(error.response);
+        console.log("counting", error.response.status);
         if (error.response) {
           let status = error.response.status;
           commit("FETCH_RESPONSE_ERROR_STATUS", status);
@@ -256,14 +275,12 @@ const entries = {
           quantity: data.quantity,
         };
         const res = await updateEntryLocation(updating);
-        let success = res.data.status
-        if(success == 200) {
-          
-          dispatch("getLatestEntries")
+        let success = res.data.status;
+        if (success == 200) {
+          dispatch("getLatestEntries");
         }
         console.log("entrulocation", res);
         commit("FETCH_LOADER_STATUS", false);
-       
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
@@ -332,7 +349,7 @@ const entries = {
 
     countingMainDetails(state) {
       const items = state.countingDataDetail;
-      if (items !== null) {
+      if (items != undefined) {
         const sorted = items.sort(function(a, b) {
           if (a.id < b.id) {
             return -1;
@@ -478,6 +495,10 @@ const entries = {
 
     currentEntryStatus(state) {
       return state.preloadResults.status;
+    },
+
+    currentStatusResponse(state) {
+      return state.statusResponse;
     },
   },
 };

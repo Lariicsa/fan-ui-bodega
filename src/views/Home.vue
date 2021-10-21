@@ -56,10 +56,11 @@
         </div>
       </Modal>
     </div>
-    <div v-if="errorResponse == 400" class="row center">
-      <Message type="notfound robot" 
-        >{{errorMessage}}</Message
-      >
+
+    <div v-if="notFound" class="row md center entry__row">
+      <Message type="notfound robot" :showmsg="notFound">
+        Conteo no encontrado
+      </Message>
     </div>
   </div>
 </template>
@@ -113,9 +114,8 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.status) {
-    }
+  async mounted() {
+    await this.showTable;
   },
 
   methods: {
@@ -131,10 +131,6 @@ export default {
 
     closeModal() {
       this.showDetails = false;
-    },
-
-    selectPaymentType(filter) {
-      console.log("filter", filter);
     },
 
     getEntriesData(typed) {
@@ -167,16 +163,28 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["countingDetails"]),
+    ...mapGetters([
+      "countingDetails",
+      "currentStatusResponse",
+      "countingMainDetails",
+    ]),
+
     showTable() {
-      let id = this.countId;
-      let notFound = this.mainTableData;
-      if (notFound != null && id) {
-        return true;
-      } else {
-        return false;
+      let status = this.currentStatusResponse;
+      switch (status) {
+        case 200:
+          if (
+            this.countingMainDetails == undefined ||
+            this.countingMainDetails.length < 1
+          ) {
+            return false;
+          }
+          return true;
+        case 500:
+          return false;
       }
     },
+
     mainTableData() {
       return this.$store.state.entries.countingData;
     },
@@ -246,28 +254,33 @@ export default {
     },
 
     status() {
-      console.log('status', this.$store.state.entries.status);
       return this.$store.state.entries.status;
     },
 
     errorResponse() {
-      return this.$store.state.statusError
+      return this.$store.state.entries.statusError;
     },
 
     statusResponse() {
-      console.log('statusResponse',this.$store.state.entries.statusResponse);
       return this.$store.state.entries.statusResponse;
     },
 
     notFound() {
-      let status = this.statusResponse;
+      let status = this.errorResponse;
       switch (status) {
         case 400:
           return true;
+        case 500:
+          return true;
         case 200:
-          return false;
-        default:
-          return false;
+          if (
+            this.countingMainDetails == undefined ||
+            this.countingMainDetails.length < 1
+          ) {
+            return true;
+          } else {
+            return false;
+          }
       }
     },
   },

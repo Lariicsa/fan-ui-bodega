@@ -41,7 +41,6 @@ export default {
 
   mounted() {
     this.sidebarMenu
-    console.log(this.sidebarMenu);
   },
 
   methods: {
