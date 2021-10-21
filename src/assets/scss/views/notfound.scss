@@ -1,0 +1,67 @@
+.notfound {
+  display: flex;
+  &__title {
+    font-family: $font-primary;
+    font-size: $big-title * 4;
+    position:relative;
+    color: $very-light-blue-two;
+
+    @include mobile {
+      font-size: $big-title * 3;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    padding: 0;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    min-height: 40vh;
+    position: relative;
+  }
+  h3 {
+    text-align: center;
+    margin: auto;
+    width: auto;
+  }
+
+  &__message {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 26rem;
+    animation: none;
+
+    &-text {
+      margin: 0;
+      padding: 0;
+      color: $ocean-blue;
+      text-align: center;
+      &.big {
+        font-size: $big-title * 2;
+        @include from($tablet) {
+          font-size: $big-title * 3;
+        }
+        @include from($desktop + 80) {
+          font-size: $big-title * 4;
+        }
+      }
+      &.small {
+        font-size: $small-title;
+        @include from($tablet) {
+          font-size: $medium-title;
+        }
+        @include from($desktop + 80) {
+          font-size: $big-title;
+        }
+      }
+    }
+  }
+}

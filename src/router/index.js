@@ -63,6 +63,12 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/404",
+    alias: "*",
+    name: "NoRoute",
+    component: () => import("@/views/NoRoute.vue"),
+  },
 ];
 
 const router = new VueRouter({
