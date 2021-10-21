@@ -12,11 +12,11 @@
   &__full {
     position: relative;
     @extend .box;
-    width: 62vw;
+    width: 100%;
     min-width: 72rem;
     max-width: 88vw;
     @include tablet {
-      width: 80vw;
+      max-width: 80vw;
       min-width: 32rem;
     }
   }

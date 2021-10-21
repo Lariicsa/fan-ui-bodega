@@ -16,13 +16,13 @@ const addPreload = ({ countId, type, fromTo, assignedTo }) =>
   MAIN_SERVICE.post(POST_PRELOAD, { countId, type, fromTo, assignedTo });
 const getOrderDetail = (idCounting) =>
   MAIN_SERVICE.get(
-    GET_COUNTING_DETAIL + idCounting + "/detail?limit=50&page=1"
+    GET_COUNTING_DETAIL + idCounting + "/detail?limit=200&page=1"
   );
 const getPreload = (preloadId) => MAIN_SERVICE.get(GET_PRELOAD + preloadId);
 const preloadDetail = (idPreload) =>
-  MAIN_SERVICE.get(GET_PRELOAD_DETAIL + idPreload + "/detail?limit=90&page=1");
+  MAIN_SERVICE.get(GET_PRELOAD_DETAIL + idPreload + "/detail?limit=200&page=1");
 const allPreloads = () =>
-  MAIN_SERVICE.get(GET_PRELOADS_ALL + "?limit=50&page=1");
+  MAIN_SERVICE.get(GET_PRELOADS_ALL + "?limit=200&page=1");
 const updatePreloadLocation = ({ action, id, finalLocation }) =>
   MAIN_SERVICE.put(UPDATE_PRELOAD_LOCATION, {
     action,
