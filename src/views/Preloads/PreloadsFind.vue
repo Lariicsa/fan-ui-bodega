@@ -11,7 +11,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
-        <div class="row center">
+        <div class="row center entry__row">
           <pagination
             :records="totalItems"
             v-model="page"
@@ -115,7 +115,7 @@ export default {
       },
       page: 1,
       totalResults: this.totalItems,
-      itemPerPage: 3,
+      itemPerPage: 9,
     };
   },
 
