@@ -1,7 +1,7 @@
 <template>
   <div class="col">
     <Loader v-show="loader" />
-    <h4>Buscar precarga</h4>
+    <h4>Buscar precarga <span>({{preloadDataDetails.length}} resultados)</span></h4>
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"

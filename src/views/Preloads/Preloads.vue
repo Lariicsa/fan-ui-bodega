@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: "Entries",
+  name: "Preloads",
   computed: {
     currentPath() {
       return this.$route.name;

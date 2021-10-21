@@ -1,18 +1,20 @@
 <template>
   <div class="container__box">
     <div class="row">
-      <h4>Precargas</h4>
+      <h4>
+        Precargas <span>({{ currentPreloads.length }} resultados)</span>
+      </h4>
     </div>
     <div class="row">
       <TableSimple
         :item="tableDataDetails"
-        :cols="8"
+        :cols="9"
         modifier="hasHover"
         colExceptions="status"
         @rowClick="goToDetail($event)"
       >
         <template v-slot:default="slotProps">
-          <div class="tableDetail__cell cols8">
+          <div class="tableDetail__cell cols9">
             <Label :type="slotProps.nrow.status" />
           </div>
         </template>
@@ -66,11 +68,12 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
+          "",
           "id",
           "Cantidad",
           "Desde",
-           "Movimiento",
-           "Editor",
+          "Movimiento",
+          "Editor",
           "Fecha",
           "Asignado a",
           "Status",
