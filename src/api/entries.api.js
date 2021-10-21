@@ -19,8 +19,9 @@ const getOrderDetail = (idCounting) =>
     GET_COUNTING_DETAIL + idCounting + "/detail?limit=200&page=1"
   );
 const getPreload = (preloadId) => MAIN_SERVICE.get(GET_PRELOAD + preloadId);
-const preloadDetail = (idPreload) =>
-  MAIN_SERVICE.get(GET_PRELOAD_DETAIL + idPreload + "/detail?limit=200&page=1");
+const preloadDetail = (data) =>
+  MAIN_SERVICE.get(GET_PRELOAD_DETAIL + data);
+
 const allPreloads = () =>
   MAIN_SERVICE.get(GET_PRELOADS_ALL + "?limit=200&page=1");
 const updatePreloadLocation = ({ action, id, finalLocation }) =>
