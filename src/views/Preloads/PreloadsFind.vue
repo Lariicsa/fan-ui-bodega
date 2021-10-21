@@ -111,6 +111,7 @@ export default {
 
   mounted() {
     this.selectFunction();
+    this.preloadDataDetails.length
   },
 
   methods: {

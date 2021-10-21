@@ -61,12 +61,6 @@ const routes = [
         props: true,
         component: () => import("@/views/Entries/EntrySuccess.vue"),
       },
-      {
-        path: "disponibles",
-        name: "EntriesAll",
-        props: true,
-        component: () => import("@/views/Entries/EntriesAll.vue"),
-      },
     ],
   },
 ];
