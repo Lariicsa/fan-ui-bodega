@@ -332,8 +332,9 @@ const entries = {
   getters: {
     currentPreloads(state) {
       const items = state.preloadsAll;
-      let formated = items.map((item) => {
+      let formated = items.map((item, n) => {
         return {
+          index: n+1,
           preload_id: item.preload_id,
           total_items: item.total_items,
           from_to: item.from_to,
