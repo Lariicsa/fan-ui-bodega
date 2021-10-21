@@ -1,7 +1,9 @@
 <template>
   <div class="col">
     <Loader v-show="loader" />
-    <h4>Buscar precarga <span>({{preloadDataDetails.length}} resultados)</span></h4>
+    <h4>
+      Buscar precarga <span>{{ currentResults }}</span>
+    </h4>
     <div class="row between">
       <Finder
         phText="Ingresa el Id de precarga"
@@ -104,14 +106,14 @@ export default {
     };
   },
 
-  beforeMount(){
-    this.$store.commit("FETCH_RESPONSE_STATUS", undefined)
+  beforeMount() {
+    this.$store.commit("FETCH_RESPONSE_STATUS", undefined);
     this.closeWarning();
   },
 
   mounted() {
     this.selectFunction();
-    this.preloadDataDetails.length
+    this.preloadDataDetails
   },
 
   methods: {
@@ -277,6 +279,17 @@ export default {
         return true;
       } else {
         return false;
+      }
+    },
+
+    currentResults() {
+      if ([this.idTyped, this.preloadId].includes(undefined)) {
+        return "";
+      } else {
+        if (this.preloadDataDetails !== undefined) {
+          let lng = this.preloadDataDetails.length;
+          return `${lng} Resultados`;
+        }
       }
     },
   },
