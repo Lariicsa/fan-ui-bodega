@@ -1,7 +1,11 @@
 <template>
   <div class="col">
     <Loader v-show="loader" />
-    <h4>Inventario</h4>
+    <div class="row">
+      <h4>
+        Inventario <span>({{ entryDataResult.length }} Resultados)</span>
+      </h4>
+    </div>
 
     <div class="row between entry__filters">
       <div class="row entry__finder">
@@ -33,6 +37,7 @@
           @click="selectParamKey(paramType)"
         />
       </div>
+      <hr />
     </div>
 
     <div class="row center">
@@ -155,7 +160,7 @@ export default {
           .then(() => {
             this.hideBox();
             setTimeout(() => {
-              location.reload()
+              location.reload();
             }, 100);
           });
       }

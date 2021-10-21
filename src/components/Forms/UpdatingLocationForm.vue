@@ -104,19 +104,26 @@ export default {
   },
 
   watch: {
-    newLocation: function(val) {
-      this.dataDetails.newLocation = val
+    newLocation: function (val) {
+      this.dataDetails.newLocation = val;
     },
-    $route: 'actionForm'
+    $route: "actionForm",
   },
 
   methods: {
     close() {
       this.$emit("close");
     },
-    
+
     actionForm(data) {
-      this.$emit("actionForm", data)
+      {
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          console.log("faltan campos");
+        } else {
+          this.$emit("actionForm", data);
+        }
+      }
     },
   },
   computed: {
