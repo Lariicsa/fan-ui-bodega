@@ -45,10 +45,18 @@
         </div>
       </div>
       <div v-if="exists" class="row center">
-        <Message :showmsg="exists" type="notfound robot">No existe ID de entrada</Message>
+        <Message :showmsg="exists" type="notfound robot"
+          >No existe ID de entrada</Message
+        >
       </div>
       <div v-if="errorResponse == 400" class="row center">
-        <Message :showmsg="true"  type="warning fixed" :showClose="true"  @clicMsg="closeWarning()">{{errorMessage}}</Message>
+        <Message
+          :showmsg="true"
+          type="warning fixed"
+          :showClose="true"
+          @clicMsg="closeWarning()"
+          >{{ errorMessage }}</Message
+        >
       </div>
     </div>
   </div>
@@ -96,14 +104,18 @@ export default {
     };
   },
 
-  created() {
+  beforeMount(){
+    this.$store.commit("FETCH_RESPONSE_STATUS", undefined)
+    this.closeWarning();
+  },
+
+  mounted() {
     this.selectFunction();
   },
 
   methods: {
-
     closeWarning() {
-      this.$store.commit("FETCH_RESPONSE_ERROR_STATUS", undefined)
+      this.$store.commit("FETCH_RESPONSE_ERROR_STATUS", undefined);
     },
 
     arrangeOnRack() {
@@ -153,7 +165,6 @@ export default {
 
     updateLocation(txt) {
       this.$store.dispatch("setPreloadLocation", txt);
-      console.log("view", txt);
     },
 
     selectFunction() {
@@ -175,21 +186,22 @@ export default {
       "preloadDataDetails",
       "currentStatus",
       "currentEntryStatus",
+      "currentStatusResponse",
     ]),
     loader() {
       return this.$store.state.entries.loader;
     },
 
     errorResponse() {
-      return this.$store.state.entries.statusError
+      return this.$store.state.entries.statusError;
     },
 
-    errorMessage(){
-      return this.$store.state.entries.errorMessage
+    errorMessage() {
+      return this.$store.state.entries.errorMessage;
     },
 
     showTable() {
-      let status = this.$store.state.entries.statusResponse;
+      let status = this.currentStatusResponse;
       if (status == 200) {
         return true;
       } else {
@@ -248,6 +260,11 @@ export default {
         case "registrado en inventario":
           return (this.lastButton = {
             text: "Reubicar",
+            func: this.registerInInventory, //temporal
+          });
+        case undefined:
+          return (this.lastButton = {
+            text: "",
             func: this.registerInInventory, //temporal
           });
       }

@@ -57,7 +57,6 @@ const entries = {
       state.status = payload;
     },
     FETCH_RESPONSE_STATUS: (state, payload) => {
-      console.log("mut", payload);
       state.statusResponse = payload;
     },
     FETCH_RESPONSE_ERROR_STATUS: (state, payload) => {
