@@ -2,7 +2,7 @@
   <div class="col" v-cloak>
     <Loader v-show="loader" />
     <h4>
-      Buscar precarga <span>{{ currentResults }}</span>
+      Buscar precarga <span>({{ totalItems }} resultados)</span>
     </h4>
     <div class="row between">
       <Finder
@@ -11,7 +11,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
-        <div class="row">
+        <div class="row center">
           <pagination
             :records="totalItems"
             v-model="page"
@@ -333,27 +333,6 @@ export default {
       }
     },
 
-    currentResults() {
-      if ([this.idTyped, this.preloadId].includes(undefined)) {
-        return "";
-      } else {
-        if (this.preloadDataDetails !== undefined) {
-          let lng = this.preloadDataDetails.length;
-          return `${lng} Resultados`;
-        }
-      }
-    },
-
-    // totalItems() {
-    //   if (this.preloadDataDetails == undefined) {
-    //     return 1;
-    //   } else {
-    //     if (this.preloadDataDetails !== undefined) {
-    //       let lng = this.preloadDataDetails.length;
-    //       return lng;
-    //     }
-    //   }
-    // },
   },
 };
 </script>

@@ -214,7 +214,7 @@ const entries = {
         let page = data.page;
         let preloadId = data.preloadId;
         const res = await preloadDetail(
-          `${preloadId}/detail?limit=3&page=${page}`
+          `${preloadId}/detail?limit=10&page=${page}`
         );
         let success = res.status;
         const items = res.data.payload;
