@@ -64,6 +64,20 @@ const routes = [
     ],
   },
   {
+    path: "/salidas",
+    redirect: "/salidas/buscar",
+    name: "Outs",
+    component: () => import("@/views/Outs/Outs.vue"),
+    children: [
+      {
+        path: "buscar",
+        name: "OutsAddNew",
+        props: true,
+        component: () => import("@/views/Outs/OutsAddNew.vue"),
+      },
+    ],
+  },
+  {
     path: "/404",
     alias: "*",
     name: "NoRoute",
