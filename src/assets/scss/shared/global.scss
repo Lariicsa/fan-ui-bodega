@@ -80,9 +80,6 @@ select {
   min-height: 100vh;
   flex-wrap: wrap;
   z-index: 0;
-  @include from($desktop) {
-    padding-bottom: 2.4rem;
-  }
 }
 
 .container__ {
@@ -104,26 +101,29 @@ select {
     @extend .container__;
     justify-content: flex-end;
     margin: 0;
-    margin-left: 18rem;
-    max-width: calc(100% - 24rem);
+    &.opened {
+      max-width: calc(100% - 18rem);
+    }
+    &.closed {
+      max-width: calc(100% - 6rem);
+    }
   }
 
   &in {
     @extend .container__;
     background-color: $white;
-    margin-left: auto;
-    margin-top: 4rem;
+    margin: 4rem auto 0 19rem;
+    max-width: calc(100% - 19.6rem);
     padding: 0;
-    width: calc(100% - 2rem);
     height: calc(100% - 6.4rem);
   }
 
   &in-full {
     @extend .container__;
     background-color: $white;
-    margin-top: 4rem;
+    margin: 4rem 0 0 6.8rem;
     padding: 0;
-    width: calc(100% - 6.4rem);
+    max-width: calc(100% - 8rem);
   }
 
   &box {

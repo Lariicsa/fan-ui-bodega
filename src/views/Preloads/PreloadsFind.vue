@@ -1,8 +1,8 @@
 <template>
-  <div class="col">
+  <div class="col" v-cloak>
     <Loader v-show="loader" />
     <h4>
-      Buscar precarga <span>{{ currentResults }}</span>
+      Buscar precarga <span>({{ totalItems }} resultados)</span>
     </h4>
     <div class="row between">
       <Finder
@@ -11,6 +11,14 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
+        <div class="row center entry__row">
+          <pagination
+            :records="totalItems"
+            v-model="page"
+            :per-page="itemPerPage"
+            @paginate="pagination"
+          />
+        </div>
         <TableSupport
           :item="tableData"
           :topCols="7"
@@ -70,6 +78,7 @@ import Inputfield from "@/components/InputField";
 import Label from "@/components/Label";
 import Loader from "@/components/Loader.vue";
 import Message from "@/components/Message";
+import Pagination from "vue-pagination-2";
 import TableDetail from "@/components/TableDetails";
 import TableSimple from "@/components/TableSimple";
 import TableSupport from "@/components/TableSupport";
@@ -84,6 +93,7 @@ export default {
     Label,
     Loader,
     Message,
+    Pagination,
     TableDetail,
     TableSimple,
     TableSupport,
@@ -103,6 +113,9 @@ export default {
         text: "",
         func: null,
       },
+      page: 1,
+      totalResults: this.totalItems,
+      itemPerPage: 9,
     };
   },
 
@@ -113,12 +126,46 @@ export default {
 
   mounted() {
     this.selectFunction();
-    this.preloadDataDetails
+    this.preloadDataDetails;
+    this.totalItems;
+  },
+
+  watch: {
+    page() {
+      this.page;
+    },
   },
 
   methods: {
     closeWarning() {
       this.$store.commit("FETCH_RESPONSE_ERROR_STATUS", undefined);
+    },
+
+    async pagination(page) {
+      if (this.preloadId == "") {
+        await this.$store
+          .dispatch("getPreloadDetail", {
+            preloadId: this.idTyped,
+            page: this.page,
+          })
+          .then(() => {
+            // this.page = page;
+          });
+        this.page = page;
+        console.log(`Page preloadId ${page}`);
+      } else {
+        await this.$store
+          .dispatch("getPreloadDetail", {
+            preloadId: this.preloadId,
+            page: this.page,
+          })
+          .then(() => {
+            // this.page = page;
+          });
+
+        this.page = page;
+        console.log(`Page idTyped ${page}`);
+      }
     },
 
     arrangeOnRack() {
@@ -178,7 +225,10 @@ export default {
 
     getPreloadInfo(entrieId) {
       this.$store.dispatch("getPreloaded", entrieId).then(() => {
-        this.$store.dispatch("getPreloadDetail", entrieId);
+        this.$store.dispatch("getPreloadDetail", {
+          preloadId: entrieId,
+          page: this.page,
+        });
       });
     },
   },
@@ -190,6 +240,7 @@ export default {
       "currentStatus",
       "currentEntryStatus",
       "currentStatusResponse",
+      "totalItems",
     ]),
     loader() {
       return this.$store.state.entries.loader;
@@ -282,16 +333,12 @@ export default {
       }
     },
 
-    currentResults() {
-      if ([this.idTyped, this.preloadId].includes(undefined)) {
-        return "";
-      } else {
-        if (this.preloadDataDetails !== undefined) {
-          let lng = this.preloadDataDetails.length;
-          return `${lng} Resultados`;
-        }
-      }
-    },
   },
 };
 </script>
+
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>

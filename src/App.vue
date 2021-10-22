@@ -1,11 +1,7 @@
 <template>
   <div id="app" class="space">
     <div class="wrapper">
-      <Header
-        :width="
-          isOpen ? 'width: 100%' : 'width: calc(100% - 6.4rem)'
-        "
-      />
+      <Header :modifier="isOpen ? 'opened' : 'closed'" />
       <div class="container__main">
         <div :class="isOpen ? 'container__in' : 'container__in-full'">
           <Sidebar @btnClick="expandMenu" :modifier="{ opened: isOpen }">
@@ -40,7 +36,7 @@ export default {
   },
 
   mounted() {
-    this.sidebarMenu
+    this.sidebarMenu;
   },
 
   methods: {

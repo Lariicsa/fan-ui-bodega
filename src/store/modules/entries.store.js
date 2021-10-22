@@ -30,6 +30,7 @@ const entries = {
     statusResponse: undefined,
     statusError: undefined,
     errorMessage: "",
+    totalResults: undefined,
   },
 
   mutations: {
@@ -84,6 +85,10 @@ const entries = {
 
     GET_ERROR_MESSAGE: (state, payload) => {
       state.errorMessage = payload;
+    },
+
+    FETCH_TOTAL_RESULT: (state, payload) => {
+      state.totalResults = payload;
     },
   },
 
@@ -152,9 +157,9 @@ const entries = {
       } catch (error) {
         if (error.response) {
           let status = error.response.status;
-          console.log('err', error.response);
-        commit("FETCH_RESPONSE_ERROR_STATUS", status);
-        //commit("FETCH_RESPONSE_STATUS", status);
+          console.log("err", error.response);
+          commit("FETCH_RESPONSE_ERROR_STATUS", status);
+          //commit("FETCH_RESPONSE_STATUS", status);
         }
       }
     },
@@ -201,18 +206,27 @@ const entries = {
       }
     },
 
-    async getPreloadDetail({ commit }, preloadId) {
+    async getPreloadDetail({ commit }, data) {
       try {
         commit("FETCH_LOADER_STATUS", true);
-        const res = await preloadDetail(preloadId);
+        console.log('data',data);
+        
+        let page = data.page;
+        let preloadId = data.preloadId;
+        const res = await preloadDetail(
+          `${preloadId}/detail?limit=10&page=${page}`
+        );
         let success = res.status;
         const items = res.data.payload;
         if (success == 200) {
+          let total = items.total_items;
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_PRELOAD_DETAILS", items);
           commit("FETCH_RESPONSE_STATUS", success);
+          console.log("total", total);
+          commit("FETCH_TOTAL_RESULT", total);
         }
-        console.log("PreloadDetail", items);
+        console.log("PreDetail", res.config.url);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         if (error.response) {
@@ -334,7 +348,7 @@ const entries = {
       const items = state.preloadsAll;
       let formated = items.map((item, n) => {
         return {
-          index: n+1,
+          index: n + 1,
           preload_id: item.preload_id,
           total_items: item.total_items,
           from_to: item.from_to,
@@ -500,6 +514,10 @@ const entries = {
 
     currentStatusResponse(state) {
       return state.statusResponse;
+    },
+
+    totalItems(state) {
+      return state.totalResults;
     },
   },
 };

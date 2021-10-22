@@ -1,5 +1,5 @@
 <template>
-  <header class="fHeader" :style="width">
+  <header class="fHeader" :class="modifier">
     <div class="fHeader__top">
       <div class="fHeader__top-right">
         <strong>Hola, Admin</strong>
@@ -12,7 +12,7 @@ import Burger from "./Burger.vue";
 export default {
   name: "Header",
 
-  props: ["width"],
+  props: ["modifier"],
 
   components: {
     Burger,
