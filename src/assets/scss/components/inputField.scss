@@ -1,6 +1,6 @@
 .textfield {
   position: relative;
-  margin: 2.4rem 0;
+  margin: 0.8rem 0;
   width: 100%;
   & > input {
     background-color: $white;
@@ -11,9 +11,9 @@
     font-size: $regular-size;
     color: $blackio;
     font-weight: $regular;
-    text-indent: 2.4rem;
+    text-indent: 1.6rem;
     width: 100%;
-    height: 5.6rem;
+    height: 4.4rem;
     position: relative;
     &:disabled {
       background-color: $pale-grey;
@@ -59,8 +59,8 @@
     font-weight: $regular;
     position: absolute;
     position: absolute;
-    top: 2rem;
-    left: 3.2rem;
+    top: 1.4rem;
+    left: 2.4rem;
     transform-origin: left;
     transition: transform 0.2s ease-in-out;
     will-change: transform;
@@ -72,10 +72,10 @@
     }
     &.filled {
       background-color: $white;
-      padding: 0.9rem 1.6rem;
+      padding: 0.4rem 0.8rem;
       font-size: $small-size;
       color: $blue-grey;
-      transform: scale(1) translateX(-2rem) translateY(-3.4rem);
+      transform: scale(1) translateX(-1.6rem) translateY(-2.6rem);
     }
   }
   &__comment {
