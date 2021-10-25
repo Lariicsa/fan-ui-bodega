@@ -1,5 +1,5 @@
 <template>
-  <div class="tableDetail">
+  <div class="tableDetail" :class="mainModifier">
     <div class="tableDetail__top">
       <div
         :class="'tableDetail__top-head ' + 'cols' + topCols"
@@ -90,13 +90,16 @@ export default {
     modifier: {
       type: String,
     },
+    mainModifier: {
+      type: String,
+    },
     colmodifier: {
       type: String,
     },
     extracell: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   methods: {

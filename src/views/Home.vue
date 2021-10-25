@@ -22,7 +22,12 @@
           />
         </div>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
+          <TableDetail
+            :item="tabledata"
+            :topCols="6"
+            :cols="3"
+            mainModifier="maxHeight"
+          />
         </div>
         <div class="row between entries__setting">
           <Dropdown
@@ -289,5 +294,9 @@ export default {
 <style lang="scss" scoped>
 .uploader__button {
   margin: 3.2rem 0;
+}
+
+.tableDetail.maxHeight {
+  max-height: 60rem;
 }
 </style>
