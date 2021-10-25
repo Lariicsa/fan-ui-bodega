@@ -9,29 +9,29 @@
           phName="Número de orden"
           name="orderId"
           type="number"
-          v-model="orderId"
+          v-model="outData.orderId"
           :showError="false"
           typemsg="error"
         />
       </div>
       <div class="row md">
         <Dropdown
-          v-model="selectedStore"
+          v-model="outData.selectedStore"
           phName="Origen"
           variant="form"
           :options="stores"
           name="idStore"
-          @onChange="setPreloadOrigin(selectedStore)"
+          @onChange="setPreloadOrigin(outData.selectedStore)"
         />
       </div>
       <div class="row md">
         <Dropdown
-          v-model="selectedEmployee"
+          v-model="outData.selectedEmployee"
           phName="Asignado a"
           variant="form"
           :options="employeesList"
           name="idEmployee"
-          @onChange="setAssignedTo(selectedEmployee)"
+          @onChange="setAssignedTo(outData.selectedEmployee)"
         />
       </div>
     </div>
@@ -42,7 +42,7 @@
       <h4>Artículos</h4>
     </div>
     <div class="row between xcenter">
-      <InputRegister txtBtnOk="Agregar" @actionForm="registerOut()" />
+      <InputRegister txtBtnOk="Agregar" />
     </div>
     <div v-if="showTableItems" class="row outs__row">
       <TableSimple :item="tableDataDetails" :cols="3" />
@@ -50,7 +50,7 @@
         <FanButton
           text="Registrar"
           ui="primary min"
-          @btnClick="showCountingDetails()"
+          @btnClick="registerOut()"
         />
       </div>
     </div>
@@ -82,16 +82,42 @@ export default {
         idProd: "",
         quantity: null,
       },
-      orderId: null,
       storesData: storesData.tiendas,
-      selectedStore: "",
       employeesList: employees.names,
-      selectedEmployee: "",
+      outData: {
+        orderId: null,
+        selectedStore: "",
+        selectedEmployee: "",
+      },
     };
   },
 
   methods: {
-    registerOut() {},
+    registerOut() {
+      this.$store.dispatch("registerNewOut", {
+        type: "SALIDA",
+        assignedTo: this.outData.selectedEmployee,
+        fromTo: this.outData.selectedStore,
+        numOrder: this.outData.orderId,
+        items: this.itemsOutCohorte,
+      });
+
+      console.log({
+        type: "SALIDA",
+        assignedTo: this.outData.selectedEmployee,
+        fromTo: this.outData.selectedStore,
+        numOrder: this.outData.orderId,
+        items: this.itemsOutCohorte,
+      });
+    },
+
+    setPreloadOrigin(origin) {
+      this.$store.commit("SET_PRELOAD_ORIGIN", origin);
+    },
+
+    setAssignedTo(employee) {
+      this.$store.commit("SET_PRELOAD_ASSIGNEDTO", employee);
+    },
   },
 
   computed: {
