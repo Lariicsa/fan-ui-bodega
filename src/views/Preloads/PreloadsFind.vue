@@ -238,7 +238,7 @@ export default {
       "preloadDataResult",
       "preloadDataDetails",
       "currentStatus",
-      "currentEntryStatus",
+      "currentPreloadsStatus",
       "currentStatusResponse",
       "totalItems",
     ]),
@@ -293,7 +293,7 @@ export default {
     },
 
     showButton() {
-      let status = this.currentEntryStatus;
+      let status = this.currentPreloadsStatus;
 
       switch (status) {
         case "asignado":
@@ -332,7 +332,6 @@ export default {
         return false;
       }
     },
-
   },
 };
 </script>
