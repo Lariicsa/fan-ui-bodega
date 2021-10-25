@@ -191,11 +191,11 @@ export default {
     },
 
     mainTableData() {
-      return this.$store.state.entries.countingData;
+      return this.$store.state.preloads.countingData;
     },
 
     detailsData() {
-      return this.$store.state.entries.countingDataDetail;
+      return this.$store.state.preloads.countingDataDetail;
     },
 
     tabledata() {
@@ -225,7 +225,7 @@ export default {
     },
 
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
 
     stores() {
@@ -236,15 +236,15 @@ export default {
     },
 
     countId() {
-      if (this.$store.state.entries.countingData != undefined) {
-        return this.$store.state.entries.countingData.count_id;
+      if (this.$store.state.preloads.countingData != undefined) {
+        return this.$store.state.preloads.countingData.count_id;
       }
     },
     fromTo() {
-      return this.$store.state.entries.entriesOrigin;
+      return this.$store.state.preloads.entriesOrigin;
     },
     assignedTo() {
-      return this.$store.state.entries.assignedEmployee;
+      return this.$store.state.preloads.assignedEmployee;
     },
 
     isAllFilled() {
@@ -259,15 +259,15 @@ export default {
     },
 
     status() {
-      return this.$store.state.entries.status;
+      return this.$store.state.preloads.status;
     },
 
     errorResponse() {
-      return this.$store.state.entries.statusError;
+      return this.$store.state.preloads.statusError;
     },
 
     statusResponse() {
-      return this.$store.state.entries.statusResponse;
+      return this.$store.state.preloads.statusResponse;
     },
 
     notFound() {

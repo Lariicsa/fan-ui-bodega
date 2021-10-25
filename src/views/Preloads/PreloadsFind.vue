@@ -243,15 +243,15 @@ export default {
       "totalItems",
     ]),
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
 
     errorResponse() {
-      return this.$store.state.entries.statusError;
+      return this.$store.state.preloads.statusError;
     },
 
     errorMessage() {
-      return this.$store.state.entries.errorMessage;
+      return this.$store.state.preloads.errorMessage;
     },
 
     showTable() {
@@ -325,7 +325,7 @@ export default {
     },
 
     exists() {
-      let status = this.$store.state.entries.statusResponse;
+      let status = this.$store.state.preloads.statusResponse;
       if (status == 400) {
         return true;
       } else {
