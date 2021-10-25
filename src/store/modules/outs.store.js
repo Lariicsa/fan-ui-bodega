@@ -9,6 +9,15 @@ const outs = {
       state.itemsCohorte.push(payload);
     },
   },
+
+  getters:{
+    itemsOutCohorte(state) {
+      let items = state.itemsCohorte.map((ele,i) => {
+        return {index: i+1, ...ele}
+      })
+      return items
+    }
+  }
 };
 
 export default outs;
