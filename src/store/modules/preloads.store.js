@@ -14,7 +14,6 @@ const entries = {
     countingData: null,
     countingDataDetail: null,
     countingDetail: null,
-    actionType: "",
     preloadEntryId: "",
     preloadResults: [],
     preloadsAll: [],
@@ -41,9 +40,6 @@ const entries = {
       state.countingDetail = payload;
     },
 
-    SET_ACTION_TYPE: (state, payload) => {
-      state.actionType = payload;
-    },
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
     },

@@ -65,12 +65,12 @@ const routes = [
   },
   {
     path: "/salidas",
-    redirect: "/salidas/buscar",
+    redirect: "/salidas/registro",
     name: "Outs",
     component: () => import("@/views/Outs/Outs.vue"),
     children: [
       {
-        path: "buscar",
+        path: "registro",
         name: "OutsAddNew",
         props: true,
         component: () => import("@/views/Outs/OutsAddNew.vue"),

@@ -106,6 +106,7 @@ export default {
       employeesList: employees.names,
       selectedEmployee: "",
       showDetails: false,
+      setActionType: "",
     };
   },
 
