@@ -29,7 +29,10 @@
     </div>
 
     <div class="tableDetail__bottom">
-      <div class="tableDetail__scrollable-in">
+      <div
+        class="tableDetail__scrollable-in"
+        :style="'min-width:' + tableWidth"
+      >
         <div
           :class="'tableDetail__header ' + 'cols' + cols"
           :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
@@ -99,6 +102,10 @@ export default {
     extracell: {
       type: Number,
       default: 0,
+    },
+    tableWidth: {
+      type: String,
+      default: "100%",
     },
   },
 

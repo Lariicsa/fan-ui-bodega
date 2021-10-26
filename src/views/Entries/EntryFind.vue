@@ -41,7 +41,7 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="">
+      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="" tableWidth="100vw">
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
