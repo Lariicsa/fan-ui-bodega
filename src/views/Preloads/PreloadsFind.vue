@@ -11,7 +11,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
-        <div class="row center entry__row">
+        <div v-if="totalItems.length > 1" class="row center entry__row">
           <pagination
             :records="totalItems"
             v-model="page"
@@ -46,6 +46,7 @@
             </div>
           </template>
         </TableSupport>
+
         <div
           v-if="preloadActionType === 'ENTRADA'"
           class="row sm right entry__endrow"
@@ -125,7 +126,7 @@ export default {
         text: "",
         func: "",
       },
-       lastButtonOut: {
+      lastButtonOut: {
         text: "",
         func: "",
       },
