@@ -12,7 +12,7 @@
     @include label($pale-pink, $tomato, "Surtiendo");
   }
   &__surtido {
-    @include label($matt-pink, $rouge, "Surtido");
+    @include label($faded-orange, $greyish-yellow, "Surtido");
   }
   &__cotejando {
     @include label($pale-peach, $purple-brown, "Cotejando");

@@ -11,7 +11,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
-        <div class="row center entry__row">
+        <div v-if="totalItems.length > 1" class="row center entry__row">
           <pagination
             :records="totalItems"
             v-model="page"
@@ -46,12 +46,13 @@
             </div>
           </template>
         </TableSupport>
+
         <div
           v-if="preloadActionType === 'ENTRADA'"
           class="row sm right entry__endrow"
         >
           <FanButton
-            v-show="showEntryButton.text !== false"
+            v-show="showEntryButton !== false"
             :text="showEntryButton.text"
             ui="primary"
             @btnClick="showEntryButton.func"
@@ -123,7 +124,11 @@ export default {
       loadPreloadId: this.preloadId,
       lastButton: {
         text: "",
-        func: null,
+        func: "",
+      },
+      lastButtonOut: {
+        text: "",
+        func: "",
       },
       page: 1,
       totalResults: this.totalItems,
@@ -346,8 +351,9 @@ export default {
             func: this.registerInInventory,
           });
         case "registrado en inventario":
-          return false
-
+          return false;
+        case undefined:
+          return false;
       }
     },
 
@@ -355,17 +361,17 @@ export default {
       let status = this.currentPreloadsStatus;
       switch (status) {
         case "asignado":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Localizar",
             func: this.findLocation,
           });
         case "surtiendo":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Finalizar surtido",
             func: this.finalizePacking,
           });
         case "surtido":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Actualizar Rack",
             func: this.registerInInventory,
           });

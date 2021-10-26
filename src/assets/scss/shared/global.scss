@@ -82,6 +82,38 @@ select {
   z-index: 0;
 }
 
+.wrapper {
+  background-color: $light-sky-blue-two;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  //min-height: calc(50vh + 68rem);
+  min-height: 100vh;
+  min-width: 130rem;
+  @include tablet {
+    padding-top: 6.4rem;
+  }
+  &:after {
+    background-color: $white;
+    content: "";
+    display: block;
+    height: 72vw;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -3;
+    @include from($tablet) {
+      height: 48vw;
+    }
+  }
+}
+
 .container__ {
   display: flex;
   justify-content: center;
@@ -111,7 +143,7 @@ select {
 
   &in {
     @extend .container__;
-    background-color: $white;
+    background-color: transparent;
     margin: 4rem auto 0 19rem;
     max-width: calc(100% - 19.6rem);
     padding: 0;
@@ -127,6 +159,10 @@ select {
   }
 
   &box {
+    background-color: $white;
+    border: 0.1rem solid $border-grey;
+    //box-shadow: inset 0 0.1rem 0.1rem $blue-grey;
+    border-radius: $radius;
     @extend .container__;
     padding: 2.4rem;
     width: 100%;
@@ -206,35 +242,4 @@ hr {
   overflow: visible;
   border: none;
   width: 100%;
-}
-
-.wrapper {
-  background-color: $light-sky-blue-two;
-  display: flex;
-  padding: 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-  min-height: calc(50vh + 68rem);
-  min-width: 130rem; //temporally
-  @include tablet {
-    padding-top: 6.4rem;
-  }
-  &:after {
-    background-color: $white;
-    content: "";
-    display: block;
-    height: 72vw;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -3;
-    @include from($tablet) {
-      height: 48vw;
-    }
-  }
 }

@@ -1,5 +1,8 @@
 <template>
   <div class="outs__form">
+    <Message :showmsg="showMessage" type="infotext"
+      ><p class="advice">{{ messageResponseText }}: {{ NotEnough.toString() }}</p></Message
+    >
     <div class="row">
       <h3>Registrar Salida</h3>
     </div>
@@ -44,14 +47,16 @@
     <div class="row between xcenter">
       <InputRegister txtBtnOk="Agregar" />
     </div>
-    <div v-if="showTableItems" class="row outs__row">
-      <TableSimple :item="tableDataDetails" :cols="3" />
-      <div class="row right outs__row">
-        <FanButton
-          text="Registrar"
-          ui="primary min"
-          @btnClick="registerOut()"
-        />
+    <div class="row outs__row">
+      <div v-if="showTableItems" class="container__box">
+        <TableSimple :item="tableDataDetails" :cols="3" />
+        <div class="row right outs__row">
+          <FanButton
+            text="Registrar"
+            ui="primary min"
+            @btnClick="registerOut()"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -61,6 +66,8 @@ import FanButton from "@/components/Button";
 import Dropdown from "@/components/Dropdown";
 import Inputfield from "@/components/InputField";
 import InputRegister from "@/components/InputRegister";
+import Loader from "@/components/Loader";
+import Message from "@/components/Message";
 import TableSimple from "@/components/TableSimple";
 import storesData from "@/Mucks/stores";
 import employees from "@/Mucks/employees";
@@ -73,6 +80,8 @@ export default {
     Dropdown,
     Inputfield,
     InputRegister,
+    Loader,
+    Message,
     TableSimple,
   },
 
@@ -89,6 +98,7 @@ export default {
         selectedStore: "",
         selectedEmployee: "",
       },
+      showMessage: false,
     };
   },
 
@@ -103,11 +113,13 @@ export default {
           items: this.itemsOutCohorte,
         })
         .then(() => {
-          if (this.currentPreloadOutstatus) {
+          if (this.currentPreloadOutstatus === true) {
             this.$router.push({
               name: "OutsSuccess",
               params: { preloadId: this.outData.orderId },
             });
+          } else {
+            this.showMessage = true;
           }
         });
     },
@@ -122,7 +134,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["itemsOutCohorte", "currentPreloadOutstatus"]),
+    ...mapGetters([
+      "itemsOutCohorte",
+      "currentPreloadOutstatus",
+      "messageResponseText",
+    ]),
     tableDataDetails() {
       const table = {
         head: ["", "Cantidad", "Clave"],
@@ -144,6 +160,14 @@ export default {
       } else {
         return false;
       }
+    },
+
+    NotEnough() {
+      let items = this.itemsOutCohorte.map((item) => {
+        return item.productId;
+      });
+
+      return items.flat();
     },
   },
 };

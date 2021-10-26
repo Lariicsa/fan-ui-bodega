@@ -8,6 +8,7 @@ const outs = {
     resStatus: null,
     loader: false,
     preloadId: "",
+    messageResponse: "",
   },
 
   mutations: {
@@ -32,6 +33,9 @@ const outs = {
     GET_PRELOAD_OUT_ID: (state, payload) => {
       state.preloadId = payload;
     },
+    GET_MESSAGE_RESPONSE: (state, payload) => {
+      state.messageResponse = payload;
+    },
   },
 
   actions: {
@@ -45,11 +49,17 @@ const outs = {
           commit("FETCH_LOADER_STATUS", false);
           commit("FETCH_PRELOAD_OUT_STATUS", true);
           commit("GET_PRELOAD_OUT_ID", preloadId);
+        } else {
+          commit("GET_MESSAGE_RESPONSE", res.data.message);
         }
         console.log("out", res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
+        if (error.response) {
+          commit("GET_MESSAGE_RESPONSE", error.response.data.message);
+          commit("FETCH_PRELOAD_OUT_STATUS", error.response.status);
+        }
       }
     },
   },
@@ -66,9 +76,12 @@ const outs = {
       return state.resStatus;
     },
 
-    currentOutPreloadId(state){
-      return state.preloadId
-    }
+    currentOutPreloadId(state) {
+      return state.preloadId;
+    },
+    messageResponseText(state) {
+      return state.messageResponse;
+    },
   },
 };
 
