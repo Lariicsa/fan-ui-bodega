@@ -26,7 +26,7 @@
       <div class="row md">
         <Dropdown
           v-model="outData.selectedStore"
-          phName="Origen"
+          phName="Destino"
           variant="form"
           :options="stores"
           name="idStore"
