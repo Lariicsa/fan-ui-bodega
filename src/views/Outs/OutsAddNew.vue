@@ -1,7 +1,13 @@
 <template>
   <div class="outs__form">
-    <Message :showmsg="showMessage" type="infotext"
-      ><p class="advice">{{ messageResponseText }}: {{ NotEnough.toString() }}</p></Message
+    <Message
+      :showmsg="showMessage"
+      type="infotext"
+      :showClose="true"
+      @clicMsg="closeWarning()"
+      ><p class="advice">
+        {{ messageResponseText }}: {{ NotEnough.toString() }}
+      </p></Message
     >
     <div class="row">
       <h3>Registrar Salida</h3>
@@ -131,6 +137,10 @@ export default {
     setAssignedTo(employee) {
       this.$store.commit("SET_PRELOAD_ASSIGNEDTO", employee);
     },
+
+    closeWarning(){
+      this.$store.commit("FETCH_PRELOAD_OUT_STATUS", false)
+    }
   },
 
   computed: {

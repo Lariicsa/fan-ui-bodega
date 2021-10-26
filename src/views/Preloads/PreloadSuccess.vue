@@ -1,12 +1,10 @@
 <template>
-  <div class="container__box">
+  <div class="row md center">
     <h3>Precarga registrada</h3>
-    <div class="row">
-      <p>
+    <Message :showmsg="true" type="infotext">
+      <p class="advice">
         El conteo <strong>{{ preloadId }}</strong> se ha registrado con éxito
-      </p>
-      <br />
-      <p>
+        <br /><br /><br />
         El ID de la precarga es:
         <strong
           ><router-link
@@ -18,13 +16,17 @@
           ></strong
         >.
       </p>
-    </div>
+    </Message>
   </div>
 </template>
 <script>
+import Message from "@/components/Message";
 import { mapGetters } from "vuex";
 export default {
   name: "PreloadSuccess",
+  components: {
+    Message,
+  },
   props: {
     preloadId: {
       required: true,
