@@ -56,7 +56,6 @@ const entries = {
       state.statusResponse = payload;
     },
     FETCH_RESPONSE_ERROR_STATUS: (state, payload) => {
-      console.log("muterr", payload);
       state.statusError = payload;
     },
 

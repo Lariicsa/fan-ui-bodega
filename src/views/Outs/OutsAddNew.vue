@@ -94,21 +94,22 @@ export default {
 
   methods: {
     registerOut() {
-      this.$store.dispatch("registerNewOut", {
-        type: "SALIDA",
-        assignedTo: this.outData.selectedEmployee,
-        fromTo: this.outData.selectedStore,
-        numOrder: this.outData.orderId,
-        items: this.itemsOutCohorte,
-      });
-
-      console.log({
-        type: "SALIDA",
-        assignedTo: this.outData.selectedEmployee,
-        fromTo: this.outData.selectedStore,
-        numOrder: this.outData.orderId,
-        items: this.itemsOutCohorte,
-      });
+      this.$store
+        .dispatch("registerNewOut", {
+          type: "SALIDA",
+          assignedTo: this.outData.selectedEmployee,
+          fromTo: this.outData.selectedStore,
+          numOrder: this.outData.orderId,
+          items: this.itemsOutCohorte,
+        })
+        .then(() => {
+          if (this.currentPreloadOutstatus) {
+            this.$router.push({
+              name: "OutsSuccess",
+              params: { preloadId: this.outData.orderId },
+            });
+          }
+        });
     },
 
     setPreloadOrigin(origin) {
@@ -121,7 +122,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["itemsOutCohorte"]),
+    ...mapGetters(["itemsOutCohorte", "currentPreloadOutstatus"]),
     tableDataDetails() {
       const table = {
         head: ["", "Cantidad", "Clave"],

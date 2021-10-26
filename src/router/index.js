@@ -75,6 +75,12 @@ const routes = [
         props: true,
         component: () => import("@/views/Outs/OutsAddNew.vue"),
       },
+      {
+        path: "precarga/:preloadId",
+        name: "OutsSuccess",
+        props: true,
+        component: () => import("@/views/Outs/OutsSuccess.vue"),
+      },
     ],
   },
   {
