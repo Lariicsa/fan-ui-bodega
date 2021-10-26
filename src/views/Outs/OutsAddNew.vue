@@ -44,14 +44,16 @@
     <div class="row between xcenter">
       <InputRegister txtBtnOk="Agregar" />
     </div>
-    <div v-if="showTableItems" class="row outs__row">
-      <TableSimple :item="tableDataDetails" :cols="3" />
-      <div class="row right outs__row">
-        <FanButton
-          text="Registrar"
-          ui="primary min"
-          @btnClick="registerOut()"
-        />
+    <div class="row outs__row">
+      <div v-if="showTableItems" class="container__box">
+        <TableSimple :item="tableDataDetails" :cols="3" />
+        <div class="row right outs__row">
+          <FanButton
+            text="Registrar"
+            ui="primary min"
+            @btnClick="registerOut()"
+          />
+        </div>
       </div>
     </div>
   </div>
