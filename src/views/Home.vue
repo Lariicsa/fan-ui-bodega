@@ -7,6 +7,7 @@
     <div class="col">
       <div class="row center">
         <Finder
+          :autofocus="true"
           phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
           v-model="idTyped"

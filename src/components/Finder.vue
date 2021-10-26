@@ -39,6 +39,7 @@ export default {
     phText: String,
     textIn: String,
     value: String,
+    autofocus: Boolean
   },
 
   data() {
@@ -46,6 +47,10 @@ export default {
       textTyped: this.textIn,
       isOpen: false,
     };
+  },
+
+  mounted() {
+    if (this.autofocus) this.$refs.input.focus();
   },
 
   methods: {

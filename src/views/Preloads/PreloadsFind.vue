@@ -46,7 +46,10 @@
             </div>
           </template>
         </TableSupport>
-        <div class="row sm right entry__endrow">
+        <div
+          v-if="preloadActionType === 'ENTRADA'"
+          class="row sm right entry__endrow"
+        >
           <FanButton
             :text="showButton.text"
             ui="primary"
@@ -241,6 +244,7 @@ export default {
       "currentPreloadsStatus",
       "currentStatusResponse",
       "totalItems",
+      "preloadActionType",
     ]),
     loader() {
       return this.$store.state.preloads.loader;

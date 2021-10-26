@@ -407,7 +407,19 @@ const entries = {
     },
 
     totalItems(state) {
-      return state.totalResults;
+      let results = state.totalResults;
+      if (results != undefined) {
+        return results;
+      } else {
+        return 1;
+      }
+    },
+
+    preloadActionType(state, getters) {
+      let details = getters.preloadDataResult;
+      if (details != undefined) {
+        return details.action_type;
+      }
     },
   },
 };
