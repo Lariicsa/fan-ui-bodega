@@ -1,6 +1,6 @@
 .finder {
   background-color: $snow;
-  border: 0.1rem solid $pale-grey-two;
+  border: 0.1rem solid $light-sky-blue-two;
   border-radius: $radius;
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,7 @@
     width: calc(100% - 40px);
     height: 100%;
     &::placeholder {
-      color: $grey-base;
+      color: $blue-grey;
     }
     &:focus {
       outline: 0;
