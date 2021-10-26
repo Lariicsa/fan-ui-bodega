@@ -64,6 +64,26 @@ const routes = [
     ],
   },
   {
+    path: "/salidas",
+    redirect: "/salidas/registro",
+    name: "Outs",
+    component: () => import("@/views/Outs/Outs.vue"),
+    children: [
+      {
+        path: "registro",
+        name: "OutsAddNew",
+        props: true,
+        component: () => import("@/views/Outs/OutsAddNew.vue"),
+      },
+      {
+        path: "precarga/:preloadId",
+        name: "OutsSuccess",
+        props: true,
+        component: () => import("@/views/Outs/OutsSuccess.vue"),
+      },
+    ],
+  },
+  {
     path: "/404",
     alias: "*",
     name: "NoRoute",

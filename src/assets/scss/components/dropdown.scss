@@ -14,7 +14,7 @@
   font-weight: 500;
   width: 100%;
   min-width: 8.2rem;
-  height: 4.4rem;
+  height: 4rem;
   position: relative;
 
   @include from($tablet) {
@@ -61,10 +61,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 1rem 0;
+      margin: 0;
       padding: 0;
       color: $blackio;
-      height: 5.6rem;
+      height: 4.4rem;
       width: 100%;
       position: relative;
       &:hover {
@@ -92,8 +92,8 @@
         padding: 0 1.2rem;
         width: auto;
         position: absolute;
-        top: 1.8rem;
-        left: 2rem;
+        top: 1.4rem;
+        left: 1rem;
         z-index: 2;
         &.filled {
           background-color: $white;

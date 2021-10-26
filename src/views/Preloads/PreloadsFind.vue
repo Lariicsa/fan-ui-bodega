@@ -46,11 +46,23 @@
             </div>
           </template>
         </TableSupport>
-        <div class="row sm right entry__endrow">
+        <div
+          v-if="preloadActionType === 'ENTRADA'"
+          class="row sm right entry__endrow"
+        >
           <FanButton
-            :text="showButton.text"
+            v-show="showEntryButton.text !== false"
+            :text="showEntryButton.text"
             ui="primary"
-            @btnClick="showButton.func"
+            @btnClick="showEntryButton.func"
+          />
+        </div>
+        <div v-else class="row sm right entry__endrow">
+          <FanButton
+            v-show="showOutButton !== false"
+            :text="showOutButton.text"
+            ui="primary"
+            @btnClick="showOutButton.func"
           />
         </div>
       </div>
@@ -143,31 +155,21 @@ export default {
 
     async pagination(page) {
       if (this.preloadId == "") {
-        await this.$store
-          .dispatch("getPreloadDetail", {
-            preloadId: this.idTyped,
-            page: this.page,
-          })
-          .then(() => {
-            // this.page = page;
-          });
+        await this.$store.dispatch("getPreloadDetail", {
+          preloadId: this.idTyped,
+          page: this.page,
+        });
         this.page = page;
-        console.log(`Page preloadId ${page}`);
       } else {
-        await this.$store
-          .dispatch("getPreloadDetail", {
-            preloadId: this.preloadId,
-            page: this.page,
-          })
-          .then(() => {
-            // this.page = page;
-          });
-
+        await this.$store.dispatch("getPreloadDetail", {
+          preloadId: this.preloadId,
+          page: this.page,
+        });
         this.page = page;
-        console.log(`Page idTyped ${page}`);
       }
     },
 
+    //Entries
     arrangeOnRack() {
       this.$store
         .dispatch("updatePreloadsStatus", {
@@ -213,6 +215,38 @@ export default {
         });
     },
 
+    //Outs
+
+    findLocation() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "localizando",
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
+        })
+        .then(() => {
+          if (this.preloadId == "") {
+            this.getPreloadInfo(this.idTyped);
+          } else {
+            this.getPreloadInfo(this.preloadId);
+          }
+        });
+    },
+
+    finalizePacking() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "surtido",
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
+        })
+        .then(() => {
+          if (this.preloadId == "") {
+            this.getPreloadInfo(this.idTyped);
+          } else {
+            this.getPreloadInfo(this.preloadId);
+          }
+        });
+    },
+
     updateLocation(txt) {
       this.$store.dispatch("setPreloadLocation", txt);
     },
@@ -238,20 +272,21 @@ export default {
       "preloadDataResult",
       "preloadDataDetails",
       "currentStatus",
-      "currentEntryStatus",
+      "currentPreloadsStatus",
       "currentStatusResponse",
       "totalItems",
+      "preloadActionType",
     ]),
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
 
     errorResponse() {
-      return this.$store.state.entries.statusError;
+      return this.$store.state.preloads.statusError;
     },
 
     errorMessage() {
-      return this.$store.state.entries.errorMessage;
+      return this.$store.state.preloads.errorMessage;
     },
 
     showTable() {
@@ -292,9 +327,8 @@ export default {
       return table;
     },
 
-    showButton() {
-      let status = this.currentEntryStatus;
-
+    showEntryButton() {
+      let status = this.currentPreloadsStatus;
       switch (status) {
         case "asignado":
           return (this.lastButton = {
@@ -312,27 +346,42 @@ export default {
             func: this.registerInInventory,
           });
         case "registrado en inventario":
+          return false
+
+      }
+    },
+
+    showOutButton() {
+      let status = this.currentPreloadsStatus;
+      switch (status) {
+        case "asignado":
           return (this.lastButton = {
-            text: "Reubicar",
-            func: this.registerInInventory, //temporal
+            text: "Localizar",
+            func: this.findLocation,
           });
-        case undefined:
+        case "surtiendo":
           return (this.lastButton = {
-            text: "",
-            func: this.registerInInventory, //temporal
+            text: "Finalizar surtido",
+            func: this.finalizePacking,
           });
+        case "surtido":
+          return (this.lastButton = {
+            text: "Actualizar Rack",
+            func: this.registerInInventory,
+          });
+        case "registrado en inventario":
+          return false;
       }
     },
 
     exists() {
-      let status = this.$store.state.entries.statusResponse;
+      let status = this.$store.state.preloads.statusResponse;
       if (status == 400) {
         return true;
       } else {
         return false;
       }
     },
-
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="simpleTable">
-    <div class="simpleTable__scrollable-in">
+    <div class="simpleTable__scrollable-in" :style="'min-width:' + tableWidth">
       <div
         :class="'simpleTable__header ' + 'cols' + cols"
         :style="'grid-template-columns: repeat(' + cols + ', 1fr)'"
@@ -68,6 +68,10 @@ export default {
     colExceptions: {
       type: String,
       default: "",
+    },
+    tableWidth: {
+      type: String,
+      default: "100%",
     },
   },
 

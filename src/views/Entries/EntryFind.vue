@@ -41,7 +41,7 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="">
+      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="" tableWidth="100vw">
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
@@ -170,11 +170,11 @@ export default {
   computed: {
     ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
 
     showTable() {
-      let status = this.$store.state.entries.statusResponse;
+      let status = this.$store.state.preloads.statusResponse;
       if (status == 200) {
         return true;
       } else {
@@ -202,7 +202,7 @@ export default {
     },
 
     exists() {
-      let status = this.$store.state.entries.statusResponse;
+      let status = this.$store.state.preloads.statusResponse;
       if (status == 400) {
         return true;
       } else {

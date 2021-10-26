@@ -138,7 +138,7 @@ export default {
   },
   computed: {
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
   },
 };

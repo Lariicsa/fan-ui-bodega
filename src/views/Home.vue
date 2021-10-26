@@ -7,6 +7,7 @@
     <div class="col">
       <div class="row center">
         <Finder
+          :autofocus="true"
           phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
           v-model="idTyped"
@@ -22,7 +23,12 @@
           />
         </div>
         <div class="row">
-          <TableDetail :item="tabledata" :topCols="6" :cols="3" />
+          <TableDetail
+            :item="tabledata"
+            :topCols="6"
+            :cols="3"
+            mainModifier="maxHeight"
+          />
         </div>
         <div class="row between entries__setting">
           <Dropdown
@@ -101,6 +107,7 @@ export default {
       employeesList: employees.names,
       selectedEmployee: "",
       showDetails: false,
+      setActionType: "",
     };
   },
 
@@ -186,11 +193,11 @@ export default {
     },
 
     mainTableData() {
-      return this.$store.state.entries.countingData;
+      return this.$store.state.preloads.countingData;
     },
 
     detailsData() {
-      return this.$store.state.entries.countingDataDetail;
+      return this.$store.state.preloads.countingDataDetail;
     },
 
     tabledata() {
@@ -220,7 +227,7 @@ export default {
     },
 
     loader() {
-      return this.$store.state.entries.loader;
+      return this.$store.state.preloads.loader;
     },
 
     stores() {
@@ -231,15 +238,15 @@ export default {
     },
 
     countId() {
-      if (this.$store.state.entries.countingData != undefined) {
-        return this.$store.state.entries.countingData.count_id;
+      if (this.$store.state.preloads.countingData != undefined) {
+        return this.$store.state.preloads.countingData.count_id;
       }
     },
     fromTo() {
-      return this.$store.state.entries.entriesOrigin;
+      return this.$store.state.preloads.entriesOrigin;
     },
     assignedTo() {
-      return this.$store.state.entries.assignedEmployee;
+      return this.$store.state.preloads.assignedEmployee;
     },
 
     isAllFilled() {
@@ -254,15 +261,15 @@ export default {
     },
 
     status() {
-      return this.$store.state.entries.status;
+      return this.$store.state.preloads.status;
     },
 
     errorResponse() {
-      return this.$store.state.entries.statusError;
+      return this.$store.state.preloads.statusError;
     },
 
     statusResponse() {
-      return this.$store.state.entries.statusResponse;
+      return this.$store.state.preloads.statusResponse;
     },
 
     notFound() {
@@ -289,5 +296,9 @@ export default {
 <style lang="scss" scoped>
 .uploader__button {
   margin: 3.2rem 0;
+}
+
+.tableDetail.maxHeight {
+  max-height: 60rem;
 }
 </style>

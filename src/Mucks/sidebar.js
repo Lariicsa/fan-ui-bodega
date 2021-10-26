@@ -20,6 +20,12 @@ export default {
     },
     {
       icon: "",
+      text: "Registrar Salida",
+      path: "/salidas/registro",
+      name: "",
+    },
+    {
+      icon: "",
       text: "Inventario",
       path: "/entradas/buscar",
       name: "availables", 
