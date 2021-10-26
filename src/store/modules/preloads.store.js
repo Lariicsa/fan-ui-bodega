@@ -212,6 +212,8 @@ const entries = {
           commit("GET_PRELOAD_DETAILS", items);
           commit("FETCH_RESPONSE_STATUS", success);
           commit("FETCH_TOTAL_RESULT", total);
+
+          console.log('preloadDetail', res.data);
         }
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);

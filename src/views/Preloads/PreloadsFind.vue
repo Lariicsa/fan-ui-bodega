@@ -51,7 +51,7 @@
           class="row sm right entry__endrow"
         >
           <FanButton
-            v-show="showEntryButton.text !== false"
+            v-show="showEntryButton !== false"
             :text="showEntryButton.text"
             ui="primary"
             @btnClick="showEntryButton.func"
@@ -123,7 +123,11 @@ export default {
       loadPreloadId: this.preloadId,
       lastButton: {
         text: "",
-        func: null,
+        func: "",
+      },
+       lastButtonOut: {
+        text: "",
+        func: "",
       },
       page: 1,
       totalResults: this.totalItems,
@@ -346,8 +350,9 @@ export default {
             func: this.registerInInventory,
           });
         case "registrado en inventario":
-          return false
-
+          return false;
+        case undefined:
+          return false;
       }
     },
 
@@ -355,17 +360,17 @@ export default {
       let status = this.currentPreloadsStatus;
       switch (status) {
         case "asignado":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Localizar",
             func: this.findLocation,
           });
         case "surtiendo":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Finalizar surtido",
             func: this.finalizePacking,
           });
         case "surtido":
-          return (this.lastButton = {
+          return (this.lastButtonOut = {
             text: "Actualizar Rack",
             func: this.registerInInventory,
           });
