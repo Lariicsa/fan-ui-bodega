@@ -346,15 +346,8 @@ export default {
             func: this.registerInInventory,
           });
         case "registrado en inventario":
-          return (this.lastButton = {
-            text: "Reubicar",
-            func: this.registerInInventory, //temporal
-          });
-        case undefined:
-          return (this.lastButton = {
-            text: "",
-            func: this.registerInInventory, //temporal
-          });
+          return false
+
       }
     },
 
@@ -376,11 +369,6 @@ export default {
             text: "Actualizar Rack",
             func: this.registerInInventory,
           });
-        // case undefined:
-        //   return (this.lastButton = {
-        //     text: false,
-        //     func: this.registerInInventory,
-        //   });
         case "registrado en inventario":
           return false;
       }
