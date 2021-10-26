@@ -202,8 +202,6 @@ const entries = {
     async getPreloadDetail({ commit }, data) {
       try {
         commit("FETCH_LOADER_STATUS", true);
-        console.log("data", data);
-
         let page = data.page;
         let preloadId = data.preloadId;
         const res = await preloadDetail(
@@ -216,10 +214,8 @@ const entries = {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_PRELOAD_DETAILS", items);
           commit("FETCH_RESPONSE_STATUS", success);
-          console.log("total", total);
           commit("FETCH_TOTAL_RESULT", total);
         }
-        console.log("PreDetail", res.config.url);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
         if (error.response) {
