@@ -51,9 +51,18 @@
           class="row sm right entry__endrow"
         >
           <FanButton
-            :text="showButton.text"
+            v-show="showEntryButton.text !== false"
+            :text="showEntryButton.text"
             ui="primary"
-            @btnClick="showButton.func"
+            @btnClick="showEntryButton.func"
+          />
+        </div>
+        <div v-else class="row sm right entry__endrow">
+          <FanButton
+            v-show="showOutButton !== false"
+            :text="showOutButton.text"
+            ui="primary"
+            @btnClick="showOutButton.func"
           />
         </div>
       </div>
@@ -146,31 +155,21 @@ export default {
 
     async pagination(page) {
       if (this.preloadId == "") {
-        await this.$store
-          .dispatch("getPreloadDetail", {
-            preloadId: this.idTyped,
-            page: this.page,
-          })
-          .then(() => {
-            // this.page = page;
-          });
+        await this.$store.dispatch("getPreloadDetail", {
+          preloadId: this.idTyped,
+          page: this.page,
+        });
         this.page = page;
-        console.log(`Page preloadId ${page}`);
       } else {
-        await this.$store
-          .dispatch("getPreloadDetail", {
-            preloadId: this.preloadId,
-            page: this.page,
-          })
-          .then(() => {
-            // this.page = page;
-          });
-
+        await this.$store.dispatch("getPreloadDetail", {
+          preloadId: this.preloadId,
+          page: this.page,
+        });
         this.page = page;
-        console.log(`Page idTyped ${page}`);
       }
     },
 
+    //Entries
     arrangeOnRack() {
       this.$store
         .dispatch("updatePreloadsStatus", {
@@ -205,6 +204,38 @@ export default {
       this.$store
         .dispatch("updatePreloadsStatus", {
           newStatus: "registrado en inventario",
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
+        })
+        .then(() => {
+          if (this.preloadId == "") {
+            this.getPreloadInfo(this.idTyped);
+          } else {
+            this.getPreloadInfo(this.preloadId);
+          }
+        });
+    },
+
+    //Outs
+
+    findLocation() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "localizando",
+          id: this.idTyped != "" ? this.idTyped : this.preloadId,
+        })
+        .then(() => {
+          if (this.preloadId == "") {
+            this.getPreloadInfo(this.idTyped);
+          } else {
+            this.getPreloadInfo(this.preloadId);
+          }
+        });
+    },
+
+    finalizePacking() {
+      this.$store
+        .dispatch("updatePreloadsStatus", {
+          newStatus: "surtido",
           id: this.idTyped != "" ? this.idTyped : this.preloadId,
         })
         .then(() => {
@@ -296,9 +327,8 @@ export default {
       return table;
     },
 
-    showButton() {
+    showEntryButton() {
       let status = this.currentPreloadsStatus;
-
       switch (status) {
         case "asignado":
           return (this.lastButton = {
@@ -325,6 +355,34 @@ export default {
             text: "",
             func: this.registerInInventory, //temporal
           });
+      }
+    },
+
+    showOutButton() {
+      let status = this.currentPreloadsStatus;
+      switch (status) {
+        case "asignado":
+          return (this.lastButton = {
+            text: "Localizar",
+            func: this.findLocation,
+          });
+        case "surtiendo":
+          return (this.lastButton = {
+            text: "Finalizar surtido",
+            func: this.finalizePacking,
+          });
+        case "surtido":
+          return (this.lastButton = {
+            text: "Actualizar Rack",
+            func: this.registerInInventory,
+          });
+        // case undefined:
+        //   return (this.lastButton = {
+        //     text: false,
+        //     func: this.registerInInventory,
+        //   });
+        case "registrado en inventario":
+          return false;
       }
     },
 

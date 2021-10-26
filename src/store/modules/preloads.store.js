@@ -127,10 +127,8 @@ const entries = {
           }
         }
         commit("FETCH_LOADER_STATUS", false);
-        // console.log(res);
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
-        // console.log(error.response);
         if (error.response) {
           let status = error.response.status;
           console.log("status", status);
@@ -152,7 +150,6 @@ const entries = {
           let status = error.response.status;
           console.log("err", error.response);
           commit("FETCH_RESPONSE_ERROR_STATUS", status);
-          //commit("FETCH_RESPONSE_STATUS", status);
         }
       }
     },
