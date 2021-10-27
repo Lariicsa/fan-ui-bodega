@@ -94,8 +94,9 @@ const entries = {
     entryDataResult(state) {
       let item = state.entriesResults;
 
-      let sorted = item.map((ele) => {
+      let sorted = item.map((ele, ix) => {
         const formated = {
+          index: ix,
           product_id: ele.product_id,
           description: ele.description,
           brand: ele.brand,
