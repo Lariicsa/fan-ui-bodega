@@ -1,5 +1,6 @@
 <template>
   <div class="col" v-cloak>
+    {{ fullPath }}}
     <Loader v-show="loader" />
     <h4>
       Buscar precarga <span>({{ totalItems }} resultados)</span>
@@ -263,6 +264,14 @@ export default {
     },
 
     getPreloadInfo(entrieId) {
+      if (this.idTyped !== "") {
+        this.$router
+          .push({
+            name: "PreloadsFind",
+            params: { preloadId: this.idTyped },
+          })
+          .catch((err) => {});
+      }
       this.$store.dispatch("getPreloaded", entrieId).then(() => {
         this.$store.dispatch("getPreloadDetail", {
           preloadId: entrieId,
@@ -282,6 +291,23 @@ export default {
       "totalItems",
       "preloadActionType",
     ]),
+
+    fullPath() {
+      //if (this.idTyped !== "") {
+      let param = this.$route.fullPath.split("/");
+      let paramId = param.indexOf(this.paramId);
+      this.loadPreloadId = paramId;
+      let cut = param.splice(3, 3, "elnuevo");
+
+      return param.join("/");
+      // }
+    },
+
+    paramId() {
+      console.log("v", this.$route);
+      return this.$route.paramId;
+    },
+
     loader() {
       return this.$store.state.preloads.loader;
     },
