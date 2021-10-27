@@ -41,7 +41,7 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="" tableWidth="100vw">
+      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="index" tableWidth="100vw">
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
@@ -51,7 +51,7 @@
             />
           </div>
           <Modal
-            :showBox="showUpdateBox === slotProps.nrow.product_id"
+            :showBox="showUpdateBox === slotProps.nrow.index"
             @closeModal="hideBox()"
           >
             <RelocateForm
@@ -117,7 +117,8 @@ export default {
     ...mapActions(["getLatestEntries"]),
 
     showBox(prod) {
-      this.showUpdateBox = prod.product_id;
+      console.log('prod', prod);
+      this.showUpdateBox = prod.index;
     },
 
     hideBox() {
@@ -152,7 +153,7 @@ export default {
         this.$store
           .dispatch("updateEntryLocation", {
             action: "UPDATE_LOCATION",
-            productId: entry.productId,
+            productId: entry.product_id,
             location: entry.location,
             newLocation: entry.newLocation,
             quantity: parseInt(entry.quantity),

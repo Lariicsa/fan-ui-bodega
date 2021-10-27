@@ -11,7 +11,7 @@
         v-model="idTyped"
       />
       <div v-if="showTable" class="row center entry__row">
-        <div v-if="totalItems.length > 1" class="row center entry__row">
+        <div class="row center entry__row">
           <pagination
             :records="totalItems"
             v-model="page"
