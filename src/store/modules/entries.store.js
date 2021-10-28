@@ -30,9 +30,9 @@ const entries = {
       state.entriesResults = payload;
     },
 
-    FETCH_ENTRY_STATUS_RESPONSE:(state, payload)=> {
-      state.statusResponse = payload
-    }
+    FETCH_ENTRY_STATUS_RESPONSE: (state, payload) => {
+      state.statusResponse = payload;
+    },
   },
 
   actions: {
@@ -50,8 +50,8 @@ const entries = {
         const res = await updateEntryLocation(updating);
         let success = res.status;
         if (success == 200) {
-          dispatch("getLatestEntries");
-          commit("FETCH_ENTRY_STATUS_RESPONSE", success)
+         await dispatch("getLatestEntries");
+          commit("FETCH_ENTRY_STATUS_RESPONSE", success);
         }
         console.log("entrulocation", res);
         commit("FETCH_LOADER_STATUS", false);
@@ -66,7 +66,6 @@ const entries = {
     },
 
     async findEntryByParam({ commit }, param) {
-
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await findEntryByParam(param);
@@ -139,9 +138,9 @@ const entries = {
       }
     },
 
-    cEntryStatus(state){
-      return state.statusResponse
-    }
+    cEntryStatus(state) {
+      return state.statusResponse;
+    },
   },
 };
 
