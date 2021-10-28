@@ -57,7 +57,7 @@
             @onChange="setAssignedTo(selectedEmployee)"
           />
           <FanButton
-            :text="'Registrar '+optionTransaction"
+            :text="'Registrar ' + optionTransaction"
             :ui="isAllFilled ? 'primary' : 'disabled'"
             @btnClick="loadEntries()"
           />
@@ -92,6 +92,7 @@ import TableSimple from "@/components/TableSimple";
 import Loader from "@/components/Loader.vue";
 import storesData from "@/Mucks/stores";
 import employees from "@/Mucks/employees";
+const token = process.env.TEMP_TOKEN;
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Home",
@@ -124,10 +125,7 @@ export default {
   created() {
     let ls = localStorage.getItem("jwt");
     if (ls === null) {
-      localStorage.setItem(
-        "jwt",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZTdjNzc3MS1lYWY2LTRlNWUtOTJmYy01YTA3NGQ2OGM0MWEiLCJlbWFpbCI6Im5hdGhhbmllbEBmYW50YXN0aWNvY29taWMuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNzIjoiZmFudGFzdGljbyBhcGkiLCJpYXQiOjE2MzQyMzE3MzJ9.jaSitYOtnXQRAYgNcYXbnj3bep1fgaE6uelV3o2G95k"
-      );
+      localStorage.setItem("jwt", token);
     }
   },
 
@@ -142,8 +140,8 @@ export default {
       "loadPreloadFromCounting",
     ]),
 
-    setTransaction(option){
-      this.$store.commit("SET_TRANSACTION_OPTION", option)
+    setTransaction(option) {
+      this.$store.commit("SET_TRANSACTION_OPTION", option);
     },
 
     showCountingDetails() {
@@ -271,7 +269,7 @@ export default {
       return this.$store.state.preloads.assignedEmployee;
     },
     optionTransaction() {
-      return this.$store.state.preloads.selectedTransaction
+      return this.$store.state.preloads.selectedTransaction;
     },
 
     isAllFilled() {

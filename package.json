@@ -1,8 +1,9 @@
 {
   "name": "ui-bodega-fantastico",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
@@ -31,6 +32,6 @@
     "last 2 versions"
   ],
   "engines": {
-    "npm": ">=10.0.0"
+    "node": "12.x"
   }
 }
