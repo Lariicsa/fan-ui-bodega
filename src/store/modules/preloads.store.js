@@ -373,16 +373,16 @@ const entries = {
           return elems;
         });
 
-        const sorted = formated.sort(function(a, b) {
-          if (a.detail_id < b.detail_id) {
-            return -1;
-          }
-          if (a.detail_id > b.detail_id) {
-            return 1;
-          }
-          return 0;
-        });
-        return sorted;
+        // const sorted = formated.sort(function(a, b) {
+        //   if (a.detail_id < b.detail_id) {
+        //     return -1;
+        //   }
+        //   if (a.detail_id > b.detail_id) {
+        //     return 1;
+        //   }
+        //   return 0;
+        // });
+        return formated;
       }
     },
 
