@@ -107,6 +107,7 @@ export default {
 
   watch: {
     newLocation: function (val) {
+      this.dataDetails.product_id
       this.dataDetails.newLocation = val;
     },
     $route: "actionForm",

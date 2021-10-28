@@ -93,7 +93,6 @@ const entries = {
   getters: {
     entryDataResult(state) {
       let item = state.entriesResults;
-
       let sorted = item.map((ele, ix) => {
         const formated = {
           index: ix,
@@ -106,11 +105,9 @@ const entries = {
           updated_at: ele.updated_at,
           updated_by: ele.updated_by,
           total_items: ele.total_items,
-          
         };
         return formated;
       });
-
       return sorted;
     },
 
@@ -127,7 +124,6 @@ const entries = {
             line: ele.line,
             control: ele.control,
             status: ele.status,
-            //pre_location: ele.pre_location,
             updated_by: ele.updated_by,
             updated_at: ele.updated_at,
             final_location: ele.final_location,

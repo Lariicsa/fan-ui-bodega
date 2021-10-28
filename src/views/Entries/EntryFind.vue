@@ -56,7 +56,7 @@
             />
           </div>
           <Modal
-            :showBox="showUpdateBox === slotProps.nrow.index"
+            :showBox="showUpdateBox === slotProps.nrow.product_id"
             @closeModal="hideBox()"
           >
             <RelocateForm
@@ -123,7 +123,7 @@ export default {
 
     showBox(prod) {
       console.log("prod", prod);
-      this.showUpdateBox = prod.index;
+      this.showUpdateBox = prod.product_id;
     },
 
     hideBox() {
@@ -155,20 +155,20 @@ export default {
     updateItemLocation(entry) {
       console.log("entry", entry);
       if (entry.newLocation !== null && entry.newLocation !== "") {
-        this.$store
-          .dispatch("updateEntryLocation", {
-            action: "UPDATE_LOCATION",
-            productId: entry.product_id,
-            location: entry.location,
-            newLocation: entry.newLocation,
-            quantity: parseInt(entry.quantity),
-          })
-          .then(() => {
-            this.hideBox();
-            setTimeout(() => {
-              location.reload();
-            }, 100);
-          });
+        const itemData = {
+          action: "UPDATE_LOCATION",
+          productId: entry.productId,
+          location: entry.location,
+          newLocation: entry.newLocation,
+          quantity: parseInt(entry.quantity),
+        };
+        console.log("itemData", itemData);
+        this.$store.dispatch("updateEntryLocation", itemData).then(() => {
+          this.hideBox();
+          setTimeout(() => {
+            location.reload();
+          }, 500);
+        });
       }
     },
   },
