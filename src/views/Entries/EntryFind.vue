@@ -56,7 +56,7 @@
             />
           </div>
           <Modal
-            :showBox="showUpdateBox === slotProps.nrow.product_id"
+            :showBox="showUpdateBox === slotProps.nrow.index"
             @closeModal="hideBox()"
           >
             <RelocateForm
@@ -75,6 +75,13 @@
     <div v-if="exists" class="row center">
       <Message type="notfound robot">No existe ID de entrada</Message>
     </div>
+    <Message
+      :showmsg="messageUpdating"
+      type="success fixed robot"
+      :showClose="true"
+      @clicMsg="closeMessage()"
+      >Reubicación actualizada</Message
+    >
   </div>
 </template>
 <script>
@@ -111,6 +118,7 @@ export default {
       paramType: "productKey",
       paramValue: "",
       showUpdateBox: null,
+      messageUpdating: false,
     };
   },
 
@@ -121,9 +129,13 @@ export default {
   methods: {
     ...mapActions(["getLatestEntries"]),
 
+    closeMessage() {
+      this.$store.commit("FETCH_ENTRY_STATUS_RESPONSE", undefined);
+    },
+
     showBox(prod) {
       console.log("prod", prod);
-      this.showUpdateBox = prod.product_id;
+      this.showUpdateBox = prod.index;
     },
 
     selectParamKey(param) {
@@ -166,11 +178,17 @@ export default {
           newLocation: entry.newLocation,
           quantity: parseInt(entry.quantity),
         };
-        console.log("itemData", itemData);
         this.$store.dispatch("updateEntryLocation", itemData).then(() => {
           this.hideBox();
           setTimeout(() => {
-            location.reload();
+            this.getLatestEntries().then(() => {
+              if (this.cEntryStatus == 200) {
+                this.messageUpdating = true;
+                setTimeout(() => {
+                  this.messageUpdating = false;
+                }, 3000);
+              }
+            });
           }, 500);
         });
       }
@@ -178,7 +196,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["entryDataResult", "entryDataDetails", "currentStatus"]),
+    ...mapGetters(["entryDataResult", "entryDataDetails", "cEntryStatus"]),
     loader() {
       return this.$store.state.preloads.loader;
     },

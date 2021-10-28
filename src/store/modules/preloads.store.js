@@ -178,6 +178,7 @@ const entries = {
       }
     },
 
+    //need to change name, this is from entries
     async getPreloaded({ commit }, preloadId) {
       commit("FETCH_LOADER_STATUS", true);
       try {
