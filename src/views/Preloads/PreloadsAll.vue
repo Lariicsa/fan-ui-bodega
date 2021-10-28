@@ -8,13 +8,13 @@
     <div class="row">
       <TableSimple
         :item="tableDataDetails"
-        :cols="9"
+        :cols="8"
         modifier="hasHover"
         colExceptions="status"
         @rowClick="goToDetail($event)"
       >
         <template v-slot:default="slotProps">
-          <div class="tableDetail__cell cols9">
+          <div class="tableDetail__cell cols8">
             <Label :type="slotProps.nrow.status" />
           </div>
         </template>
@@ -68,7 +68,7 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
-          "",
+          "Status",
           "id",
           "Cantidad",
           "Desde",
@@ -76,7 +76,6 @@ export default {
           "Editor",
           "Fecha",
           "Asignado a",
-          "Status",
         ],
         rows: this.currentPreloads,
       };

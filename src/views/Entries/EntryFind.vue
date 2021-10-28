@@ -20,14 +20,14 @@
         <!-- refactor -->
         <Radiooption
           v-model="paramType"
-          textOption="Por nombre"
-          id="name"
+          textOption="Por clave"
+          id="productKey"
           @click="selectParamKey(paramType)"
         />
         <Radiooption
           v-model="paramType"
-          textOption="Por clave"
-          id="productKey"
+          textOption="Por nombre"
+          id="name"
           @click="selectParamKey(paramType)"
         />
         <Radiooption
@@ -41,7 +41,12 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="index" tableWidth="100vw">
+      <TableSimple
+        :item="tableDataDetails"
+        :cols="10"
+        colExceptions="index"
+        tableWidth="100vw"
+      >
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
@@ -51,7 +56,7 @@
             />
           </div>
           <Modal
-            :showBox="showUpdateBox === slotProps.nrow.index"
+            :showBox="showUpdateBox === slotProps.nrow.product_id"
             @closeModal="hideBox()"
           >
             <RelocateForm
@@ -103,7 +108,7 @@ export default {
   data() {
     return {
       idTyped: "",
-      paramType: "name",
+      paramType: "productKey",
       paramValue: "",
       showUpdateBox: null,
     };
@@ -117,8 +122,12 @@ export default {
     ...mapActions(["getLatestEntries"]),
 
     showBox(prod) {
-      console.log('prod', prod);
-      this.showUpdateBox = prod.index;
+      console.log("prod", prod);
+      this.showUpdateBox = prod.product_id;
+    },
+
+    selectParamKey(param){
+      console.log('key', param);
     },
 
     hideBox() {
@@ -131,13 +140,14 @@ export default {
           this.$store.dispatch("findEntryByParam", `?barcode=${key}`);
           break;
 
-        case "productKey":
-          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
+        case "name":
+           this.$store.dispatch("findEntryByParam", `?name=${key}`);
           break;
 
         default:
-          this.$store.dispatch("findEntryByParam", `?name=${key}`);
+          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
           break;
+         
       }
     },
 
@@ -150,20 +160,20 @@ export default {
     updateItemLocation(entry) {
       console.log("entry", entry);
       if (entry.newLocation !== null && entry.newLocation !== "") {
-        this.$store
-          .dispatch("updateEntryLocation", {
-            action: "UPDATE_LOCATION",
-            productId: entry.product_id,
-            location: entry.location,
-            newLocation: entry.newLocation,
-            quantity: parseInt(entry.quantity),
-          })
-          .then(() => {
-            this.hideBox();
-            setTimeout(() => {
-              location.reload();
-            }, 100);
-          });
+        const itemData = {
+          action: "UPDATE_LOCATION",
+          productId: entry.productId,
+          location: entry.location,
+          newLocation: entry.newLocation,
+          quantity: parseInt(entry.quantity),
+        };
+        console.log("itemData", itemData);
+        this.$store.dispatch("updateEntryLocation", itemData).then(() => {
+          this.hideBox();
+          setTimeout(() => {
+            location.reload();
+          }, 500);
+        });
       }
     },
   },
@@ -186,6 +196,8 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
+          "",
+          "Ubicación",
           "Clave",
           "Descripción",
           "Editorial",
@@ -194,8 +206,6 @@ export default {
           "Actualización",
           "Editor",
           "Cantidad",
-          "Ubicación",
-          "",
         ],
         rows: this.entryDataResult,
       };
