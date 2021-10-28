@@ -126,8 +126,8 @@ export default {
       this.showUpdateBox = prod.product_id;
     },
 
-    selectParamKey(param){
-      console.log('key', param);
+    selectParamKey(param) {
+      console.log("key", param);
     },
 
     hideBox() {
@@ -141,13 +141,12 @@ export default {
           break;
 
         case "name":
-           this.$store.dispatch("findEntryByParam", `?name=${key}`);
+          this.$store.dispatch("findEntryByParam", `?name=${key}`);
           break;
 
         default:
           this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
           break;
-         
       }
     },
 
