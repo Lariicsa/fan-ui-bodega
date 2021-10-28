@@ -22,6 +22,8 @@ _Esta app está hospedada en Heroku.com_
 
 [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
 
+> En caso de no tener instalada la última versión de Heroku CLI se debe actualizar con ```npm update -g heroku```
+
 
 ### Configuración de repositorio Heroku
 
@@ -39,7 +41,7 @@ heroku buildpacks:add heroku/nodejs
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static
 ```
 
-**Es importante verificar que el archivo `static.json` se encuentra en raíz con esl siguiente código:**
+**Es importante verificar que el archivo `static.json` se encuentra en raíz con el siguiente código:**
 
 ```json
 {
