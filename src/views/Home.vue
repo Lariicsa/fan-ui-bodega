@@ -30,7 +30,16 @@
             mainModifier="maxHeight"
           />
         </div>
-        <div class="row between entries__setting">
+        <div class="row entries__setting">
+          <Dropdown
+            v-model="selectTransaction"
+            phName="Movimiento"
+            variant="form"
+            :options="transactionList"
+            name="transact"
+            @onChange="setTransaction(selectTransaction)"
+          />
+
           <Dropdown
             v-model="selectedStore"
             phName="Origen"
@@ -48,7 +57,7 @@
             @onChange="setAssignedTo(selectedEmployee)"
           />
           <FanButton
-            text="Registrar entrada"
+            :text="'Registrar '+optionTransaction"
             :ui="isAllFilled ? 'primary' : 'disabled'"
             @btnClick="loadEntries()"
           />
@@ -108,6 +117,7 @@ export default {
       selectedEmployee: "",
       showDetails: false,
       setActionType: "",
+      selectTransaction: "",
     };
   },
 
@@ -132,6 +142,10 @@ export default {
       "loadPreloadFromCounting",
     ]),
 
+    setTransaction(option){
+      this.$store.commit("SET_TRANSACTION_OPTION", option)
+    },
+
     showCountingDetails() {
       this.showDetails = true;
     },
@@ -150,7 +164,7 @@ export default {
       this.$store
         .dispatch("loadPreloadFromCounting", {
           countId: this.countId,
-          type: "ENTRADA",
+          type: this.optionTransaction,
           fromTo: this.fromTo,
           assignedTo: this.assignedTo,
         })
@@ -237,6 +251,14 @@ export default {
       return tiendas;
     },
 
+    transactionList() {
+      let transactions = ["ENTRADA", "SALIDA"];
+      let option = transactions.map((item) => {
+        return { value: item, text: item };
+      });
+      return option;
+    },
+
     countId() {
       if (this.$store.state.preloads.countingData != undefined) {
         return this.$store.state.preloads.countingData.count_id;
@@ -247,6 +269,9 @@ export default {
     },
     assignedTo() {
       return this.$store.state.preloads.assignedEmployee;
+    },
+    optionTransaction() {
+      return this.$store.state.preloads.selectedTransaction
     },
 
     isAllFilled() {

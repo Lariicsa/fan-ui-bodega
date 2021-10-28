@@ -19,6 +19,7 @@ const entries = {
     preloadsAll: [],
     preloadDetail: [],
     assignedEmployee: "",
+    selectedTransaction: "",
     loader: false,
     status: false,
     statusResponse: undefined,
@@ -82,6 +83,10 @@ const entries = {
 
     GET_ENTRIES_RESULT: (state, payload) => {
       state.entriesResults = payload;
+    },
+
+    SET_TRANSACTION_OPTION: (state, payload) => {
+      state.selectedTransaction = payload;
     },
   },
 
@@ -214,7 +219,7 @@ const entries = {
           commit("FETCH_RESPONSE_STATUS", success);
           commit("FETCH_TOTAL_RESULT", total);
 
-          console.log('preloadDetail', res.data);
+          console.log("preloadDetail", res.data);
         }
       } catch (error) {
         commit("FETCH_LOADER_STATUS", false);
