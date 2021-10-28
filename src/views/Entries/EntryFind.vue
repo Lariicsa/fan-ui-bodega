@@ -20,14 +20,14 @@
         <!-- refactor -->
         <Radiooption
           v-model="paramType"
-          textOption="Por nombre"
-          id="name"
+          textOption="Por clave"
+          id="productKey"
           @click="selectParamKey(paramType)"
         />
         <Radiooption
           v-model="paramType"
-          textOption="Por clave"
-          id="productKey"
+          textOption="Por nombre"
+          id="name"
           @click="selectParamKey(paramType)"
         />
         <Radiooption
@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       idTyped: "",
-      paramType: "name",
+      paramType: "productKey",
       paramValue: "",
       showUpdateBox: null,
     };
@@ -126,6 +126,10 @@ export default {
       this.showUpdateBox = prod.product_id;
     },
 
+    selectParamKey(param){
+      console.log('key', param);
+    },
+
     hideBox() {
       this.showUpdateBox = false;
     },
@@ -136,13 +140,14 @@ export default {
           this.$store.dispatch("findEntryByParam", `?barcode=${key}`);
           break;
 
-        case "productKey":
-          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
+        case "name":
+           this.$store.dispatch("findEntryByParam", `?name=${key}`);
           break;
 
         default:
-          this.$store.dispatch("findEntryByParam", `?name=${key}`);
+          this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
           break;
+         
       }
     },
 
