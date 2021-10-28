@@ -1,6 +1,5 @@
 <template>
   <div class="col" v-cloak>
-    {{ fullPath }}}
     <Loader v-show="loader" />
     <h4>
       Buscar precarga <span>({{ totalItems }} resultados)</span>
