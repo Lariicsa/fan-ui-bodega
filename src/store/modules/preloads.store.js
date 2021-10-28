@@ -279,7 +279,6 @@ const entries = {
       const items = state.preloadsAll;
       let formated = items.map((item, n) => {
         return {
-          index: n + 1,
           preload_id: item.preload_id,
           total_items: item.total_items,
           from_to: item.from_to,
@@ -364,7 +363,6 @@ const entries = {
             brand: ele.brand,
             line: ele.line,
             control: ele.control,
-            //pre_location: ele.pre_location,
             updated_by: ele.updated_by,
             updated_at: ele.updated_at,
             final_location: ele.final_location,
