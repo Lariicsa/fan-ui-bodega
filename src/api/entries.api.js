@@ -18,8 +18,8 @@ const getOrderDetail = (idCounting) =>
   MAIN_SERVICE.get(
     GET_COUNTING_DETAIL + idCounting + "/detail?limit=200&page=1"
   );
-const getPreload = (preloadId) => MAIN_SERVICE.get(GET_PRELOAD + preloadId);
-const preloadDetail = (data) =>
+const getEntry = (preloadId) => MAIN_SERVICE.get(GET_PRELOAD + preloadId);
+const getEntryDetail = (data) =>
   MAIN_SERVICE.get(GET_PRELOAD_DETAIL + data);
 
 const allPreloads = () =>
@@ -58,8 +58,8 @@ export {
   getCountingOrder,
   addPreload,
   getOrderDetail,
-  getPreload,
-  preloadDetail,
+  getEntry,
+  getEntryDetail,
   allPreloads,
   updatePreloadLocation,
   updatePreloadStatus,
