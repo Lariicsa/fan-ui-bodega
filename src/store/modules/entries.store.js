@@ -97,16 +97,16 @@ const entries = {
       let sorted = item.map((ele, ix) => {
         const formated = {
           index: ix,
+          final_location: ele.final_location,
           product_id: ele.product_id,
           description: ele.description,
           brand: ele.brand,
           line: ele.line,
           control: ele.control,
-          //pre_location: ele.pre_location,
           updated_at: ele.updated_at,
           updated_by: ele.updated_by,
           total_items: ele.total_items,
-          final_location: ele.final_location,
+          
         };
         return formated;
       });

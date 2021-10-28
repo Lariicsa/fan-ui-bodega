@@ -41,7 +41,12 @@
     </div>
 
     <div class="row center">
-      <TableSimple :item="tableDataDetails" :cols="10" colExceptions="index" tableWidth="100vw">
+      <TableSimple
+        :item="tableDataDetails"
+        :cols="10"
+        colExceptions="index"
+        tableWidth="100vw"
+      >
         <template v-slot:default="slotProps">
           <div class="tableDetail__cell cols10">
             <FanButton
@@ -117,7 +122,7 @@ export default {
     ...mapActions(["getLatestEntries"]),
 
     showBox(prod) {
-      console.log('prod', prod);
+      console.log("prod", prod);
       this.showUpdateBox = prod.index;
     },
 
@@ -186,6 +191,8 @@ export default {
     tableDataDetails() {
       const table = {
         head: [
+          "",
+          "Ubicación",
           "Clave",
           "Descripción",
           "Editorial",
@@ -194,8 +201,6 @@ export default {
           "Actualización",
           "Editor",
           "Cantidad",
-          "Ubicación",
-          "",
         ],
         rows: this.entryDataResult,
       };

@@ -22,6 +22,7 @@
           :key="i"
           @click.stop="rowClick(row)"
         >
+          <slot v-bind:nrow="row"></slot>
           <div
             v-for="(col, n) in columns"
             :class="
@@ -39,7 +40,6 @@
               `<div class='simpleTable__cell-in'>` + col + '</div>' + row[col]
             "
           ></div>
-          <slot v-bind:nrow="row"></slot>
         </div>
         <div class="simpleTable__row">
           <slot name="extraRow"></slot>
