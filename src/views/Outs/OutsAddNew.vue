@@ -23,6 +23,22 @@
           typemsg="error"
         />
       </div>
+    </div>
+    <div class="row">
+      <h4>Artículos</h4>
+    </div>
+    <div class="row between xcenter">
+      <InputRegister txtBtnOk="Agregar" />
+    </div>
+    <div class="row">
+      <hr />
+    </div>
+    <div class="row outs__row">
+      <div v-if="showTableItems" class="container__box">
+        <TableSimple :item="tableDataDetails" :cols="3" />
+      </div>
+    </div>
+    <div v-show="showTableItems" class="row between xcenter">
       <div class="row md">
         <Dropdown
           v-model="outData.selectedStore"
@@ -43,27 +59,13 @@
           @onChange="setAssignedTo(outData.selectedEmployee)"
         />
       </div>
-    </div>
-    <div class="row">
-      <hr />
-    </div>
-    <div class="row">
-      <h4>Artículos</h4>
-    </div>
-    <div class="row between xcenter">
-      <InputRegister txtBtnOk="Agregar" />
-    </div>
-    <div class="row outs__row">
-      <div v-if="showTableItems" class="container__box">
-        <TableSimple :item="tableDataDetails" :cols="3" />
-        <div class="row right outs__row">
+      <div class="row right outs__row">
           <FanButton
             text="Registrar"
             ui="primary min"
             @btnClick="registerOut()"
           />
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -138,9 +140,9 @@ export default {
       this.$store.commit("SET_PRELOAD_ASSIGNEDTO", employee);
     },
 
-    closeWarning(){
-      this.$store.commit("FETCH_PRELOAD_OUT_STATUS", false)
-    }
+    closeWarning() {
+      this.$store.commit("FETCH_PRELOAD_OUT_STATUS", false);
+    },
   },
 
   computed: {
