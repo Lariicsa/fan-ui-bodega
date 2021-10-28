@@ -3,8 +3,8 @@ import {
   allPreloads,
   getCountingOrder,
   getOrderDetail,
-  getPreload,
-  preloadDetail,
+  getEntry,
+  getEntryDetail,
   updatePreloadLocation,
   updatePreloadStatus,
 } from "@/api/entries.api";
@@ -178,10 +178,11 @@ const entries = {
       }
     },
 
+    //need to change name, this is from entries
     async getPreloaded({ commit }, preloadId) {
       commit("FETCH_LOADER_STATUS", true);
       try {
-        const res = await getPreload(preloadId);
+        const res = await getEntry(preloadId);
         let preloadRes = res.data.payload;
         let success = res.status;
         if (success == 200) {
@@ -201,7 +202,7 @@ const entries = {
         commit("FETCH_LOADER_STATUS", true);
         let page = data.page;
         let preloadId = data.preloadId;
-        const res = await preloadDetail(
+        const res = await getEntryDetail(
           `${preloadId}/detail?limit=9&page=${page}`
         );
         let success = res.status;
