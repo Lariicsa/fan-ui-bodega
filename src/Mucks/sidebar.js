@@ -22,7 +22,7 @@ export default {
       icon: "",
       text: "Registrar Salida",
       path: "/salidas/registro",
-      name: "",
+      name: "outs",
     },
     {
       icon: "",

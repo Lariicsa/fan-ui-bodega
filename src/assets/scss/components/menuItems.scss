@@ -88,6 +88,11 @@
           @include icon("search", $blackio);
         }
       }
+      &.outs {
+        &:after {
+          @include icon("outs", $blackio);
+        }
+      }
     }
   }
 
@@ -126,6 +131,11 @@
   &.search > a {
     &:after {
       @include icon("search", $dusk);
+    }
+  }
+  &.outs > a {
+    &:after {
+      @include icon("outs", $dusk);
     }
   }
 }
