@@ -410,7 +410,7 @@ const entries = {
       if (results != undefined) {
         return results;
       } else {
-        return 1;
+        return 0;
       }
     },
 
