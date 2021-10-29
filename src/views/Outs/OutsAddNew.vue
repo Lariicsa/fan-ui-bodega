@@ -54,20 +54,22 @@
         <Dropdown
           v-model="outData.selectedStore"
           phName="Destino"
-          variant="form"
+          :variant="isAnyWrong ? 'form error' : 'form'"
           :options="stores"
           name="idStore"
           @onChange="setPreloadOrigin(outData.selectedStore)"
+          errorMessage="Debes seleccionar un destino"
         />
       </div>
       <div class="row md">
         <Dropdown
           v-model="outData.selectedEmployee"
           phName="Asignado a"
-          variant="form"
+          :variant="isAnyWrong ? 'form error' : 'form'"
           :options="employeesList"
           name="idEmployee"
           @onChange="setAssignedTo(outData.selectedEmployee)"
+          errorMessage="Debes seleccionar a quien se asigna"
         />
       </div>
       <div class="row right outs__row">
@@ -122,7 +124,7 @@ export default {
   },
 
   mounted() {
-    this.currentPreloadOutstatus
+    this.currentPreloadOutstatus;
   },
 
   methods: {
@@ -200,6 +202,14 @@ export default {
           return item.product_id;
         });
         return items.flat();
+      }
+    },
+
+    isAnyWrong() {
+      if ([400, 409].includes(this.currentPreloadOutstatus)) {
+        return true;
+      } else {
+        return false;
       }
     },
   },

@@ -9,7 +9,6 @@
       v-model="selected"
       @change="onChange($event.target.value)"
     >
-      <!-- <option v-if="selected" value="">{{ selected ? "" : "" }}</option> -->
       <option
         v-for="option in options"
         :value="option.value"
@@ -18,6 +17,7 @@
         {{ option.text }}
       </option>
     </select>
+    <span v-if="error" class="message">{{errorMessage}}</span>
   </div>
 </template>
 <script>
@@ -35,6 +35,7 @@ export default {
     "error",
     "variant",
     "isNumber",
+    "errorMessage"
   ],
 
   methods: {

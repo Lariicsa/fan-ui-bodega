@@ -120,6 +120,9 @@
         & > .message {
           font-size: $small-size;
           color: $tomato;
+          position: absolute;
+          bottom: -2rem;
+          left: 0.2rem;
         }
       }
     }
