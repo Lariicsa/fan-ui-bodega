@@ -121,6 +121,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.currentPreloadOutstatus
+  },
+
   methods: {
     registerOut() {
       this.$store

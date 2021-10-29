@@ -291,19 +291,7 @@ export default {
       "preloadActionType",
     ]),
 
-    fullPath() {
-      //if (this.idTyped !== "") {
-      let param = this.$route.fullPath.split("/");
-      let paramId = param.indexOf(this.paramId);
-      this.loadPreloadId = paramId;
-      let cut = param.splice(3, 3, "elnuevo");
-
-      return param.join("/");
-      // }
-    },
-
     paramId() {
-      console.log("v", this.$route);
       return this.$route.paramId;
     },
 

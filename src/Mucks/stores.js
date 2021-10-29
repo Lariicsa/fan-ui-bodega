@@ -20,5 +20,9 @@ export default {
       lugarid: 8,
       nombre: "Monterrey",
     },
+    {
+      lugarid: 9,
+      nombre: "Bodega",
+    },
   ],
 };
