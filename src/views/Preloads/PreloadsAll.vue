@@ -69,10 +69,10 @@ export default {
       const table = {
         head: [
           "Status",
-          "id",
-          "Cantidad",
-          "Desde",
+          "Id",
           "Movimiento",
+          "Sucursal",
+          "Cantidad",
           "Editor",
           "Fecha",
           "Asignado a",

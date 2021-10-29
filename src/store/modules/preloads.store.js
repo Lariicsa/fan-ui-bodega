@@ -286,9 +286,9 @@ const entries = {
       let formated = items.map((item, n) => {
         return {
           preload_id: item.preload_id,
-          total_items: item.total_items,
-          from_to: item.from_to,
           action_type: item.action_type,
+          from_to: item.from_to,
+          total_items: item.total_items,
           assigned_to: item.assigned_to,
           created_at: item.created_at,
           created_by: item.created_by,

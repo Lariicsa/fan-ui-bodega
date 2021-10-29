@@ -214,7 +214,7 @@ export default {
 
     tabledata() {
       const table = {
-        topHead: ["Id de Conteo", "Fecha", "Descripción", "Total", "Autor", ""],
+        topHead: ["Id de Conteo", "Autor", "Fecha","Descripción" , "Total", ""],
         topRows: this.mainTableData,
         head: ["clave", "Descripción", "Cantidad"],
         rows: this.detailsData,

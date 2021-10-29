@@ -101,6 +101,7 @@ const entries = {
         const formated = {
           index: ix,
           final_location: ele.final_location,
+          total_items: ele.total_items,
           product_id: ele.product_id,
           description: ele.description,
           brand: ele.brand,
@@ -108,7 +109,6 @@ const entries = {
           control: ele.control,
           updated_at: ele.updated_at,
           updated_by: ele.updated_by,
-          total_items: ele.total_items,
         };
         return formated;
       });

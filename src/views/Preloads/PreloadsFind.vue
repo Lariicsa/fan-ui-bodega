@@ -333,7 +333,7 @@ export default {
         topHead: [
           "Cantidad",
           "Transacción",
-          "Desde",
+          "Sucursal",
           "Fecha",
           "Creado por",
           "Asignado a",
@@ -342,7 +342,7 @@ export default {
         topRows: this.preloadDataResult,
         head: [
           "Ubicación",
-          "id",
+          "Id",
           "Clave",
           "Descripción",
           "Editorial",

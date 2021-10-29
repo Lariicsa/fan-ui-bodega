@@ -153,7 +153,7 @@ export default {
     ]),
     tableDataDetails() {
       const table = {
-        head: ["", "Cantidad", "Clave"],
+        head: ["", "Clave", "Cantidad"],
         rows: this.itemsOutCohorte,
       };
       return table;

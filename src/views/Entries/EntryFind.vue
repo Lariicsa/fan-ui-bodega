@@ -215,6 +215,7 @@ export default {
         head: [
           "",
           "Ubicación",
+          "Cantidad",
           "Clave",
           "Descripción",
           "Editorial",
@@ -222,7 +223,6 @@ export default {
           "Control",
           "Actualización",
           "Editor",
-          "Cantidad",
         ],
         rows: this.entryDataResult,
       };
