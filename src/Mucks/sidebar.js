@@ -30,17 +30,17 @@ export default {
       path: "/entradas/buscar",
       name: "availables", 
     },
-    {
-      icon: "",
-      text: "Logs",
-      path: "/logs",
-      name: "logs",
-    },
-    {
-      icon: "",
-      text: "Cerrar Sesión",
-      path: "/logout",
-      name: "logout ",
-    },
+    // {
+    //   icon: "",
+    //   text: "Logs",
+    //   path: "/logs",
+    //   name: "logs",
+    // },
+    // {
+    //   icon: "",
+    //   text: "Cerrar Sesión",
+    //   path: "/logout",
+    //   name: "logout ",
+    // },
   ],
 };

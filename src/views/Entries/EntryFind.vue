@@ -122,8 +122,8 @@ export default {
     };
   },
 
-  mounted() {
-    this.getLatestEntries();
+  async mounted() {
+    await this.getLatestEntries();
   },
 
   methods: {
@@ -139,12 +139,13 @@ export default {
     },
 
     selectParamKey(param) {
-      console.log("key", param);
+      this.findEntryBy(this.paramValue)
     },
 
     hideBox() {
       this.showUpdateBox = false;
     },
+
     findEntryBy(key) {
       let param = this.paramType;
       switch (param) {
@@ -196,7 +197,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["entryDataResult", "entryDataDetails", "cEntryStatus"]),
+    ...mapGetters(["entryDataResult","cEntryStatus"]),
     loader() {
       return this.$store.state.preloads.loader;
     },
