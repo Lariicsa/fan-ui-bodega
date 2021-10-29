@@ -3,7 +3,7 @@
     <Loader v-show="loader" />
     <div class="row">
       <h4>
-        Inventario <span>({{ entryDataResult.length }} Resultados)</span>
+        Inventario <span>({{ entryDataResult.length }} resultados)</span>
       </h4>
     </div>
 

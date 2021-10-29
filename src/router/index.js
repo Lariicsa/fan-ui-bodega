@@ -76,7 +76,7 @@ const routes = [
         component: () => import("@/views/Outs/OutsAddNew.vue"),
       },
       {
-        path: "precarga/:preloadId",
+        path: "salida/:preloadId",
         name: "OutsSuccess",
         props: true,
         component: () => import("@/views/Outs/OutsSuccess.vue"),

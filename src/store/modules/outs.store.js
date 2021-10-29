@@ -3,6 +3,7 @@ import { addOutPreload } from "@/api/preloads.api";
 const outs = {
   state: {
     itemsCohorte: [],
+    itemsIssues: [],
     preloadOrigin: "",
     assignedTo: "",
     resStatus: null,
@@ -13,8 +14,11 @@ const outs = {
 
   mutations: {
     ADD_OUT_ITEM: (state, payload) => {
-      console.log(payload);
       state.itemsCohorte.push(payload);
+    },
+
+    REMOVE_OUT_ITEM: (state, payload) => {
+      state.itemsCohorte.splice(payload, 1);
     },
 
     SET_PRELOAD_ORIGIN: (state, payload) => {
@@ -35,6 +39,9 @@ const outs = {
     },
     GET_MESSAGE_RESPONSE: (state, payload) => {
       state.messageResponse = payload;
+    },
+    FETCH_ITEMS_ISSUED: (state, payload) => {
+      state.itemsIssues = payload;
     },
   },
 
@@ -59,6 +66,7 @@ const outs = {
         if (error.response) {
           commit("GET_MESSAGE_RESPONSE", error.response.data.message);
           commit("FETCH_PRELOAD_OUT_STATUS", error.response.status);
+          commit("FETCH_ITEMS_ISSUED", error.response.data.payload.items);
         }
       }
     },
@@ -66,9 +74,12 @@ const outs = {
 
   getters: {
     itemsOutCohorte(state) {
-      let items = state.itemsCohorte.map((ele, i) => {
-        return { index: i + 1, ...ele };
-      });
+      let items = state.itemsCohorte
+      return items;
+    },
+
+    issuesInCohorte(state) {
+      let items = state.itemsIssues
       return items;
     },
 

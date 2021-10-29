@@ -3,7 +3,7 @@
     <h3>Precarga Registrada</h3>
     <Message :showmsg="true" type="infotext">
       <p class="advice">
-        La orden <strong>{{ preloadId }}</strong> se ha registrado con éxito.
+        La precarga se ha registrado con éxito.
         <br /><br />
         <br />
         El ID de la precarga es:
@@ -28,12 +28,6 @@ export default {
   components: {
     Message,
   },
-  props: {
-    preloadId: {
-      required: true,
-    },
-  },
-
   computed: {
     ...mapGetters(["currentPreloadOutstatus", "currentOutPreloadId"]),
   },

@@ -65,6 +65,10 @@ export default {
             quantity: this.product.quantity,
           };
           this.$store.commit("ADD_OUT_ITEM", data);
+          setTimeout(() => {
+            this.product.idProd = "";
+            this.product.quantity = "";
+          }, 200);
         }
       }
     },

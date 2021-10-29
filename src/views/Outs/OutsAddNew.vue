@@ -6,7 +6,9 @@
       :showClose="true"
       @clicMsg="closeWarning()"
       ><p class="advice">
-        {{ messageResponseText }}: {{ NotEnough.toString() }}
+        {{ messageResponseText }}:
+        <br />
+        {{ NotEnough.toString() }}
       </p></Message
     >
     <div class="row">
@@ -35,7 +37,16 @@
     </div>
     <div class="row outs__row">
       <div v-if="showTableItems" class="container__box">
-        <TableSimple :item="tableDataDetails" :cols="3" />
+        <TableSimple :item="tableDataDetails" :cols="4">
+          <template v-slot:default="slotProps">
+            <div class="tableDetail__cell cols4">
+              <FanButton
+                ui="delete"
+                @btnClick="removeItem(slotProps.nrow.index)"
+              />
+            </div>
+          </template>
+        </TableSimple>
       </div>
     </div>
     <div v-show="showTableItems" class="row between xcenter">
@@ -60,12 +71,12 @@
         />
       </div>
       <div class="row right outs__row">
-          <FanButton
-            text="Registrar"
-            ui="primary min"
-            @btnClick="registerOut()"
-          />
-        </div>
+        <FanButton
+          text="Registrar"
+          ui="primary min"
+          @btnClick="registerOut()"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -124,12 +135,16 @@ export default {
           if (this.currentPreloadOutstatus === true) {
             this.$router.push({
               name: "OutsSuccess",
-              params: { preloadId: this.outData.orderId },
             });
           } else {
             this.showMessage = true;
           }
         });
+    },
+
+    removeItem(item) {
+      this.$store.commit("REMOVE_OUT_ITEM", item);
+      console.log(item);
     },
 
     setPreloadOrigin(origin) {
@@ -150,10 +165,11 @@ export default {
       "itemsOutCohorte",
       "currentPreloadOutstatus",
       "messageResponseText",
+      "issuesInCohorte",
     ]),
     tableDataDetails() {
       const table = {
-        head: ["", "Clave", "Cantidad"],
+        head: ["", "", "Clave", "Cantidad"],
         rows: this.itemsOutCohorte,
       };
       return table;
@@ -175,11 +191,12 @@ export default {
     },
 
     NotEnough() {
-      let items = this.itemsOutCohorte.map((item) => {
-        return item.productId;
-      });
-
-      return items.flat();
+      if (this.issuesInCohorte != undefined) {
+        let items = this.issuesInCohorte.map((item) => {
+          return item.product_id;
+        });
+        return items.flat();
+      }
     },
   },
 };
