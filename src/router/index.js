@@ -17,6 +17,11 @@ const routes = [
     component: () => import("@/views/Testing.vue"),
   },
   {
+    path: "/registrar",
+    name: "Register",
+    component: () => import("@/views/Authentication/RegisterUser.vue"),
+  },
+  {
     path: "/precargas",
     redirect: "/precargas/buscar/:preloadId?",
     name: "Preloads",

@@ -401,9 +401,6 @@ const entries = {
       return state.preloadResults.status;
     },
 
-
-    
-
     currentStatusResponse(state) {
       return state.statusResponse;
     },
