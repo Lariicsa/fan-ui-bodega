@@ -3,6 +3,7 @@ import axios from "axios";
 const mainHeaders = {
   "content-Type": "application/json",
   accept: "application/json",
+  Authorization: `Bearer ${localStorage.getItem("tsa")}`,
 };
 
 const mainBaseURL = () => {
@@ -14,14 +15,14 @@ const MAIN_SERVICE = axios.create({
   headers: mainHeaders,
 });
 
-MAIN_SERVICE.interceptors.request.use(
-  function(config) {
-    config.headers["x-jwt-token"] = localStorage.getItem("jwt");
-    return config;
-  },
-  function(error) {
-    return Promise.reject(error);
-  }
-);
+// MAIN_SERVICE.interceptors.request.use(
+//   function(config) {
+//     config.headers["x-jwt-token"] = localStorage.getItem("jwt");
+//     return config;
+//   },
+//   function(error) {
+//     return Promise.reject(error);
+//   }
+// );
 
 export { MAIN_SERVICE };
