@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <Loader v-show="loader" />
     <div class="outs__form">
       <div class="row">
         <h4>Registrar usuario</h4>
@@ -39,6 +40,7 @@ import FanButton from "@/components/Button";
 import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader";
 import Message from "@/components/Message";
+import { mapGetters } from "vuex";
 export default {
   name: "Login",
 
@@ -59,14 +61,33 @@ export default {
     };
   },
 
+  watch: {
+    isLoged: "redirectIfLogin",
+  },
+
   methods: {
     registerUser() {
       const user = {
         email: this.register.email,
         password: this.register.password,
       };
-      this.$store.dispatch("loginSuper", user);
-      console.log("clic");
+      this.$store.dispatch("loginSuper", user).then(() => {
+        this.redirectIfLogin();
+      });
+    },
+
+    redirectIfLogin() {
+      if (this.isLoged) {
+        this.$router.push({ name: "Home" });
+        console.log("hell-o!");
+      }
+    },
+  },
+
+  computed: {
+    ...mapGetters(["isLoged"]),
+    loader() {
+      return this.$store.state.auth.loader;
     },
   },
 };
