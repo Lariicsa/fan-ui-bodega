@@ -1,4 +1,4 @@
-import { loginSuperAdmin } from "@/api/auth.api";
+import { loginSuperAdmin, postRegisterUser } from "@/api/auth.api";
 
 const auth = {
   state: {
