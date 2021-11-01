@@ -1,9 +1,12 @@
 <template>
-  <div class="box">
+  <div class="container__box nobg">
+    <div class="row center">
+      <h1>Sistema de Bodega Fantadmin</h1>
+    </div>
     <Loader v-show="loader" />
-    <div class="outs__form">
+    <div class="box">
       <div class="row">
-        <h4>Registrar usuario</h4>
+        <h4>Iniciar sesión</h4>
       </div>
 
       <div class="row">
@@ -63,6 +66,10 @@ export default {
 
   watch: {
     isLoged: "redirectIfLogin",
+  },
+
+  beforeMount() {
+    this.redirectIfLogin();
   },
 
   methods: {

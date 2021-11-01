@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import store from "@/store/index.js";
 
 Vue.use(VueRouter);
 
@@ -8,7 +8,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home.vue"),
   },
   //route for testing
   {
@@ -30,6 +30,7 @@ const routes = [
     path: "/precargas",
     redirect: "/precargas/buscar/:preloadId?",
     name: "Preloads",
+    meta: { requireAuth: true },
     component: () => import("@/views/Preloads/Preloads.vue"),
     children: [
       {
@@ -57,6 +58,7 @@ const routes = [
     path: "/entradas",
     redirect: "/entradas/buscar",
     name: "Entries",
+    meta: { requireAuth: true },
     component: () => import("@/views/Entries/Entries.vue"),
     children: [
       {
@@ -77,6 +79,7 @@ const routes = [
     path: "/salidas",
     redirect: "/salidas/registro",
     name: "Outs",
+    meta: { requireAuth: true },
     component: () => import("@/views/Outs/Outs.vue"),
     children: [
       {
@@ -114,14 +117,14 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   const protectedRoute = to.matched.some((record) => record.meta.requireAuth);
-//   if (protectedRoute && store.state.auth.session === null) {
-//     next({ name: "Login" });
-//   } else {
-//     next();
-//   }
+router.beforeEach((to, from, next) => {
+  const protectedRoute = to.matched.some((record) => record.meta.requireAuth);
+  if (protectedRoute && store.state.auth.session === null) {
+    next({ name: "Login" });
+  } else {
+    next();
+  }
 
-// });
+});
 
 export default router;
