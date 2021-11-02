@@ -8,6 +8,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    meta: { requireAuth: true },
     component: () => import("@/views/Home.vue"),
   },
   //route for testing
@@ -24,6 +25,7 @@ const routes = [
   {
     path: "/registrar",
     name: "Register",
+    meta: { requireAuth: true },
     component: () => import("@/views/Authentication/RegisterUser.vue"),
   },
   {

@@ -72,6 +72,10 @@ export default {
     this.redirectIfLogin();
   },
 
+  mounted(){
+    this.redirectIfLogin();
+  },
+
   methods: {
     registerUser() {
       const user = {
