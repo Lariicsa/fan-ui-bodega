@@ -5,7 +5,7 @@
       <div class="container__main">
         <div :class="isOpen ? 'container__in' : 'container__in-full'">
           <Sidebar @btnClick="expandMenu" :modifier="{ opened: isOpen }">
-            <MenuItems :items="sidebarMenu" />
+            <MenuItems :items="sidebarMenu" @logout="logout()" />
           </Sidebar>
           <router-view />
         </div>
@@ -42,6 +42,16 @@ export default {
   methods: {
     expandMenu() {
       this.isOpen = !this.isOpen;
+    },
+
+    logout() {
+      this.$store.dispatch("logOut").then(() => {
+        setTimeout(() => {
+          this.$router.push({
+            name: "Login",
+          });
+        }, 500);
+      });
     },
   },
 };

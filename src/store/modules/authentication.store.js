@@ -25,6 +25,11 @@ const auth = {
     FETCH_RESPONSE_STATUS: (state, payload) => {
       state.responseStatus = payload;
     },
+
+    SET_TEMP_LS_DATA: (state, payload) => {
+      state.tkn = payload.token;
+      state.session = payload.session;
+    },
   },
 
   actions: {
@@ -38,6 +43,7 @@ const auth = {
           localStorage.setItem("tsa", token);
           localStorage.setItem("session", true);
           commit("FETCH_LOADER_STATUS", false);
+          commit("SET_TEMP_LS_DATA", { token, session: true });
         }
         console.log("res", res.data);
       } catch (error) {
@@ -62,15 +68,19 @@ const auth = {
         commit("FETCH_LOADER_STATUS", false);
         console.log(error.response);
         if (error.response) {
-          // let params = error.response.data.errors.map((param) => {
-          //   return param.param;
-          // });
           let message = error.response.data.message;
           let status = error.response.status;
           commit("GET_RESPONSE_MESSAGE", message);
           commit("FETCH_RESPONSE_STATUS", status);
         }
       }
+    },
+
+    //temporal
+    logOut({ commit }, data) {
+      localStorage.removeItem("tsa");
+      localStorage.removeItem("session");
+      commit("SET_TEMP_LS_DATA", { token: null, session: false });
     },
   },
 
