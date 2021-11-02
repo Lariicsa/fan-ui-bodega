@@ -134,7 +134,6 @@ export default {
     },
 
     showBox(prod) {
-      console.log("prod", prod);
       this.showUpdateBox = prod.index;
     },
 
