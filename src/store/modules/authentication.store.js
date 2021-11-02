@@ -10,12 +10,20 @@ const auth = {
       lastname: "",
     },
 
+    responseMessage: "",
+    responseStatus: null,
     loader: false,
   },
 
   mutations: {
     FETCH_LOADER_STATUS: (state, payload) => {
       state.loader = payload;
+    },
+    GET_RESPONSE_MESSAGE: (state, payload) => {
+      state.responseMessage = payload;
+    },
+    FETCH_RESPONSE_STATUS: (state, payload) => {
+      state.responseStatus = payload;
     },
   },
 
@@ -37,11 +45,44 @@ const auth = {
         commit("FETCH_LOADER_STATUS", false);
       }
     },
+
+    async addNewUser({ commit }, data) {
+      commit("FETCH_LOADER_STATUS", true);
+      try {
+        const res = await postRegisterUser(data);
+        console.log(res);
+        let status = res.status;
+        let message = res.data.message;
+        if (status == 200) {
+          commit("FETCH_LOADER_STATUS", false);
+          commit("GET_RESPONSE_MESSAGE", message);
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
+      } catch (error) {
+        commit("FETCH_LOADER_STATUS", false);
+        console.log(error.response);
+        if (error.response) {
+          // let params = error.response.data.errors.map((param) => {
+          //   return param.param;
+          // });
+          let message = error.response.data.message;
+          let status = error.response.status;
+          commit("GET_RESPONSE_MESSAGE", message);
+          commit("FETCH_RESPONSE_STATUS", status);
+        }
+      }
+    },
   },
 
   getters: {
     isLoged: (state) => !!state.session,
-  }
+    autResponseStatus: (state) => {
+      return state.responseStatus;
+    },
+    autResponseMessage: (state) => {
+      return state.responseMessage;
+    },
+  },
 };
 
 export default auth;

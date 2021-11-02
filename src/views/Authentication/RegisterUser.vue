@@ -1,10 +1,12 @@
 <template>
   <div class="box">
+    <Message :type="fetchRes.typeMessage" :showmsg="fetchRes.showMessage">
+      {{ fetchRes.message }}
+    </Message>
     <div class="outs__form">
       <div class="row">
         <h4>Registrar usuario</h4>
       </div>
-
       <div class="row">
         <Inputfield
           phName="eMail"
@@ -64,6 +66,7 @@ import FanButton from "@/components/Button";
 import Inputfield from "@/components/InputField";
 import Loader from "@/components/Loader";
 import Message from "@/components/Message";
+import { mapGetters } from "vuex";
 export default {
   name: "Register",
 
@@ -83,14 +86,58 @@ export default {
         pass2: "",
         name: "",
         lastname: "",
-        rol: "",
+      },
+      response: {
+        showMessage: false,
+        typeMessage: "",
+        message: "",
       },
     };
   },
 
   methods: {
     registerUser() {
-      console.log("clic");
+      const user = {
+        email: this.register.email,
+        password: this.register.pass1,
+        confirmPassword: this.register.pass2,
+        name: this.register.name,
+        lastName: this.register.lastname,
+        roles: ["ADMIN"],
+      };
+      this.$store.dispatch("addNewUser", user).then(()=>{
+        if(this.autResponseStatus == 200){
+          this.router.push({name:'Home'})
+        }
+      })
+      console.log("clic", user);
+    },
+  },
+  computed: {
+    ...mapGetters(["autResponseStatus", "autResponseMessage"]),
+
+    fetchRes() {
+      let key = this.autResponseStatus;
+      switch (key) {
+        case 200:
+          return (this.response = {
+            showMessage: true,
+            typeMessage: "success fixed smile",
+            message: this.autResponseMessage,
+          });
+        case 400:
+          return (this.response = {
+            showMessage: true,
+            typeMessage: "warning fixed neutral",
+            message: this.autResponseMessage,
+          });
+        default:
+          return (this.response = {
+            showMessage: false,
+            typeMessage: "",
+            message: "na",
+          });
+      }
     },
   },
 };
