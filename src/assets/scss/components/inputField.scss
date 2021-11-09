@@ -22,7 +22,6 @@
       cursor: not-allowed;
     }
     &.error {
-      background-color: $tomato;
       border: 0.1rem solid $tomato;
       color: $tomato;
       font-weight: 400;
@@ -128,11 +127,11 @@
     display: none;
   }
 
-  &.error {
-    & > label.filled {
-      color: $tomato;
-    }
-  }
+  // &.error {
+  //   & > label.filled {
+  //     color: $tomato;
+  //   }
+  // }
 }
 
 @keyframes spin {

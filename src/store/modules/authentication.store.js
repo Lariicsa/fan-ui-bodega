@@ -47,8 +47,10 @@ const auth = {
         }
         console.log("res", res.data);
       } catch (error) {
+        let message = error.response.data.message
         console.log(error.response);
         commit("FETCH_LOADER_STATUS", false);
+        commit("GET_RESPONSE_MESSAGE", message)
       }
     },
 

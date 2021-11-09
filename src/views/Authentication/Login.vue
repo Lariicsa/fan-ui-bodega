@@ -15,17 +15,21 @@
           name="rEmail"
           type="email"
           v-model="register.email"
-          :showError="false"
+          :showError="userError"
           typemsg="error"
-        />
+        >
+          <span v-if="userError">{{ autResponseMessage }}</span>
+        </Inputfield>
         <Inputfield
           phName="Contraseña"
           name="rpass"
           type="password"
           v-model="register.password"
-          :showError="false"
+          :showError="passwordError"
           typemsg="error"
-        />
+        >
+          <span v-if="passwordError">{{ autResponseMessage }}</span>
+        </Inputfield>
       </div>
       <div class="row right">
         <FanButton
@@ -72,7 +76,7 @@ export default {
     this.redirectIfLogin();
   },
 
-  mounted(){
+  mounted() {
     this.redirectIfLogin();
   },
 
@@ -96,9 +100,25 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["isLoged"]),
+    ...mapGetters(["isLoged", "autResponseMessage"]),
     loader() {
       return this.$store.state.auth.loader;
+    },
+    passwordError() {
+      let type = this.autResponseMessage;
+      if (type.includes("password")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    userError() {
+      let type = this.autResponseMessage;
+      if (type.includes("usuario")) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
