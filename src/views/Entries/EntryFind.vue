@@ -122,8 +122,14 @@ export default {
     };
   },
 
-  async mounted() {
-    await this.getLatestEntries();
+
+  beforeEnter: (to, from, next) => {
+    this.getLatestEntries();
+    next()
+  },
+
+  mounted() {
+   this.getLatestEntries();
   },
 
   methods: {
