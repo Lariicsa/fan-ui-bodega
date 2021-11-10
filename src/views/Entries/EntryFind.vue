@@ -122,14 +122,12 @@ export default {
     };
   },
 
-
-  beforeEnter: (to, from, next) => {
-    this.getLatestEntries();
-    next()
-  },
-
   mounted() {
    this.getLatestEntries();
+  },
+
+  watch: {
+    $route: 'getLatestEntries'
   },
 
   methods: {

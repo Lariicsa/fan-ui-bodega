@@ -93,7 +93,9 @@ export default {
 
     redirectIfLogin() {
       if (this.isLoged) {
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "Home" }).then(()=>{
+          location.reload()
+        })
         console.log("hell-o!");
       }
     },
