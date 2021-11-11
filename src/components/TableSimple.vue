@@ -35,7 +35,7 @@
               ' ' +
               row[col]
             "
-            :key="n * 3.2 + 1"
+            :key="n"
             v-html="
               `<div class='simpleTable__cell-in'>` + col + '</div>' + row[col]
             "
@@ -73,6 +73,11 @@ export default {
       type: String,
       default: "100%",
     },
+  },
+
+  mounted(){
+    this.item;
+    this.columns
   },
 
   methods: {
