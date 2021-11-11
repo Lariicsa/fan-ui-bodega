@@ -122,8 +122,12 @@ export default {
     };
   },
 
-  async mounted() {
-    await this.getLatestEntries();
+  mounted() {
+    this.getLatestEntries();
+  },
+
+  watch: {
+    $route: "getLatestEntries",
   },
 
   methods: {
@@ -138,7 +142,7 @@ export default {
     },
 
     selectParamKey(param) {
-      this.findEntryBy(this.paramValue)
+      this.findEntryBy(this.paramValue);
     },
 
     hideBox() {
@@ -180,23 +184,27 @@ export default {
         };
         this.$store.dispatch("updateEntryLocation", itemData).then(() => {
           this.hideBox();
-          setTimeout(() => {
-            this.getLatestEntries().then(() => {
-              if (this.cEntryStatus == 200) {
-                this.messageUpdating = true;
-                setTimeout(() => {
-                  this.messageUpdating = false;
-                }, 3000);
-              }
-            });
-          }, 500);
+          //bad way
+          if (this.cEntryStatus == 200) {
+            location.reload();
+          }
+          // setTimeout(() => {
+          //   this.getLatestEntries().then(() => {
+          //     if (this.cEntryStatus == 200) {
+          //       this.messageUpdating = true;
+          //       setTimeout(() => {
+          //         this.messageUpdating = false;
+          //       }, 3000);
+          //     }
+          //   });
+          // }, 500);
         });
       }
     },
   },
 
   computed: {
-    ...mapGetters(["entryDataResult","cEntryStatus"]),
+    ...mapGetters(["entryDataResult", "cEntryStatus"]),
     loader() {
       return this.$store.state.preloads.loader;
     },

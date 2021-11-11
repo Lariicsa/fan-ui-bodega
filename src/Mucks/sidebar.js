@@ -8,9 +8,9 @@ export default {
     },
     {
       icon: "",
-      text: "Buscar Precarga",
-      path: "/precargas/buscar",
-      name: "search",
+      text: "Registrar Salida",
+      path: "/salidas/registro",
+      name: "outs",
     },
     {
       icon: "",
@@ -20,15 +20,21 @@ export default {
     },
     {
       icon: "",
-      text: "Registrar Salida",
-      path: "/salidas/registro",
-      name: "outs",
+      text: "Buscar Precarga",
+      path: "/precargas/buscar",
+      name: "search",
     },
     {
       icon: "",
       text: "Inventario",
       path: "/entradas/buscar",
       name: "availables", 
+    },
+    {
+      icon: "",
+      text: "Registrar usuario",
+      path: "/registrar",
+      name: "",
     },
     // {
     //   icon: "",

@@ -35,6 +35,7 @@
         </transition>
       </router-link>
     </li>
+    <li class="item logout" @click="logout()"><a href="#">Cerrar Sesión</a></li>
   </ul>
 </template>
 <script>
@@ -67,6 +68,11 @@ export default {
         this.$forceUpdate();
       }
     },
+
+    //temporal
+    logout(){
+      this.$emit("logout")
+    }
   },
 
   computed: {

@@ -44,7 +44,7 @@
         name="quantity"
         type="number"
         v-model="$v.dataDetails.quantity.$model"
-        :showError="$v.dataDetails.quantity.$error ||  errorQty"
+        :showError="$v.dataDetails.quantity.$error || errorQty"
         typemsg="error"
         @keyup="validateQuantity($v.dataDetails.quantity.$model)"
       >
@@ -91,7 +91,7 @@ export default {
         newLocation: this.newLocation,
         quantity: this.item.quantity,
       },
-      errorQty: false
+      errorQty: false,
     };
   },
 
@@ -105,32 +105,27 @@ export default {
     },
   },
 
-  watch: {
-    newLocation: function (val) {
-      this.dataDetails.product_id
-      this.dataDetails.newLocation = val;
-    },
-    $route: "actionForm",
-  },
-
   methods: {
     close() {
       this.$emit("close");
     },
 
-    validateQuantity(val){
-      if(val > this.item.total_items){
-        this.errorQty = true
-      }else {
-        this.errorQty = false
+    validateQuantity(val) {
+      if (val > this.item.total_items) {
+        this.errorQty = true;
+      } else {
+        this.errorQty = false;
       }
+    },
+
+    update() {
+      this.$mount();
     },
 
     actionForm(data) {
       {
         this.$v.$touch();
         if (this.$v.$invalid) {
-          console.log("faltan campos");
         } else {
           this.$emit("actionForm", data);
         }

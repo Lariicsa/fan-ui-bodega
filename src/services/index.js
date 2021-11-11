@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const AUTH_TOKEN = `Bearer ${localStorage.getItem("tsa")}`
+
 const mainHeaders = {
   "content-Type": "application/json",
   accept: "application/json",
+  Authorization: AUTH_TOKEN ,
 };
 
 const mainBaseURL = () => {
@@ -16,7 +19,7 @@ const MAIN_SERVICE = axios.create({
 
 MAIN_SERVICE.interceptors.request.use(
   function(config) {
-    config.headers["x-jwt-token"] = localStorage.getItem("jwt");
+    config.headers["Authorization"] = AUTH_TOKEN;
     return config;
   },
   function(error) {
