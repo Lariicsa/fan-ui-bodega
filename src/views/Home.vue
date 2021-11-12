@@ -26,7 +26,7 @@
         <div class="row">
           <TableDetail
             :item="tabledata"
-            :topCols="6"
+            :topCols="5"
             :cols="3"
             mainModifier="maxHeight"
           />
@@ -229,7 +229,7 @@ export default {
 
     tabledata() {
       const table = {
-        topHead: ["Id de Conteo", "Autor", "Fecha", "Descripción", "Total", ""],
+        topHead: ["Id de Conteo", "Autor", "Fecha", "Descripción", "Total"],
         topRows: this.mainTableData,
         head: ["clave", "Descripción", "Cantidad"],
         rows: this.detailsData,
