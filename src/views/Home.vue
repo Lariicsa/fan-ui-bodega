@@ -11,6 +11,7 @@
           phText="Ingresa el Id de conteo"
           @search="getEntriesData(idTyped)"
           v-model="idTyped"
+          @onBlur="resetFields()"
         />
       </div>
       <div v-if="showTable" class="col">
@@ -152,6 +153,12 @@ export default {
       this.showDetails = false;
     },
 
+    resetFields() {
+      this.selectedEmployee = "";
+      this.selectedStore = "";
+      this.selectTransaction = "";
+    },
+
     getEntriesData(typed) {
       this.$store.dispatch("getItemsCountData", typed).then(() => {
         this.$store.dispatch("getCountingDetail", typed);
@@ -188,6 +195,14 @@ export default {
       "countingMainDetails",
     ]),
 
+    reTyping() {
+      if (this.countId !== this.idTyped) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     showTable() {
       let status = this.currentStatusResponse;
       switch (status) {
@@ -214,7 +229,7 @@ export default {
 
     tabledata() {
       const table = {
-        topHead: ["Id de Conteo", "Autor", "Fecha","Descripción" , "Total", ""],
+        topHead: ["Id de Conteo", "Autor", "Fecha", "Descripción", "Total", ""],
         topRows: this.mainTableData,
         head: ["clave", "Descripción", "Cantidad"],
         rows: this.detailsData,

@@ -75,9 +75,11 @@ export default {
     },
   },
 
-  mounted(){
-    this.item;
-    this.columns
+  mounted() {
+    if (this.item == undefined) {
+      this.item;
+      this.columns;
+    }
   },
 
   methods: {
