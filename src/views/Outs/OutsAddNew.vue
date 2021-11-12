@@ -37,9 +37,9 @@
     </div>
     <div class="row outs__row">
       <div v-if="showTableItems" class="container__box">
-        <TableSimple :item="tableDataDetails" :cols="4">
+        <TableSimple :item="tableDataDetails" :cols="3">
           <template v-slot:default="slotProps">
-            <div class="tableDetail__cell cols4">
+            <div class="tableDetail__cell cols3">
               <FanButton
                 ui="delete"
                 @btnClick="removeItem(slotProps.nrow.index)"
@@ -175,7 +175,7 @@ export default {
     ]),
     tableDataDetails() {
       const table = {
-        head: ["", "", "Clave", "Cantidad"],
+        head: ["", "Clave", "Cantidad"],
         rows: this.itemsOutCohorte,
       };
       return table;
