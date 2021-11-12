@@ -1,10 +1,16 @@
 <template>
   <div class="col">
     <Loader v-show="loader" />
-    <div class="row">
+    <div class="row xcenter">
       <h4>
         Inventario <span>({{ entryDataResult.length }} resultados)</span>
       </h4>
+      <FanButton
+        v-if="isAnyfilter"
+        text="Borrar filtros"
+        ui="secondary"
+        @btnClick="removeFilters()"
+      />
     </div>
 
     <div class="row between entry__filters">
@@ -119,6 +125,7 @@ export default {
       paramValue: "",
       showUpdateBox: null,
       messageUpdating: false,
+      isAnyfilter: false,
     };
   },
 
@@ -152,6 +159,7 @@ export default {
 
     findEntryBy(key) {
       let param = this.paramType;
+      this.isAnyfilter = true;
       switch (param) {
         case "barcode":
           this.$store.dispatch("findEntryByParam", `?barcode=${key}`);
@@ -165,6 +173,10 @@ export default {
           this.$store.dispatch("findEntryByParam", `?productKey=${key}`);
           break;
       }
+    },
+
+    removeFilters() {
+      location.reload();
     },
 
     getEntrieInfo(entrieId) {
