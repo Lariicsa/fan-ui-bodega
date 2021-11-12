@@ -29,8 +29,6 @@
           <template v-slot:firstRow="slotProps">
             <div class="tableDetail__cell cols10">
               <Inputfield
-                :placeholder="slotProps.nrow.final_location"
-                :updateValue="slotProps.nrow.final_location"
                 :name="slotProps.nrow.id_product"
                 type="text"
                 @keyupEnter="updateLocation(slotProps.nrow)"

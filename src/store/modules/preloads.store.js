@@ -18,6 +18,7 @@ const entries = {
     preloadResults: [],
     preloadsAll: [],
     preloadDetail: [],
+    preloadID: '',
     assignedEmployee: "",
     selectedTransaction: "",
     loader: false,
@@ -88,6 +89,10 @@ const entries = {
     SET_TRANSACTION_OPTION: (state, payload) => {
       state.selectedTransaction = payload;
     },
+
+    SET_PRELOAD_ID:(state, payload)=> {
+      state.preloadID = payload
+    }
   },
 
   actions: {
@@ -185,6 +190,7 @@ const entries = {
 
     //need to change name, this is from entries
     async getPreloaded({ commit }, preloadId) {
+      console.log('preloadId', preloadId);
       commit("FETCH_LOADER_STATUS", true);
       try {
         const res = await getEntry(preloadId);
@@ -194,6 +200,7 @@ const entries = {
           commit("FETCH_LOADER_STATUS", false);
           commit("GET_PRELOAD_BY_ID", preloadRes);
           commit("FETCH_RESPONSE_STATUS", success);
+          commit("SET_PRELOAD_ID", preloadId)
         }
         console.log("getPreloaded", preloadRes);
       } catch (error) {
@@ -203,6 +210,7 @@ const entries = {
     },
 
     async getPreloadDetail({ commit }, data) {
+      console.log('preloadIdDetail', data);
       try {
         commit("FETCH_LOADER_STATUS", true);
         let page = data.page;
@@ -230,15 +238,20 @@ const entries = {
       }
     },
 
-    async setPreloadLocation({ commit }, data) {
+    async setPreloadLocation({ commit, dispatch, state }, data) {
       try {
+        console.log('data', data);
         const entryLocation = {
           action: "UPDATE_LOCATION",
           id: data.detail_id,
           finalLocation: data.final_location,
         };
+        const id = state.preloadID
         const res = await updatePreloadLocation(entryLocation);
         console.log("res", res);
+        if(res.status == 200) {
+          dispatch("getPreloaded", id)
+        }
       } catch (error) {
         console.log(error.response);
       }
